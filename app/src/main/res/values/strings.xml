@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QingDan</string>
+    <string-array name="bottom_title">
+        <item>清单</item>
+        <item>挑选</item>
+        <item>个人</item>
+    </string-array>
+</resources>
