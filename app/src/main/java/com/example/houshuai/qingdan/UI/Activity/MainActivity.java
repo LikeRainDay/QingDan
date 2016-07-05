@@ -13,6 +13,7 @@ import com.example.houshuai.qingdan.UI.fragment.SelfFramgment;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
 
 import butterknife.BindView;
+
 /*主界面*/
 public class MainActivity extends BaseActivity {
     private int[] picSelect = {R.drawable.qingdan_selector, R.drawable.tiaoxuan_selector, R.drawable.self_selector};

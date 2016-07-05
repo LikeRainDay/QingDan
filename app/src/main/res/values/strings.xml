@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">QingDan</string>
+    <string name="LoginState">未登录</string>
+    <string name="self_noLogin">请登录体验所有服务</string>
+    <string name="goto_login">去登陆</string>
     <string-array name="bottom_title">
         <item>清单</item>
         <item>挑选</item>
