@@ -9,29 +9,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
-<android.support.design.widget.CollapsingToolbarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <include
-            layout="@layout/self_heard"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/self_toolabr"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            
-            />
-</android.support.design.widget.CollapsingToolbarLayout>
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/self_heard"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/self_toolabr"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/self_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-    </FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>
