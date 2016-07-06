@@ -16,12 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/self_noLogin"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:id="@+id/textView2" />
 
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/self_button"
@@ -29,6 +30,6 @@
         android:layout_marginTop="25dp"
         android:id="@+id/button"
         android:textColor="@color/self_buttomColor"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@id/textView2"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
