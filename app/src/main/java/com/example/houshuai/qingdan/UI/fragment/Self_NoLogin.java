@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.example.houshuai.qingdan.Base.BaseFragment;
-import com.example.houshuai.qingdan.Custom.MoreWindow;
+import com.example.houshuai.qingdan.UI.Custom.MoreWindow;
 import com.example.houshuai.qingdan.R;
 
 import butterknife.OnClick;

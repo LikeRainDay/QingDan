@@ -40,15 +40,33 @@ import butterknife.ButterKnife;
 public class Self_loginFragment extends Fragment implements View.OnClickListener {
     private FragmentManager manager;
     private boolean isPop;
+    private UMShareAPI umShareAPI = null;
     private LayoutInflater inflater;
     private RelativeLayout linearLayout;
+
     @BindView(R.id.self_callback)
     ImageView mbackImage;
     @BindView(R.id.textView4)
     TextView mQvHao;
     @BindView(R.id.editText)
     EditText mEditText_phone;
-    private UMShareAPI umShareAPI = null;
+    @BindView(R.id.editText2)
+    EditText mEditText_msg;
+    @BindView(R.id.button2)
+    Button mYanZheng;
+    @BindView(R.id.button4)
+    Button mXiaYiBu;
+    @BindView(R.id.textView5)
+    TextView mZhuCe;
+    @BindView(R.id.textView6)
+    TextView mForgetPass;
+    @BindView(R.id.imageView8)
+    ImageView mQQ;
+    @BindView(R.id.imageView10)
+    ImageView mSina;
+    @BindView(R.id.imageView9)
+    ImageView mRenRen;
+
 
     public Self_loginFragment() {
         isPop = true;
@@ -125,23 +143,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         return an;
     }
 
-    @BindView(R.id.editText2)
-    EditText mEditText_msg;
-    @BindView(R.id.button2)
-    Button mYanZheng;
-    @BindView(R.id.button4)
-    Button mXiaYiBu;
-    @BindView(R.id.textView5)
-    TextView mZhuCe;
-    @BindView(R.id.textView6)
-    TextView mForgetPass;
-    @BindView(R.id.imageView8)
-    ImageView mQQ;
-    @BindView(R.id.imageView10)
-    ImageView mSina;
-    @BindView(R.id.imageView9)
-    ImageView mRenRen;
-
 
     @Override
     public void onClick(View view) {
@@ -152,7 +153,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
             case R.id.self_callback:
 //返回    并关闭虚拟键盘
                 InputMethodManager systemService = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (systemService!=null) {
+                if (systemService != null) {
                     systemService.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
                 }
 
@@ -169,6 +170,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.button2:
 //获取验证码
+
                 break;
             case R.id.button4:
 //下一步
@@ -197,6 +199,34 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
 
     }
+
+//    private void openContacts() {
+//        //打开通信录好友列表页面
+//        ContactsPage contactsPage = new ContactsPage();
+//        contactsPage.show(context);
+//    }
+
+//    private void getRegisterView() {
+//        //打开注册页面
+//        // TODO: 2016/7/6
+//        RegisterPage registerPage = new RegisterPage();
+//        registerPage.setRegisterCallback(new EventHandler() {
+//            public void afterEvent(int event, int result, Object data) {
+//// 解析注册结果
+//                if (result == SMSSDK.RESULT_COMPLETE) {
+//                    @SuppressWarnings("unchecked")
+//                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+//                    String country = (String) phoneMap.get("country");
+//                    String phone = (String) phoneMap.get("phone");
+//// 提交用户信息
+//
+//
+////                    registerUser(country, phone);
+//                }
+//            }
+//        });
+//        registerPage.show(context);
+//    }
 
     /**
      * auth callback interface

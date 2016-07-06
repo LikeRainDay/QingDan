@@ -1,4 +1,4 @@
-package com.example.houshuai.qingdan.Custom;
+package com.example.houshuai.qingdan.UI.Custom;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -29,6 +29,8 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.utils.FastBlur;
+import com.example.houshuai.qingdan.utils.KickBackAnimator;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
