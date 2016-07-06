@@ -26,7 +26,7 @@ public class Self_NoLogin extends BaseFragment  {
 //        }
 //        mMoreWindow.showMoreWindow(view, 100);
         FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
-        transaction.replace(R.id.self_fragment,new Self_loginFragment());
+        transaction.replace(R.id.self_fragment, new Self_loginFragment());
         transaction.addToBackStack(null);
         transaction.commit();
 
