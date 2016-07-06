@@ -26,8 +26,17 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
+import com.umeng.socialize.media.UMusic;
 
 /*
 * 分享的点击监听事件代码
@@ -38,7 +47,6 @@ import com.example.houshuai.qingdan.R;
         mMoreWindow.showMoreWindow(view, 100);
 * */
 public class MoreWindow extends PopupWindow implements OnClickListener {
-
     private String TAG = MoreWindow.class.getSimpleName();
     Activity mContext;
     private int mWidth;
@@ -48,6 +56,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
     private Bitmap overlay = null;
 
     private Handler mHandler = new Handler();
+    private UMShareAPI umShareAPI;
 
     public MoreWindow(Activity context) {
         mContext = context;
@@ -242,17 +251,62 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.info_icon_1);
+        //UMImage image = new UMImage(ShareActivity.this,bitmap);
+        //UMImage image = new UMImage(ShareActivity.this,new File("/SDCARD/image_jpg.jpg"));
+        UMusic music = new UMusic("http://music.huoxing.com/upload/20130330/1364651263157_1085.mp3");
+        //UMusic music = new UMusic("http://y.qq.com/#type=song&mid=002I7CmS01UAIH&tpl=yqq_song_detail");
+        music.setTitle("This is music title");
+        music.setThumb("http://www.umeng.com/images/pic/social/chart_1.png");
+        music.setDescription("my description");
+        // share video
+        UMVideo video = new UMVideo("http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html");
+        video.setThumb("http://www.adiumxtras.com/images/thumbs/dango_menu_bar_icon_set_11_19047_6240_thumb.png");
+        // share URL
+        String url = "http://www.umeng.com";
+        UMImage image = new UMImage(mContext, "http://www.umeng.com/images/pic/social/integrated_3.png");
+
+
+        //开启分享
+        umShareAPI = UMShareAPI.get(mContext);
+        //开启编辑页
+        Config.OpenEditor = true;
         //分享按钮监听
         // TODO: 2016/7/6 分享操作
         switch (v.getId()) {
             case R.id.shar_xinlang:
                 Log.e("des", "xinlang");
+                new ShareAction(mContext).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
+                        .withText("Umeng Share")
+                        .withTitle("this is title")
+                        .withMedia(image)
+                        //.withExtra(new UMImage(ShareActivity.this,R.drawable.ic_launcher))
+                        .withTargetUrl(url)
+                        .share();
+
                 break;
             case R.id.share_QQ:
                 Log.e("des", "QQ");
+                new ShareAction(mContext).setPlatform(SHARE_MEDIA.QQ).setCallback(umShareListener)
+                        .withTitle("this is title")
+                        .withText("hello umeng")
+                        .withMedia(image)
+                        //.withMedia(music)
+                        //.withTargetUrl(url)
+                        //.withTitle("qqshare")
+                        .share();
                 break;
             case R.id.share_weixin:
                 Log.e("des", "weixin");
+                new ShareAction(mContext).setPlatform(SHARE_MEDIA.RENREN).setCallback(umShareListener)
+                        .withTitle("this is title")
+                        .withText("hello umeng")
+                        .withMedia(image)
+                        //.withMedia(music)
+                        //.withTargetUrl(url)
+                        //.withTitle("qqshare")
+                        .share();
                 break;
         }
     }
@@ -269,5 +323,28 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
             System.gc();
         }
     }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            com.umeng.socialize.utils.Log.d("plat", "platform" + platform);
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mContext, platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(mContext, platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(mContext, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
+
 
 }
