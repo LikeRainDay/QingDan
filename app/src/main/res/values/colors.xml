@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="self_buttomColor">#ba1b9b</color>
     <color name="white">#FFFFFF</color>
+    <color name="self_pop_actionbar">#4e5a6e</color>
+    <color name="hintColor">#7f848f</color>
+    <color name="self_button">#7b157e</color>
 </resources>

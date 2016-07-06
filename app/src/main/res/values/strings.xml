@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">QingDan</string>
+    <string name="app_name">清单</string>
     <string name="LoginState">未登录</string>
     <string name="self_noLogin">请登录体验所有服务</string>
     <string name="goto_login">去登陆</string>
     <string name="self_setting">设置</string>
     <string name="Self_noLogin">未登录</string>
     <string name="main_text_toolbar">清单</string>
+    <string name="telephone_number">+86</string>
+    <string name="getnumber">获取验证码</string>
     <string-array name="bottom_title">
         <item>清单</item>
         <item>挑选</item>
