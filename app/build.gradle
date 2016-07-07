@@ -18,12 +18,22 @@ android {
         }
     }
 }
+repositories
+        {
+            maven { url "https://jitpack.io" }
+            flatDir {
+                dirs 'libs'  //放置arr的目录地址
+            }
+
+        }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha2'
     testCompile 'junit:junit:4.12'
+    compile name: 'SMSSDK-2.1.0', ext: 'aar'
+    compile name: 'SMSSDKGUI-2.1.0', ext: 'aar'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support:support-annotations:24.0.0'
@@ -31,8 +41,19 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
-    compile ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+    compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
     }
+    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile files('libs/umeng_social_sdk.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
+    compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/SocialSDK_QQZone_3.jar')
+    compile files('libs/SocialSDK_renren_1.jar')
+    compile files('libs/SocialSDK_renren_2.jar')
+    compile files('libs/SocialSDK_Sina.jar')
+    compile files('libs/weiboSDKCore_3.1.4.jar')
+    compile files('libs/MobCommons-2016.0624.1326.jar')
+    compile files('libs/MobTools-2016.0624.1326.jar')
 }

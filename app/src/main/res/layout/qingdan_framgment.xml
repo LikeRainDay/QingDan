@@ -2,14 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!--导航-->
-    <TableLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/qingdan_tl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        app:tabSelectedTextColor="#000000"
+        app:tabTextColor="#ADADAD"
+        app:tabIndicatorColor="#000000"
+        app:tabIndicatorHeight="1dp"
+        />
     <!--viewpager的布局-->
     <android.support.v4.view.ViewPager
+        android:id="@+id/qindan_viewpager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
