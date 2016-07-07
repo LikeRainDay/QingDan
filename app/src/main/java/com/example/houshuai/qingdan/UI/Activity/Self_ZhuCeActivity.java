@@ -1,6 +1,7 @@
 package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -64,7 +65,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 if (systemService != null) {
                     systemService.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 }
-                getFragmentManager().popBackStack();
+               finish();
                 break;
             case R.id.button2:
                 //获取验证码
@@ -77,6 +78,9 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
             case R.id.textView6:
                 //用户手册
                 Toast.makeText(this, "点击了用户手册", Toast.LENGTH_SHORT).show();
+                //暂时跳转
+                Intent intent = new Intent(Self_ZhuCeActivity.this, Self_ZhuCeXiangQingActivity.class);
+                startActivity(intent);
                 break;
 
         }
@@ -108,7 +112,10 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 Log.d("aaa", event + "<afterEvent>" + result + ",myLooper=" + Looper.myLooper());
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
+                        //成功后跳转
                         Log.d("aaa", event + "<afterEvent>" + result + ",校验成功");
+                        Intent intent = new Intent(Self_ZhuCeActivity.this, Self_ZhuCeXiangQingActivity.class);
+                        startActivity(intent);
                     } else {
                         Log.d("aaa", event + "<afterEvent>" + result + ",校验失败");
                     }

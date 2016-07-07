@@ -11,7 +11,6 @@ import com.umeng.socialize.PlatformConfig;
 
 public class App extends Application {
 
-
     @Override
     public void onCreate() {
         super.onCreate();

@@ -9,6 +9,7 @@
     <string name="telephone_number">86</string>
     <string name="getnumber">获取验证码</string>
     <string name="edityoutPass">请输入您的密码</string>
+    <string name="RegistViewTitle">昵称密码</string>
     <string-array name="bottom_title">
         <item>清单</item>
         <item>挑选</item>

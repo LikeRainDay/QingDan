@@ -20,6 +20,7 @@ android {
 }
 repositories
         {
+            maven { url "https://jitpack.io" }
             flatDir {
                 dirs 'libs'  //放置arr的目录地址
             }
@@ -43,6 +44,7 @@ dependencies {
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
     }
+    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile files('libs/umeng_social_sdk.jar')
     compile files('libs/mta-sdk-1.6.2.jar')
