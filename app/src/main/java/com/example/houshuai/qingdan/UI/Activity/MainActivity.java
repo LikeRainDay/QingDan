@@ -1,5 +1,6 @@
 package com.example.houshuai.qingdan.UI.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.widget.Toolbar;
@@ -10,15 +11,14 @@ import android.widget.TextView;
 
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
-import com.example.houshuai.qingdan.Receive.MyReceiver;
 import com.example.houshuai.qingdan.UI.fragment.QingDanFramgment;
 import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
-import com.example.houshuai.qingdan.UI.fragment.SelfFramgment;
+import com.example.houshuai.qingdan.UI.fragment.Self_Framgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
 import com.example.houshuai.qingdan.UI.fragment.Self_NoLogin;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
+
 import butterknife.BindView;
-import cn.jpush.android.api.JPushInterface;
 
 
 /*主界面*/
@@ -36,30 +36,17 @@ public class MainActivity extends BaseActivity {
 
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        JPushInterface.onPause(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        JPushInterface.onResume(this);
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(new MyReceiver());
-    }
-
-    @Override
     protected void initLayout() {
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
         initFragmentTabHost();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
+        Intent intent = getIntent();
+        boolean self = intent.getBooleanExtra("self", false);
+        if (self) {
+            mFragmentTabHost.setCurrentTab(2);
+        }
+
     }
 
     private void initFragmentTabHost() {
@@ -80,7 +67,7 @@ public class MainActivity extends BaseActivity {
                     mFragmentTabHost.addTab(tabSpec, TiaoXuanFramgment.class, bundle);
                     break;
                 case 2:
-                    mFragmentTabHost.addTab(tabSpec, SelfFramgment.class, bundle);
+                    mFragmentTabHost.addTab(tabSpec, Self_Framgment.class, bundle);
                     break;
             }
         }
@@ -92,15 +79,15 @@ public class MainActivity extends BaseActivity {
                 switch (s) {
                     case "清单":
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
-                    mTextView.setText("清单");
+                        mTextView.setText("清单");
                         break;
                     case "挑选":
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_NoLogin()).commit();
-                    mTextView.setText("登录");
+                        mTextView.setText("登录");
                         break;
                     case "个人":
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
-                    mTextView.setText("未登录");
+                        mTextView.setText("未登录");
                         break;
 
                 }

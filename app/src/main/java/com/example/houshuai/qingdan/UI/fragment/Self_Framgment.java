@@ -1,5 +1,6 @@
 package com.example.houshuai.qingdan.UI.fragment;
 
+import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
 
@@ -8,8 +9,8 @@ import com.example.houshuai.qingdan.R;
  * Created by HouShuai on 2016/7/5.
  */
 
-public class SelfFramgment extends BaseFragment {
-    private boolean isLogin=false;
+public class Self_Framgment extends BaseFragment {
+
 
     @Override
     protected int getFragmentID() {
@@ -24,10 +25,12 @@ public class SelfFramgment extends BaseFragment {
 
 
     private void initBottomFragment() {
-        if (isLogin == true) {
+        boolean mIsLogin = ((App) getActivity().getApplication()).mIsLogin;
+        if (mIsLogin == true) {
             getFragmentManager().beginTransaction().replace(R.id.self_fragment, new Self_hasLogin()).commit();
         } else {
             getFragmentManager().beginTransaction().replace(R.id.self_fragment, new Self_NoLogin()).commit();
+
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +24,6 @@ import cn.smssdk.SMSSDK;
 import static com.example.houshuai.qingdan.R.id.textView4;
 
 /**
- *
  * 短信验证界面
  * Created by HouShuai on 2016/7/7.
  */
@@ -65,7 +65,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 if (systemService != null) {
                     systemService.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 }
-               finish();
+                finish();
                 break;
             case R.id.button2:
                 //获取验证码
@@ -95,7 +95,18 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
         SMSSDK.getVerificationCode(mQvHao.getText().toString().trim(), mEditText_phone.getText().toString().trim(), new OnSendMessageHandler() {
             @Override
             public boolean onSendMessage(String s, String s1) {
-                Log.d("aaa", s + "<onSendMessage>" + s1);
+                mYanZheng.setClickable(false);
+                int time = 180;
+                for (int i = 0; i < 360; i++) {
+                    mYanZheng.setText(time + "");
+                    SystemClock.sleep(1000);
+                    --time;
+                    if (time==0) {
+                        mYanZheng.setText("重新获取短信");
+                        mYanZheng.setClickable(true);
+                        return false;
+                    }
+                }
                 return false;
             }
         });

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
 
@@ -38,6 +39,8 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     Button mButton;
     @BindView(R.id.back)
     ImageView mBack;
+    private boolean sucessful;
+    private List<String> path = new ArrayList<>();
 
     @Override
     protected void initLayout() {
@@ -47,7 +50,6 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     }
 
     ArrayList<String> mlist = new ArrayList<>();
-
 
 
     @Override
@@ -61,18 +63,35 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                         .count(1)
                         .single()
                         .origin(mlist)
-                        .start(this,REQUEST_CODE_GALLERY);
+                        .start(this, REQUEST_CODE_GALLERY);
 
                 break;
             case R.id.button3:
                 //点击按钮注册
-                mName.getText().toString().trim();
+                String name = mName.getText().toString().trim();
+                String pass = mPass.getText().toString().trim();
+                isSucessful(name, pass);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("self", true);
+                startActivity(intent);
                 break;
             case R.id.back:
                 //点击返回
                 finish();
                 break;
         }
+    }
+
+    private void isSucessful(String name, String pass) {
+        // TODO: 2016/7/7 正则
+        String pathString ;
+        if (0 == path.size()) {
+            pathString = "false";
+        } else {
+            pathString = path.get(0);
+        }
+        ((App) getApplication()).setMySharePerference(name, name, pass, pathString, "", "");
+        ((App) getApplication()).setIsLoginSharedPreferences(true, name);
     }
 
     private void initWeigt() {
@@ -89,18 +108,13 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_GALLERY){
-            if(resultCode == RESULT_OK){
-                // Get the result list of select image paths
-                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-                // do your logic ....
-                // TODO: 2016/7/7 图片采样
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (resultCode == RESULT_OK) {
+                path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                // TODO: 2016/7/7 图片采样或者picassio
                 mHeadPic.setImageURI(Uri.fromFile(new File(path.get(0))));
-
             }
         }
-
     }
-
 
 }

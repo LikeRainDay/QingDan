@@ -8,6 +8,7 @@ import com.example.houshuai.qingdan.R;
  */
 
 public class Self_hasLogin extends BaseFragment {
+
     @Override
     protected int getFragmentID() {
         return R.layout.self_haslogin;

@@ -1,6 +1,5 @@
 package com.example.houshuai.qingdan.Base;
 
-import android.app.Notification;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.houshuai.qingdan.R;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.jpush.android.api.BasicPushNotificationBuilder;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 基类
@@ -22,7 +17,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 
 public abstract class BaseFragment extends Fragment {
-    private Context mContext;
+    public Context mContext;
     private Unbinder bind;
 
 
@@ -56,6 +51,8 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
+
     }
+
 
 }
