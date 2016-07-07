@@ -10,14 +10,16 @@ import android.widget.TextView;
 
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.Receive.MyReceiver;
 import com.example.houshuai.qingdan.UI.fragment.QingDanFramgment;
 import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
 import com.example.houshuai.qingdan.UI.fragment.SelfFramgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
 import com.example.houshuai.qingdan.UI.fragment.Self_NoLogin;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
-
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
+
 
 /*主界面*/
 public class MainActivity extends BaseActivity {
@@ -29,11 +31,31 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar_name)
     TextView mTextView;
     private String[] titleName;
+    public static boolean isForeground = false;
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(new MyReceiver());
+    }
 
     @Override
     protected void initLayout() {
         setSupportActionBar(mToolbar);
-
         //初始化FramgnetTabHost
         initFragmentTabHost();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
@@ -96,6 +118,5 @@ public class MainActivity extends BaseActivity {
     protected int getActivityID() {
         return R.layout.activity_main;
     }
-
 
 }
