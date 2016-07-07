@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     public static boolean isForeground = false;
 
 
+
     @Override
     protected void onPause() {
         super.onPause();

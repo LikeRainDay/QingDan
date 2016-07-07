@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.example.houshuai.qingdan.UI.Activity.MainActivity;
 import com.example.houshuai.qingdan.UI.Activity.TestActivity;
+import com.example.houshuai.qingdan.constans.Constans;
 import com.example.houshuai.qingdan.utils.ExampleUtil;
-import com.example.houshuai.qingdan.UI.constans.Constans;
 
 import org.json.JSONException;
 import org.json.JSONObject;
