@@ -22,16 +22,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.UI.Activity.Self_ZhuCeActivity;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.view.UMFriendListener;
 
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.houshuai.qingdan.R.id.textView4;
 
 /**
  * Created by HouShuai on 2016/7/6.
@@ -43,17 +45,15 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     private UMShareAPI umShareAPI = null;
     private LayoutInflater inflater;
     private RelativeLayout linearLayout;
-
+    private boolean isAuth = false;
     @BindView(R.id.self_callback)
     ImageView mbackImage;
-    @BindView(R.id.textView4)
+    @BindView(textView4)
     TextView mQvHao;
     @BindView(R.id.editText)
     EditText mEditText_phone;
     @BindView(R.id.editText2)
     EditText mEditText_msg;
-    @BindView(R.id.button2)
-    Button mYanZheng;
     @BindView(R.id.button4)
     Button mXiaYiBu;
     @BindView(R.id.textView5)
@@ -86,7 +86,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         mQvHao.setOnClickListener(this);
         mEditText_phone.setOnClickListener(this);
         mEditText_msg.setOnClickListener(this);
-        mYanZheng.setOnClickListener(this);
         mXiaYiBu.setOnClickListener(this);
         mZhuCe.setOnClickListener(this);
         mForgetPass.setOnClickListener(this);
@@ -149,34 +148,34 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         SHARE_MEDIA platform = null;
         umShareAPI = UMShareAPI.get(getActivity());
         switch (view.getId()) {
-            // TODO: 2016/7/6  
+            // TODO: 2016/7/6
+
+
             case R.id.self_callback:
 //返回    并关闭虚拟键盘
                 InputMethodManager systemService = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (systemService != null) {
                     systemService.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
                 }
-
                 getFragmentManager().popBackStack();
                 break;
-            case R.id.textView4:
+            case textView4:
 //区号
                 break;
             case R.id.editText:
 //电话号码
                 break;
             case R.id.editText2:
-//短信
+//密码
                 break;
-            case R.id.button2:
-//获取验证码
 
-                break;
             case R.id.button4:
 //下一步
                 break;
             case R.id.textView5:
 //注册
+                Intent intent = new Intent(getActivity(), Self_ZhuCeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.textView6:
 //忘记密码
@@ -192,13 +191,25 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
             case R.id.imageView9:
 //人人
                 platform = SHARE_MEDIA.RENREN;
-//                umShareAPI.deleteOauth(getActivity(), platform, umdelAuthListener);
+
                 break;
+        }
+
+        if (!isAuth) {
+            //取消授权
+            umShareAPI.deleteOauth(getActivity(), platform, umdelAuthListener);
+            isAuth = true;
+            return;
         }
         umShareAPI.doOauthVerify(getActivity(), platform, umAuthListener);
         umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
-
+        isAuth = false;
     }
+
+
+
+
+
 
 //    private void openContacts() {
 //        //打开通信录好友列表页面
@@ -235,7 +246,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             Toast.makeText(getContext(), " 清除授权", Toast.LENGTH_SHORT).show();
-            Log.d("user info", "user info:" + data.toString());
         }
 
         @Override
@@ -255,7 +265,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             Toast.makeText(getContext(), " 授权成功", Toast.LENGTH_SHORT).show();
-            Log.d("user info", "user info:" + data.toString());
         }
 
         @Override
@@ -275,6 +284,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, Object> data) {
             if (data != null) {
                 Toast.makeText(getContext(), data.get("json").toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), data.size(), Toast.LENGTH_LONG).show();
             }
 
         }

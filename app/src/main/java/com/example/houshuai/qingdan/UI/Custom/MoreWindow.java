@@ -278,7 +278,6 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         // TODO: 2016/7/6 分享操作
         switch (v.getId()) {
             case R.id.shar_xinlang:
-                Log.e("des", "xinlang");
                 new ShareAction(mContext).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
                         .withText("Umeng Share")
                         .withTitle("this is title")
@@ -289,7 +288,6 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
 
                 break;
             case R.id.share_QQ:
-                Log.e("des", "QQ");
                 new ShareAction(mContext).setPlatform(SHARE_MEDIA.QQ).setCallback(umShareListener)
                         .withTitle("this is title")
                         .withText("hello umeng")
@@ -300,7 +298,6 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
                         .share();
                 break;
             case R.id.share_weixin:
-                Log.e("des", "weixin");
                 new ShareAction(mContext).setPlatform(SHARE_MEDIA.RENREN).setCallback(umShareListener)
                         .withTitle("this is title")
                         .withText("hello umeng")

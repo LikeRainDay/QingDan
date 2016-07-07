@@ -33,7 +33,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initLayout() {
         setSupportActionBar(mToolbar);
-
         //初始化FramgnetTabHost
         initFragmentTabHost();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();

@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.umeng.socialize.PlatformConfig;
 
-import cn.smssdk.SMSSDK;
-
 /**
  * 全局
  * Created by HouShuai on 2016/7/5.
@@ -21,8 +19,6 @@ public class App extends Application {
 
     }
     {
-        //短信的KEY
-        SMSSDK.initSDK(this, "14aa400a62d7e", "34f69a9a008dc933302a2b982b5c207e");
         //新浪微博
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
         //易信
