@@ -2,6 +2,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.self_callback:
                 //返回    并关闭虚拟键盘
@@ -75,11 +77,15 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 YanZhengMsg();
                 finish();
                 break;
+            case textView4:
+                intent = new Intent(Self_ZhuCeActivity.this, CountryActivity.class);
+                startActivityForResult(intent,13);
+                break;
             case R.id.textView6:
                 //用户手册
                 Toast.makeText(this, "点击了用户手册", Toast.LENGTH_SHORT).show();
                 //暂时跳转
-                Intent intent = new Intent(Self_ZhuCeActivity.this, Self_ZhuCeXiangQingActivity.class);
+                intent = new Intent(Self_ZhuCeActivity.this, Self_ZhuCeXiangQingActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -89,11 +95,11 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void YanZhengMsg() {
-        SMSSDK.submitVerificationCode(mQvHao.getText().toString().trim(), mEditText_phone.getText().toString().trim(), mEditText_msg.getText().toString().trim());
+        SMSSDK.submitVerificationCode(mQvHao.getText().toString().trim().substring(1), mEditText_phone.getText().toString().trim(), mEditText_msg.getText().toString().trim());
     }
 
     private void getMsgNumber() {
-        SMSSDK.getVerificationCode(mQvHao.getText().toString().trim(), mEditText_phone.getText().toString().trim(), new OnSendMessageHandler() {
+        SMSSDK.getVerificationCode(mQvHao.getText().toString().trim().substring(1), mEditText_phone.getText().toString().trim(), new OnSendMessageHandler() {
             @Override
             public boolean onSendMessage(String s, String s1) {
 //                mYanZheng.setClickable(false);
@@ -137,6 +143,28 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        { case 13:
+            if (resultCode == RESULT_OK)
+            {
+                Bundle bundle = data.getExtras();
+                String countryNumber = bundle.getString("countryNumber");
+
+                mQvHao.setText(countryNumber);
+
+
+            }
+            break;
+        default:
+
+            break;
+
+        }
+    }
+
     private void addListener() {
         mbackImage.setOnClickListener(this);
         mQvHao.setOnClickListener(this);
@@ -146,4 +174,5 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
         mDenglu.setOnClickListener(this);
         mYongHuShouCe.setOnClickListener(this);
     }
+
 }

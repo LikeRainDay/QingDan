@@ -72,6 +72,7 @@
         android:layout_alignRight="@+id/imageView5"
         android:layout_alignTop="@+id/imageView5"
         android:layout_marginEnd="13dp"
+        android:layout_marginLeft="3dp"
         android:layout_marginRight="13dp"
         android:clickable="true"
         android:text="@string/telephone_number"
@@ -147,16 +148,6 @@
         android:layout_alignBottom="@+id/textView5"
         android:layout_toRightOf="@+id/textView5"
         android:layout_toEndOf="@+id/textView5" />
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:text="+"
-        android:textSize="20sp"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignStart="@+id/imageView3" />
+
 
 </RelativeLayout>
