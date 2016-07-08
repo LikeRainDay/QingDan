@@ -258,6 +258,8 @@
                 <category android:name="jpush.testCategory" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Activity.CountryActivity"></activity>
+
     </application>
 
 </manifest>

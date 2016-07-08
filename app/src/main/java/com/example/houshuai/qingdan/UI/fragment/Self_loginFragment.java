@@ -22,7 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.UI.Activity.CountryActivity;
 import com.example.houshuai.qingdan.UI.Activity.Self_ZhuCeActivity;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -33,6 +35,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.houshuai.qingdan.R.id.textView4;
 
 /**
@@ -46,6 +49,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     private LayoutInflater inflater;
     private RelativeLayout linearLayout;
     private boolean isAuth = false;
+    Intent intent = null;
     @BindView(R.id.self_callback)
     ImageView mbackImage;
     @BindView(textView4)
@@ -161,6 +165,11 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 break;
             case textView4:
 //区号
+
+                Intent intent = new Intent(getActivity(), CountryActivity.class);
+                startActivityForResult(intent, 12);
+
+
                 break;
             case R.id.editText:
 //电话号码
@@ -174,7 +183,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.textView5:
 //注册
-                Intent intent = new Intent(getActivity(), Self_ZhuCeActivity.class);
+                intent = new Intent(getActivity(), Self_ZhuCeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textView6:
@@ -205,10 +214,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
         isAuth = false;
     }
-
-
-
-
 
 
 //    private void openContacts() {
@@ -304,5 +309,26 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         umShareAPI.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case 12:
+                if (resultCode == RESULT_OK)
+                {
+                    Bundle bundle = data.getExtras();
+                    String countryNumber = bundle.getString("countryNumber");
+
+                    mQvHao.setText(countryNumber.substring(1));
+
+
+                }
+                break;
+
+            default:
+                break;
+        }
+
+
+
+
     }
 }

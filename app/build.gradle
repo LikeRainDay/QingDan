@@ -29,23 +29,11 @@ repositories
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha2'
-    testCompile 'junit:junit:4.12'
     compile name: 'SMSSDK-2.1.0', ext: 'aar'
     compile name: 'SMSSDKGUI-2.1.0', ext: 'aar'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:24.0.0'
-    compile 'com.jakewharton:butterknife:8.1.0'
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
-    compile 'com.android.support:design:24.0.0'
-    compile 'com.android.support:recyclerview-v7:24.0.0'
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
     }
-    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile files('libs/umeng_social_sdk.jar')
     compile files('libs/mta-sdk-1.6.2.jar')
     compile files('libs/open_sdk_r5509.jar')
@@ -56,4 +44,19 @@ dependencies {
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/MobCommons-2016.0624.1326.jar')
     compile files('libs/MobTools-2016.0624.1326.jar')
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
+    compile 'com.jakewharton:butterknife:8.1.0'
+    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:recyclerview-v7:24.0.0'
+    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support:support-annotations:24.0.0'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile 'com.googlecode.libphonenumber:libphonenumber:7.4.4'
+    compile files('libs/dj-common-util-1.4.8-64184c0951814c39efbd31071c5683f0.jar')
+    compile files('libs/jpush-android-2.1.6.jar')
 }
