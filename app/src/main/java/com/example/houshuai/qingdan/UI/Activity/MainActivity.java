@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         boolean self = intent.getBooleanExtra("self", false);
         if (self) {
-            mFragmentTabHost.removeViewAt(2);
+//            mFragmentTabHost.removeViewAt(2);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, new Self_hasLogin()).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
             mFragmentTabHost.setCurrentTab(2);
