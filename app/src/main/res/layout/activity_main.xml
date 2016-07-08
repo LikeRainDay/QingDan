@@ -42,7 +42,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:gravity="end"
                     android:id="@+id/self_image"
                     android:src="@mipmap/bell_circle_white"
                     android:visibility="gone" />

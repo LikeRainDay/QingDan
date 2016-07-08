@@ -59,7 +59,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-<!--    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />-->
+    <!--    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />-->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -68,6 +68,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.Activity.WelcomeActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UI.Activity.Self_Settings">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -128,13 +133,12 @@
         </activity>
         <!--选择图片的页面-->
         <activity
-            android:configChanges="orientation|screenSize"
-            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
         <!-- ###################添加UmengAppkey###################### -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="577cbd5367e58e1162000433" />
-
 
 
         <!-- Rich push 核心功能 since 2.0.6 -->

@@ -82,16 +82,16 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         if (null != overlay) {
             return overlay;
         }
-        long startMs = System.currentTimeMillis();
+        long startMs = System.currentTimeMil    lis();
 
         View view = mContext.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache(true);
         mBitmap = view.getDrawingCache();
 
-        float scaleFactor = 8;//ͼƬ���ű�����
+        float scaleFactor = 1;//ͼƬ���ű�����
         // TODO: 2016/7/7 改动 //radius = 10
-        float radius = 5;//ģ���̶�
+        float radius = 3;//ģ���̶�
         int width = mBitmap.getWidth();
         int height = mBitmap.getHeight();
 

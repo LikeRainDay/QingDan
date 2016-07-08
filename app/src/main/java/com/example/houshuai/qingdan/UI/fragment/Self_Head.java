@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.UI.Activity.Self_Settings;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -58,7 +59,8 @@ public class Self_Head extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.self_image) {
-
+                    Intent intent = new Intent(getActivity(), Self_Settings.class);
+                    startActivity(intent);
                 }
             }
         });
