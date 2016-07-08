@@ -40,14 +40,6 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
 import com.umeng.socialize.media.UMusic;
 
-/*
-* 分享的点击监听事件代码
-*  if (null == mMoreWindow) {
-            mMoreWindow = new MoreWindow(getActivity());
-            mMoreWindow.init();
-        }
-        mMoreWindow.showMoreWindow(view, 100);
-* */
 public class MoreWindow extends PopupWindow implements OnClickListener {
     private String TAG = MoreWindow.class.getSimpleName();
     Activity mContext;
@@ -82,7 +74,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         if (null != overlay) {
             return overlay;
         }
-        long startMs = System.currentTimeMil    lis();
+        long startMs = System.currentTimeMillis();
 
         View view = mContext.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);

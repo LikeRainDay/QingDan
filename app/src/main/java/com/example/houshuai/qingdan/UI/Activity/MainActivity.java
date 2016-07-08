@@ -16,7 +16,6 @@ import com.example.houshuai.qingdan.UI.fragment.QingDanFramgment;
 import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
 import com.example.houshuai.qingdan.UI.fragment.Self_Framgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
-import com.example.houshuai.qingdan.UI.fragment.Self_hasLogin;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
 
 import java.util.List;
@@ -62,10 +61,8 @@ public class MainActivity extends BaseActivity {
         boolean self = intent.getBooleanExtra("self", false);
         if (self) {
 //            mFragmentTabHost.removeViewAt(2);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, new Self_hasLogin()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
+
             mFragmentTabHost.setCurrentTab(2);
-            mFragmentTabHost.refreshDrawableState();
             List<String> mySharePerference = application.getMySharePerference(application.mID);
             mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
         }

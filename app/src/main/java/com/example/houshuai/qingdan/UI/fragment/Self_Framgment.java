@@ -9,7 +9,7 @@ import com.example.houshuai.qingdan.R;
  * Created by HouShuai on 2016/7/5.
  */
 
-public class Self_Framgment extends BaseFragment {
+public class Self_Framgment extends BaseFragment  {
 
 
     @Override
@@ -33,4 +33,5 @@ public class Self_Framgment extends BaseFragment {
 
         }
     }
+
 }
