@@ -203,17 +203,6 @@
         android:clickable="true"
         android:src="@mipmap/umeng_socialize_renren_on" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:text="+"
-        android:textSize="20sp"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignStart="@+id/imageView3" />
 
 
 </RelativeLayout>

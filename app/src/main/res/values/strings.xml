@@ -6,7 +6,7 @@
     <string name="self_setting">设置</string>
     <string name="Self_noLogin">未登录</string>
     <string name="main_text_toolbar">清单</string>
-    <string name="telephone_number">86</string>
+    <string name="telephone_number">+86</string>
     <string name="getnumber">获取验证码</string>
     <string name="edityoutPass">请输入您的密码</string>
     <string name="RegistViewTitle">昵称密码</string>

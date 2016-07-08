@@ -289,7 +289,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                     Bundle bundle = data.getExtras();
                     String countryNumber = bundle.getString("countryNumber");
 
-                    mQvHao.setText(countryNumber.substring(1));
+                    mQvHao.setText(countryNumber);
 
 
                 }
