@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -214,36 +215,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
         isAuth = false;
     }
-
-
-//    private void openContacts() {
-//        //打开通信录好友列表页面
-//        ContactsPage contactsPage = new ContactsPage();
-//        contactsPage.show(context);
-//    }
-
-//    private void getRegisterView() {
-//        //打开注册页面
-//        // TODO: 2016/7/6
-//        RegisterPage registerPage = new RegisterPage();
-//        registerPage.setRegisterCallback(new EventHandler() {
-//            public void afterEvent(int event, int result, Object data) {
-//// 解析注册结果
-//                if (result == SMSSDK.RESULT_COMPLETE) {
-//                    @SuppressWarnings("unchecked")
-//                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
-//                    String country = (String) phoneMap.get("country");
-//                    String phone = (String) phoneMap.get("phone");
-//// 提交用户信息
-//
-//
-////                    registerUser(country, phone);
-//                }
-//            }
-//        });
-//        registerPage.show(context);
-//    }
-
     /**
      * auth callback interface
      **/
@@ -290,6 +261,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
             if (data != null) {
                 Toast.makeText(getContext(), data.get("json").toString(), Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(), data.size(), Toast.LENGTH_LONG).show();
+                Log.e("des", data.get("json").toString());
             }
 
         }

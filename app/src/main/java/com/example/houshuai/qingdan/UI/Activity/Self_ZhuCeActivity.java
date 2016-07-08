@@ -3,7 +3,6 @@ package com.example.houshuai.qingdan.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -74,6 +73,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
             case R.id.button4:
                 //下一步
                 YanZhengMsg();
+                finish();
                 break;
             case R.id.textView6:
                 //用户手册
@@ -81,6 +81,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 //暂时跳转
                 Intent intent = new Intent(Self_ZhuCeActivity.this, Self_ZhuCeXiangQingActivity.class);
                 startActivity(intent);
+                finish();
                 break;
 
         }
@@ -95,18 +96,19 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
         SMSSDK.getVerificationCode(mQvHao.getText().toString().trim(), mEditText_phone.getText().toString().trim(), new OnSendMessageHandler() {
             @Override
             public boolean onSendMessage(String s, String s1) {
-                mYanZheng.setClickable(false);
-                int time = 180;
-                for (int i = 0; i < 360; i++) {
-                    mYanZheng.setText(time + "");
-                    SystemClock.sleep(1000);
-                    --time;
-                    if (time==0) {
-                        mYanZheng.setText("重新获取短信");
-                        mYanZheng.setClickable(true);
-                        return false;
-                    }
-                }
+//                mYanZheng.setClickable(false);
+//                int time = 180;
+//                for (int i = 0; i < 360; i++) {
+//                    mYanZheng.setText(time + "");
+//                    SystemClock.sleep(1000);
+//                    --time;
+//                    if (time==0) {
+//                        mYanZheng.setText("重新获取短信");
+//                        mYanZheng.setClickable(true);
+//                        return false;
+//                    }
+//                }
+                Log.e("des", s + "----" + s1);
                 return false;
             }
         });

@@ -41,9 +41,11 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     ImageView mBack;
     private boolean sucessful;
     private List<String> path = new ArrayList<>();
+    private App application;
 
     @Override
     protected void initLayout() {
+        application = (App) getApplication();
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         initWeigt();
@@ -74,6 +76,7 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("self", true);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.back:
                 //点击返回
@@ -90,8 +93,8 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
         } else {
             pathString = path.get(0);
         }
-        ((App) getApplication()).setMySharePerference(name, name, pass, pathString, "", "");
-        ((App) getApplication()).setIsLoginSharedPreferences(true, name);
+        application.setMySharePerference(name, name, pass, pathString, "", "");
+        application.setIsLoginSharedPreferences(true, name);
     }
 
     private void initWeigt() {

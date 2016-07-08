@@ -9,14 +9,17 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.fragment.QingDanFramgment;
 import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
 import com.example.houshuai.qingdan.UI.fragment.Self_Framgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
-import com.example.houshuai.qingdan.UI.fragment.Self_NoLogin;
+import com.example.houshuai.qingdan.UI.fragment.Self_hasLogin;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -32,21 +35,40 @@ public class MainActivity extends BaseActivity {
     TextView mTextView;
     private String[] titleName;
     public static boolean isForeground = false;
-
-
+    @BindView(R.id.self_image)
+    ImageView mToolBarImageView;
+    private App application;
 
     @Override
     protected void initLayout() {
+        application = (App) getApplication();
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
         initFragmentTabHost();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
+        getRegistIntent();
+
+    }
+
+    private void getRegistIntent() {
+        mToolBarImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Self_Settings.class);
+                startActivity(intent);
+            }
+        });
         Intent intent = getIntent();
         boolean self = intent.getBooleanExtra("self", false);
         if (self) {
+            mFragmentTabHost.removeViewAt(2);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, new Self_hasLogin()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
             mFragmentTabHost.setCurrentTab(2);
+            mFragmentTabHost.refreshDrawableState();
+            List<String> mySharePerference = application.getMySharePerference(application.mID);
+            mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
         }
-
     }
 
     private void initFragmentTabHost() {
@@ -78,18 +100,25 @@ public class MainActivity extends BaseActivity {
                 // TODO: 2016/7/5  动态监听
                 switch (s) {
                     case "清单":
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager(), "qingdan").commit();
                         mTextView.setText("清单");
                         break;
                     case "挑选":
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_NoLogin()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager(), "tiaoxuan").commit();
                         mTextView.setText("登录");
                         break;
                     case "个人":
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
-                        mTextView.setText("未登录");
-                        break;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head(), "self").commit();
 
+                        if (application.mIsLogin) {
+                            List<String> mySharePerference = application.getMySharePerference(application.mID);
+                            mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
+                            mToolBarImageView.setVisibility(View.VISIBLE);
+                        } else {
+                            mToolBarImageView.setVisibility(View.GONE);
+                            mTextView.setText("未登录");
+                        }
+                        break;
                 }
             }
         });

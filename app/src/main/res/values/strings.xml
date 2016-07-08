@@ -15,4 +15,8 @@
         <item>挑选</item>
         <item>个人</item>
     </string-array>
+    <string-array name="self_title">
+        <item>文章</item>
+        <item>商品</item>
+    </string-array>
 </resources>

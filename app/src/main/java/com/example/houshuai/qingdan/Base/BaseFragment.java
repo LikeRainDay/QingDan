@@ -21,7 +21,6 @@ public abstract class BaseFragment extends Fragment {
     private Unbinder bind;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,8 +50,5 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
-
     }
-
-
 }
