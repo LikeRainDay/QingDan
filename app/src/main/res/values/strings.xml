@@ -19,4 +19,13 @@
         <item>文章</item>
         <item>商品</item>
     </string-array>
+    <string name="action_settings">设置</string>
+    <string name="button_login">登录</string>
+    <string name="button_signup">注册</string>
+    <string name="button_confirm_login">确认 登录</string>
+    <string name="button_cancel_login">取消 登录</string>
+    <string name="button_confirm_signup">确认 注册</string>
+    <string name="button_cancel_signup">取消 注册</string>
+    <string name="edit_username">username</string>
+    <string name="edit_password">password</string>
 </resources>

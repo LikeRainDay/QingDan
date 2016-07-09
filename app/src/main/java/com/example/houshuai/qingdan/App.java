@@ -34,12 +34,13 @@ public class App extends Application {
         checkIsLogin();
     }
 
-    private void checkIsLogin() {
+    public void checkIsLogin() {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);
         mIsLogin = isLogin.getBoolean("isLogin", false);
         mID = isLogin.getString("ID", "false");
-        Log.e("login",mIsLogin+"---检查----"+mID);
+        Log.e("login", mIsLogin + "---检查----" + mID);
     }
+
 
     public void setIsLoginSharedPreferences(boolean Login, String ID) {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);

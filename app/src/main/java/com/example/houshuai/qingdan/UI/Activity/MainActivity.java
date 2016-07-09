@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initLayout() {
-        application = (App) getApplication();
+         application = (App) getApplication();
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
         initFragmentTabHost();
@@ -60,8 +60,7 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         boolean self = intent.getBooleanExtra("self", false);
         if (self) {
-//            mFragmentTabHost.removeViewAt(2);
-
+            application.checkIsLogin();
             mFragmentTabHost.setCurrentTab(2);
             List<String> mySharePerference = application.getMySharePerference(application.mID);
             mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));

@@ -69,6 +69,7 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
             case R.id.self_settings_button:
                 //退出登录
                 application.setIsLoginSharedPreferences(false, application.mID);
+                application.checkIsLogin();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -76,7 +77,6 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
 
         }
     }
-
     @Override
     protected void initLayout() {
         mToolbar.setTitle("");

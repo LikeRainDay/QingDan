@@ -2,27 +2,25 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 
 import android.content.Intent;
+import android.os.SystemClock;
 
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
-public class WelcomeActivity extends BaseActivity{
+
+public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initLayout() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-               runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
-                       finish();
-                   }
-               });
+                SystemClock.sleep(2500);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                        finish();
+                    }
+                });
             }
         }).start();
     }
