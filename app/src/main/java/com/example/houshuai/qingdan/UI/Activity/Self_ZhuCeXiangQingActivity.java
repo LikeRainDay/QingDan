@@ -2,9 +2,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -97,16 +95,28 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     }
 
     private void isSucessful(String name, String pass) {
-        // TODO: 2016/7/7 正则
-        String pathString ;
-        if (0 == path.size()) {
-            pathString = "false";
+        Pattern nameCompile = Pattern.compile("[\\u4E00-\\u9FA5]{2,5}(?:·[\\u4E00-\\u9FA5]{2,5})*");
+        Pattern passCompile = Pattern.compile("^[^\\s]{8,20}$");
+        Matcher nameMatcher = nameCompile.matcher(name);
+        Matcher passMatcher = passCompile.matcher(pass);
+        if (nameMatcher.find() && passMatcher.find()) {
+            String pathString;
+            if (0 == path.size()) {
+                pathString = "false";
+            } else {
+                pathString = path.get(0);
+            }
+            application.setMySharePerference(name, name, pass, pathString, "", "");
+            application.setIsLoginSharedPreferences(true, name);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("self", true);
+            startActivity(intent);
+            finish();
         } else {
-            pathString = path.get(0);
+            Toast.makeText(this, "输入有误,昵称只能为中文", Toast.LENGTH_SHORT).show();
         }
-        application.setMySharePerference(name, name, pass, pathString, "", "");
-        application.setIsLoginSharedPreferences(true, name);
     }
+
 
     private void initWeigt() {
         mHeadPic.setOnClickListener(this);

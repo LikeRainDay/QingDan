@@ -1,7 +1,5 @@
 package com.example.houshuai.qingdan.UI.Custom;
 
-import java.util.Hashtable;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
@@ -12,6 +10,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.util.Hashtable;
+
 /**
  * @author Ryan Tang
  *
@@ -21,27 +21,6 @@ public final class EncodingHandler {
 	private static final int  HINTCOLOR= 0x00ffffff;
 	//增加容错率的代码 一般是中间没有LOGO的！
 
-//	public static Bitmap createQRCode(String str,int widthAndHeight) throws WriterException {
-//		Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
-//        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-//		BitMatrix matrix = new MultiFormatWriter().encode(str,
-//				BarcodeFormat.QR_CODE, widthAndHeight, widthAndHeight);
-//		int width = matrix.getWidth();
-//		int height = matrix.getHeight();
-//		int[] pixels = new int[width * height];
-//
-//		for (int y = 0; y < height; y++) {
-//			for (int x = 0; x < width; x++) {
-//				if (matrix.get(x, y)) {
-//					pixels[y * width + x] = COLOR;
-//				}
-//			}
-//		}
-//		Bitmap bitmap = Bitmap.createBitmap(width, height,
-//				Bitmap.Config.ARGB_8888);
-//		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-//		return bitmap;
-//	}
 
 
 	//增加容错率的代码 一般是中间加上个LOGO的！
@@ -69,19 +48,6 @@ public final class EncodingHandler {
 		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 		return bitmap;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public static Bitmap add(Bitmap src, Bitmap logo) {
