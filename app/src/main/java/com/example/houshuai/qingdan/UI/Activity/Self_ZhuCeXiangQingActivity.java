@@ -82,10 +82,6 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                 String name = mName.getText().toString().trim();
                 String pass = mPass.getText().toString().trim();
                 isSucessful(name, pass);
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("self", true);
-                startActivity(intent);
-                finish();
                 break;
             case R.id.back:
                 //点击返回

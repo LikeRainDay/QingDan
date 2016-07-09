@@ -226,12 +226,14 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
 
                 if (view == buttonLeft) {
                     formView.animate().translationY(0).alpha(1).setDuration(500).start();
+                    Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
                     inputType = LOGIN;
                     buttonLeft.setText(R.string.button_confirm_login);
                     buttonRight.setText(R.string.button_cancel_login);
 
                 } else if (view == buttonRight) {
                     Self_FormView_Welcome.animate().translationY(0).alpha(1).setDuration(500).start();
+                    formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                     inputType = SIGN_UP;
                     buttonLeft.setText(R.string.button_confirm_signup);
                     buttonRight.setText(R.string.button_cancel_signup);
@@ -239,16 +241,13 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
 
                 break;
             case LOGIN:
-
-
-
                 if (view == buttonLeft) {
                     formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                     //denglu
                     String userName = mUserName.getText().toString().trim();
                     String userPass = mUserPass.getText().toString().trim();
                     boolean has = new LoginUtil(application).nameEqualPass(userName, userPass);
-                    if (!has) {
+                    if (!has|userName==""|userPass=="") {
                         Toast.makeText(this, "用户不存在,请注册", Toast.LENGTH_SHORT).show();
                     } else {
                         toMainActivity();
@@ -256,20 +255,25 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
 
                 } else if (view == buttonRight) {
                     Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
+                    formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
+
                 }
                 inputType = InputType.NONE;
                 buttonLeft.setText(R.string.button_login);
                 buttonRight.setText(R.string.button_signup);
                 break;
             case SIGN_UP:
-
-
                 if (view == buttonLeft) {
+                    Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
                     formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                     // TODO: 2016/7/8 zhuce
-                    toMainActivity();
+                    //短信验证
+
+
+//                    toMainActivity();
                 } else if (view == buttonRight) {
                     Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
+                    formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                 }
                 inputType = InputType.NONE;
                 buttonLeft.setText(R.string.button_login);
