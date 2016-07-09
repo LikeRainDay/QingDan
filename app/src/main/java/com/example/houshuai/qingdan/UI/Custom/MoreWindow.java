@@ -65,7 +65,6 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
                 .getMetrics(metrics);
         mWidth = metrics.widthPixels;
         mHeight = metrics.heightPixels;
-
         setWidth(mWidth);
         setHeight(mHeight);
     }
@@ -81,7 +80,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         view.buildDrawingCache(true);
         mBitmap = view.getDrawingCache();
 
-        float scaleFactor = 1;//ͼƬ���ű�����
+        float scaleFactor = 2;//ͼƬ���ű�����
         // TODO: 2016/7/7 改动 //radius = 10
         float radius = 3;//ģ���̶�
         int width = mBitmap.getWidth();

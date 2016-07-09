@@ -3,6 +3,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.utils.LoginUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import cn.smssdk.EventHandler;
@@ -72,8 +76,14 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.button2:
-                //获取验证码
-                getMsgNumber();
+                Pattern compile = Pattern.compile("^((\\(d{3}\\))|(\\d{3}\\-))?13[0-9]\\d{8}|15[89]\\d{8}");
+                Matcher matcher = compile.matcher(mEditText_phone.getText().toString().trim());
+                if (matcher.find()) {
+                    //获取验证码
+                    getMsgNumber();
+                } else {
+                    Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.button4:
                 //下一步
@@ -82,7 +92,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 break;
             case textView4:
                 intent = new Intent(Self_ZhuCeActivity.this, CountryActivity.class);
-                startActivityForResult(intent,13);
+                startActivityForResult(intent, 13);
                 break;
             case R.id.textView6:
                 //用户手册
@@ -97,26 +107,35 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
 
     }
 
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
+        }
+
+        @Override
+        public void onFinish() {//计时完毕时触发
+            mYanZheng.setText("重新验证");
+            mYanZheng.setClickable(true);
+
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {//计时过程显示
+            mYanZheng.setClickable(false);
+            mYanZheng.setText(millisUntilFinished / 1000 + "秒");
+        }
+    }
+
     private void YanZhengMsg() {
         SMSSDK.submitVerificationCode(mQvHao.getText().toString().trim().substring(1), mEditText_phone.getText().toString().trim(), mEditText_msg.getText().toString().trim());
     }
 
     private void getMsgNumber() {
+        TimeCount time = new TimeCount(60000, 1000);
+        time.start();//开始计时
         SMSSDK.getVerificationCode(mQvHao.getText().toString().trim().substring(1), mEditText_phone.getText().toString().trim(), new OnSendMessageHandler() {
             @Override
             public boolean onSendMessage(String s, String s1) {
-//                mYanZheng.setClickable(false);
-//                int time = 180;
-//                for (int i = 0; i < 360; i++) {
-//                    mYanZheng.setText(time + "");
-//                    SystemClock.sleep(1000);
-//                    --time;
-//                    if (time==0) {
-//                        mYanZheng.setText("重新获取短信");
-//                        mYanZheng.setClickable(true);
-//                        return false;
-//                    }
-//                }
                 Log.e("des", s + "----" + s1);
                 return false;
             }
@@ -149,21 +168,20 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode)
-        { case 13:
-            if (resultCode == RESULT_OK)
-            {
-                Bundle bundle = data.getExtras();
-                String countryNumber = bundle.getString("countryNumber");
+        switch (requestCode) {
+            case 13:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String countryNumber = bundle.getString("countryNumber");
 
-                mQvHao.setText(countryNumber);
+                    mQvHao.setText(countryNumber);
 
 
-            }
-            break;
-        default:
+                }
+                break;
+            default:
 
-            break;
+                break;
 
         }
     }

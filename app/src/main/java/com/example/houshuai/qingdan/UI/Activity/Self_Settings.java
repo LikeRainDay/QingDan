@@ -2,6 +2,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -51,10 +52,28 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
             case R.id.self_XiuGaiPass:
                 break;
             case R.id.self_TongZhi:
+                if (null == mMoreWindow) {
+                    mMoreWindow = new MoreWindow(this);
+                    mMoreWindow.init();
+                }
+                Log.e("des", "我点击了");
+                mMoreWindow.showMoreWindow(view, 100);
                 break;
             case R.id.self_CleanCaches:
+                if (null == mMoreWindow) {
+                    mMoreWindow = new MoreWindow(this);
+                    mMoreWindow.init();
+                }
+                Log.e("des", "我点击了");
+                mMoreWindow.showMoreWindow(view, 100);
                 break;
             case R.id.settings_caches:
+                if (null == mMoreWindow) {
+                    mMoreWindow = new MoreWindow(this);
+                    mMoreWindow.init();
+                }
+                Log.e("des", "我点击了");
+                mMoreWindow.showMoreWindow(view, 100);
                 break;
             case R.id.self_GuanYv:
                 break;
@@ -63,6 +82,7 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                     mMoreWindow = new MoreWindow(this);
                     mMoreWindow.init();
                 }
+                Log.e("des", "我点击了");
                 mMoreWindow.showMoreWindow(view, 100);
                 break;
             case R.id.self_YiJianFanKu:
