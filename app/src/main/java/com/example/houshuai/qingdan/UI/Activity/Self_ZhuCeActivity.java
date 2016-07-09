@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import butterknife.BindView;
 import cn.smssdk.EventHandler;
@@ -47,6 +48,8 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initLayout() {
+        LoginUtil.windowSettings(this);
+
         initSMSResultHandler();
         addListener();
     }

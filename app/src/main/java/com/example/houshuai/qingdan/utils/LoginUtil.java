@@ -1,5 +1,10 @@
 package com.example.houshuai.qingdan.utils;
 
+import android.app.Activity;
+import android.os.Build;
+import android.view.Window;
+import android.view.WindowManager;
+
 import com.example.houshuai.qingdan.App;
 
 import java.util.List;
@@ -17,6 +22,19 @@ public class LoginUtil {
 
     public LoginUtil(App mAPP) {
         this.mInstance = mAPP;
+    }
+
+    //沉泥室
+    public static void windowSettings(Activity activity) {
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
     }
 
     //是否登录

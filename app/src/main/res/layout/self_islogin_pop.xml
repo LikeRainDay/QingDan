@@ -8,13 +8,13 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginTop="10dp"
         android:background="@color/self_pop_actionbar">
 
         <ImageView
             android:id="@+id/self_callback"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
             android:clickable="true"
             android:src="@mipmap/abc_ic_clear_mtrl_alpha" />
 
@@ -26,7 +26,7 @@
             android:layout_centerVertical="true"
             android:text="登录"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <ImageView
@@ -202,7 +202,6 @@
         android:background="@drawable/self_circle"
         android:clickable="true"
         android:src="@mipmap/umeng_socialize_renren_on" />
-
 
 
 </RelativeLayout>

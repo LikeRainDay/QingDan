@@ -28,7 +28,7 @@ public class MyVideoView extends VideoView {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY) {
             setMeasuredDimension(widthSize, heightSize);
-        } else{
+        } else {
 
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }

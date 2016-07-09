@@ -33,6 +33,7 @@ import com.example.houshuai.qingdan.bean.CountrySortModel;
 import com.example.houshuai.qingdan.utils.CharacterParserUtil;
 import com.example.houshuai.qingdan.utils.CountryComparator;
 import com.example.houshuai.qingdan.utils.GetCountryNameSort;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,6 +78,7 @@ public class CountryActivity extends Activity
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
+
 	{
 		super.onCreate(savedInstanceState);
 		
@@ -84,7 +86,8 @@ public class CountryActivity extends Activity
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.coogame_country);
-		
+		LoginUtil.windowSettings(this);
+
 		initView();
 		
 		setListener();

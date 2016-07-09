@@ -17,6 +17,7 @@ import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
 import com.example.houshuai.qingdan.UI.fragment.Self_Framgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initLayout() {
-         application = (App) getApplication();
+        LoginUtil.windowSettings(this);
+        application = (App) getApplication();
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
         initFragmentTabHost();

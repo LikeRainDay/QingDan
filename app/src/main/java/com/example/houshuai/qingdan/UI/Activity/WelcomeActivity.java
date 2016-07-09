@@ -6,10 +6,12 @@ import android.os.SystemClock;
 
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initLayout() {
+        LoginUtil.windowSettings(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +26,8 @@ public class WelcomeActivity extends BaseActivity {
             }
         }).start();
     }
+
+
 
     @Override
     protected int getActivityID() {

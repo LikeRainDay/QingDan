@@ -11,6 +11,7 @@ import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Custom.MoreWindow;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import butterknife.BindView;
 
@@ -79,6 +80,8 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
     }
     @Override
     protected void initLayout() {
+        LoginUtil.windowSettings(this);
+
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         addListener();

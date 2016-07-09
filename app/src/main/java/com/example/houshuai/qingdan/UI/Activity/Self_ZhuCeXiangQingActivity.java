@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseActivity;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
 
     @Override
     protected void initLayout() {
+        LoginUtil.windowSettings(this);
+
         application = (App) getApplication();
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
