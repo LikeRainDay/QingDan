@@ -44,18 +44,22 @@ dependencies {
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/MobCommons-2016.0624.1326.jar')
     compile files('libs/MobTools-2016.0624.1326.jar')
+    compile files('libs/dj-common-util-1.4.8-64184c0951814c39efbd31071c5683f0.jar')
+    compile files('libs/jpush-android-2.1.6.jar')
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.googlecode.libphonenumber:libphonenumber:7.4.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support:support-annotations:24.0.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
-    compile 'com.googlecode.libphonenumber:libphonenumber:7.4.4'
-    compile files('libs/dj-common-util-1.4.8-64184c0951814c39efbd31071c5683f0.jar')
-    compile files('libs/jpush-android-2.1.6.jar')
+    compile files('libs/zxing.jar')
+    compile files('libs/zxing-0b54a6257c073af9034d440f8743c2c0.jar')
+    compile files('libs/core-3.1.0.jar')
 }

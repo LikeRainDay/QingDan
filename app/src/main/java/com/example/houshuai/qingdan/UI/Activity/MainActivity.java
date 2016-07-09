@@ -16,8 +16,8 @@ import com.example.houshuai.qingdan.UI.fragment.QingDanFramgment;
 import com.example.houshuai.qingdan.UI.fragment.QingDan_viewPager;
 import com.example.houshuai.qingdan.UI.fragment.Self_Framgment;
 import com.example.houshuai.qingdan.UI.fragment.Self_Head;
+import com.example.houshuai.qingdan.UI.fragment.Self_hasLogin;
 import com.example.houshuai.qingdan.UI.fragment.TiaoXuanFramgment;
-import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import java.util.List;
 
@@ -41,7 +41,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initLayout() {
-        LoginUtil.windowSettings(this);
         application = (App) getApplication();
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
@@ -51,7 +50,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    //intent返回类型
     private void getRegistIntent() {
         mToolBarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,18 +60,12 @@ public class MainActivity extends BaseActivity {
         });
         Intent intent = getIntent();
         boolean self = intent.getBooleanExtra("self", false);
-        boolean inner_login = intent.getBooleanExtra("inner_login", false);
-        boolean settings = intent.getBooleanExtra("settings", false);
-        if (inner_login) {
-            mFragmentTabHost.setCurrentTab(2);
-        }
-        if (settings) {
-            application.checkIsLogin();
-            mFragmentTabHost.setCurrentTab(2);
-        }
         if (self) {
-            application.checkIsLogin();
+//            mFragmentTabHost.removeViewAt(2);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, new Self_hasLogin()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new Self_Head()).commit();
             mFragmentTabHost.setCurrentTab(2);
+            mFragmentTabHost.refreshDrawableState();
             List<String> mySharePerference = application.getMySharePerference(application.mID);
             mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
         }
@@ -121,6 +113,8 @@ public class MainActivity extends BaseActivity {
                         if (application.mIsLogin) {
                             List<String> mySharePerference = application.getMySharePerference(application.mID);
                             mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
+      //
+
                             mToolBarImageView.setVisibility(View.VISIBLE);
                         } else {
                             mToolBarImageView.setVisibility(View.GONE);
