@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.example.houshuai.qingdan.R.id.buttonMsg;
+import static com.example.houshuai.qingdan.R.id.edit1;
+import static com.example.houshuai.qingdan.R.id.edit2;
+import static com.example.houshuai.qingdan.R.id.welcom_qvhao;
 import static com.example.houshuai.qingdan.UI.Activity.WelcomeMovieActivity.InputType.LOGIN;
 import static com.example.houshuai.qingdan.UI.Activity.WelcomeMovieActivity.InputType.SIGN_UP;
 
@@ -48,6 +53,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     private Button buttonLeft, buttonRight;
 
     private FormView formView;
+    private LinearLayout Self_FormView_Welcome;
 
     private ViewGroup contianer;
 
@@ -55,6 +61,12 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     private EditText mUserName;
     private EditText mUserPass;
     private App application;
+    private Button buttonThird;
+    private EditText egist_edit1;
+    private EditText egist_edit2;
+    private EditText egist_edit3;
+    private TextView mQvhao;
+    private Button mYanZheng;
 
 
     @Override
@@ -102,19 +114,44 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
 
 
     private void findView() {
-        mVideoView = (VideoView) findViewById(com.example.houshuai.qingdan.R.id.videoView);
-        buttonLeft = (Button) findViewById(com.example.houshuai.qingdan.R.id.buttonLeft);
-        buttonRight = (Button) findViewById(com.example.houshuai.qingdan.R.id.buttonRight);
-        contianer = (ViewGroup) findViewById(com.example.houshuai.qingdan.R.id.container);
-        formView = (FormView) findViewById(com.example.houshuai.qingdan.R.id.formView);
-        appName = (TextView) findViewById(com.example.houshuai.qingdan.R.id.appName);
-        mUserName = (EditText) formView.findViewById(R.id.edit1);
-        mUserPass = (EditText) formView.findViewById(R.id.edit2);
+        mVideoView = (VideoView) findViewById(R.id.videoView);
+        buttonLeft = (Button) findViewById(R.id.buttonLeft);
+        buttonRight = (Button) findViewById(R.id.buttonRight);
+        contianer = (ViewGroup) findViewById(R.id.container);
+        formView = (FormView) findViewById(R.id.formView);
+        Self_FormView_Welcome = (LinearLayout) findViewById(R.id.regist_form_view);
+        appName = (TextView) findViewById(R.id.appName);
+        buttonThird = (Button) findViewById(R.id.buttonThird);
+        mUserName = (EditText) formView.findViewById(edit1);
+        mUserPass = (EditText) formView.findViewById(edit2);
+
+        egist_edit1 = (EditText) Self_FormView_Welcome.findViewById(R.id.self_edit1);
+        egist_edit2 = (EditText) Self_FormView_Welcome.findViewById(R.id.self_edit2);
+        egist_edit3 = (EditText) Self_FormView_Welcome.findViewById(R.id.self_edit3);
+        mQvhao = (TextView) Self_FormView_Welcome.findViewById(welcom_qvhao);
+        mYanZheng = (Button) Self_FormView_Welcome.findViewById(buttonMsg);
+
+
         formView.post(new Runnable() {
             @Override
             public void run() {
                 int delta = formView.getTop() + formView.getHeight();
                 formView.setTranslationY(-1 * delta);
+            }
+        });
+        Self_FormView_Welcome.post(new Runnable() {
+            @Override
+            public void run() {
+                int delta = Self_FormView_Welcome.getTop() + Self_FormView_Welcome.getHeight();
+                Self_FormView_Welcome.setTranslationY(-1 * delta);
+            }
+        });
+        buttonThird.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 2016/7/9 第三方
+
+                Toast.makeText(WelcomeMovieActivity.this, "第三方", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -156,7 +193,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         File videoFile;
         try {
             FileOutputStream fos = openFileOutput(VIDEO_NAME, MODE_PRIVATE);
-            InputStream in = getResources().openRawResource(com.example.houshuai.qingdan.R.raw.welcome_video);
+            InputStream in = getResources().openRawResource(R.raw.welcome_video);
             byte[] buff = new byte[1024];
             int len = 0;
             while ((len = in.read(buff)) != -1) {
@@ -182,54 +219,61 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         int delta = formView.getTop() + formView.getHeight();
+        int delta2 = Self_FormView_Welcome.getTop() + Self_FormView_Welcome.getHeight();
         switch (inputType) {
             case NONE:
 
-                formView.animate().translationY(0).alpha(1).setDuration(500).start();
+
                 if (view == buttonLeft) {
+                    formView.animate().translationY(0).alpha(1).setDuration(500).start();
                     inputType = LOGIN;
-                    buttonLeft.setText(com.example.houshuai.qingdan.R.string.button_confirm_login);
-                    buttonRight.setText(com.example.houshuai.qingdan.R.string.button_cancel_login);
+                    buttonLeft.setText(R.string.button_confirm_login);
+                    buttonRight.setText(R.string.button_cancel_login);
 
                 } else if (view == buttonRight) {
+                    Self_FormView_Welcome.animate().translationY(0).alpha(1).setDuration(500).start();
                     inputType = SIGN_UP;
-                    buttonLeft.setText(com.example.houshuai.qingdan.R.string.button_confirm_signup);
-                    buttonRight.setText(com.example.houshuai.qingdan.R.string.button_cancel_signup);
+                    buttonLeft.setText(R.string.button_confirm_signup);
+                    buttonRight.setText(R.string.button_cancel_signup);
                 }
 
                 break;
             case LOGIN:
 
-                formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
+
+
                 if (view == buttonLeft) {
+                    formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                     //denglu
                     String userName = mUserName.getText().toString().trim();
                     String userPass = mUserPass.getText().toString().trim();
                     boolean has = new LoginUtil(application).nameEqualPass(userName, userPass);
                     if (!has) {
-                        Toast.makeText(this, "用户不存在,请注册", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "用户不存在,请注册", Toast.LENGTH_SHORT).show();
                     } else {
                         toMainActivity();
                     }
 
                 } else if (view == buttonRight) {
-
+                    Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
                 }
                 inputType = InputType.NONE;
-                buttonLeft.setText(com.example.houshuai.qingdan.R.string.button_login);
-                buttonRight.setText(com.example.houshuai.qingdan.R.string.button_signup);
+                buttonLeft.setText(R.string.button_login);
+                buttonRight.setText(R.string.button_signup);
                 break;
             case SIGN_UP:
-                formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
+
+
                 if (view == buttonLeft) {
+                    formView.animate().translationY(-1 * delta).alpha(0).setDuration(500).start();
                     // TODO: 2016/7/8 zhuce
                     toMainActivity();
                 } else if (view == buttonRight) {
-
+                    Self_FormView_Welcome.animate().translationY(-1 * delta2).alpha(0).setDuration(500).start();
                 }
                 inputType = InputType.NONE;
-                buttonLeft.setText(com.example.houshuai.qingdan.R.string.button_login);
-                buttonRight.setText(com.example.houshuai.qingdan.R.string.button_signup);
+                buttonLeft.setText(R.string.button_login);
+                buttonRight.setText(R.string.button_signup);
                 break;
         }
     }

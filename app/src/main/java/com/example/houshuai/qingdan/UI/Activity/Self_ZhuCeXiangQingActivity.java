@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.Base.BaseActivity;
@@ -16,6 +17,8 @@ import com.example.houshuai.qingdan.utils.LoginUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,7 +50,6 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     @Override
     protected void initLayout() {
         LoginUtil.windowSettings(this);
-
         application = (App) getApplication();
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
@@ -76,10 +78,6 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                 String name = mName.getText().toString().trim();
                 String pass = mPass.getText().toString().trim();
                 isSucessful(name, pass);
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("self", true);
-                startActivity(intent);
-                finish();
                 break;
             case R.id.back:
                 //点击返回
@@ -89,15 +87,29 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     }
 
     private void isSucessful(String name, String pass) {
-        // TODO: 2016/7/7 正则
-        String pathString ;
-        if (0 == path.size()) {
-            pathString = "false";
+
+        Pattern nameCompile = Pattern.compile("[\\u4E00-\\u9FA5]{2,5}(?:·[\\u4E00-\\u9FA5]{2,5})*");
+        Pattern passCompile = Pattern.compile("^[^\\s]{8,20}$");
+        Matcher nameMatcher = nameCompile.matcher(name);
+        Matcher passMatcher = passCompile.matcher(pass);
+        if (nameMatcher.find() && passMatcher.find()) {
+            String pathString;
+            if (0 == path.size()) {
+                pathString = "false";
+            } else {
+                pathString = path.get(0);
+            }
+            application.setMySharePerference(name, name, pass, pathString, "", "");
+            application.setIsLoginSharedPreferences(true, name);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("self", true);
+            startActivity(intent);
+            finish();
         } else {
-            pathString = path.get(0);
+            Toast.makeText(this, "输入有误,昵称只能为中文", Toast.LENGTH_SHORT).show();
         }
-        application.setMySharePerference(name, name, pass, pathString, "", "");
-        application.setIsLoginSharedPreferences(true, name);
+
+
     }
 
     private void initWeigt() {

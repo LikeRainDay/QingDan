@@ -33,7 +33,7 @@ public class FormView extends LinearLayout {
 
     private void loadView(){
         setOrientation(VERTICAL);
-        LayoutInflater.from(getContext()).inflate(R.layout.form_view, this);
+        LayoutInflater.from(getContext()).inflate(R.layout.self_login_form_view, this);
         edit1 = (EditText) findViewById(R.id.edit1);
         edit2 = (EditText) findViewById(R.id.edit2);
     }

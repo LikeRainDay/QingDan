@@ -26,6 +26,8 @@
     <string name="button_cancel_login">取消 登录</string>
     <string name="button_confirm_signup">确认 注册</string>
     <string name="button_cancel_signup">取消 注册</string>
-    <string name="edit_username">username</string>
-    <string name="edit_password">password</string>
+    <string name="edit_username">账号</string>
+    <string name="edit_password">密码</string>
+    <string name="button_Third">第三方</string>
+    <string name="duanxinyanzheng">短信验证</string>
 </resources>
