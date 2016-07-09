@@ -72,6 +72,7 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                 application.setIsLoginSharedPreferences(false, application.mID);
                 application.checkIsLogin();
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("settings", true);
                 startActivity(intent);
                 finish();
                 break;

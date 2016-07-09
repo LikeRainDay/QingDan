@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    //intent返回类型
     private void getRegistIntent() {
         mToolBarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,15 @@ public class MainActivity extends BaseActivity {
         });
         Intent intent = getIntent();
         boolean self = intent.getBooleanExtra("self", false);
+        boolean inner_login = intent.getBooleanExtra("inner_login", false);
+        boolean settings = intent.getBooleanExtra("settings", false);
+        if (inner_login) {
+            mFragmentTabHost.setCurrentTab(2);
+        }
+        if (settings) {
+            application.checkIsLogin();
+            mFragmentTabHost.setCurrentTab(2);
+        }
         if (self) {
             application.checkIsLogin();
             mFragmentTabHost.setCurrentTab(2);

@@ -53,5 +53,14 @@ public class LoginUtil {
         return false;
     }
 
+    //账号密码是否一致
+    public static boolean newNameEqualPass(App mapp, String name, String pass) {
+        List<String> mySharePerference = mapp.getMySharePerference(name);
+        if (name.equals(mySharePerference.get(0)) && pass.equals(mySharePerference.get(1))) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

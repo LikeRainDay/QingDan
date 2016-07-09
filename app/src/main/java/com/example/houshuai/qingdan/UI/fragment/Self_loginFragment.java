@@ -22,10 +22,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Activity.CountryActivity;
+import com.example.houshuai.qingdan.UI.Activity.MainActivity;
 import com.example.houshuai.qingdan.UI.Activity.Self_ZhuCeActivity;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.example.houshuai.qingdan.utils.LoginUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -172,15 +174,25 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
 
 
                 break;
-            case R.id.editText:
-//电话号码
-                break;
-            case R.id.editText2:
-//密码
-                break;
-
             case R.id.button4:
-//下一步
+//登录
+                App application = (App) getActivity().getApplication();
+                String name = mEditText_phone.getText().toString().trim();
+                String pass = mEditText_msg.getText().toString().trim();
+//                mQvHao.getText().toString().trim();
+                boolean b = LoginUtil.newNameEqualPass(application, name, pass);
+                if (b) {
+                    //登录成功
+                    application.setIsLoginSharedPreferences(true, name);
+                    application.checkIsLogin();
+                    Intent m = new Intent(getActivity(), MainActivity.class);
+                    m.putExtra("inner_login", true);
+                    startActivity(m);
+                    getFragmentManager().popBackStack();
+                } else {
+                    Toast.makeText(getActivity(), "账号密码不正确,请核对后登录", Toast.LENGTH_LONG).show();
+                }
+
                 break;
             case R.id.textView5:
 //注册
@@ -189,6 +201,8 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.textView6:
 //忘记密码
+
+
                 break;
             case R.id.imageView8:
 //企鹅第三方
@@ -215,6 +229,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
         isAuth = false;
     }
+
     /**
      * auth callback interface
      **/
@@ -281,11 +296,9 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         umShareAPI.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case 12:
-                if (resultCode == RESULT_OK)
-                {
+                if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String countryNumber = bundle.getString("countryNumber");
 
@@ -298,8 +311,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
             default:
                 break;
         }
-
-
 
 
     }

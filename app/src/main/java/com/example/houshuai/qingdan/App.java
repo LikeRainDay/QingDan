@@ -38,7 +38,7 @@ public class App extends Application {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);
         mIsLogin = isLogin.getBoolean("isLogin", false);
         mID = isLogin.getString("ID", "false");
-        Log.e("login", mIsLogin + "---检查----" + mID);
+        Log.e("login",mIsLogin+"---检查----"+mID);
     }
 
 
