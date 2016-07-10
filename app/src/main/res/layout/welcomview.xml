@@ -44,7 +44,7 @@
                 android:id="@+id/welcom_qvhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"  android:textColor="@android:color/white"
-                android:text="86" />
+                android:text="+86" />
 
             <EditText
                 android:id="@+id/self_edit1"
@@ -71,7 +71,6 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:hint="@string/name_welcome"
-            android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHint="#55FFFFFF" />
 
