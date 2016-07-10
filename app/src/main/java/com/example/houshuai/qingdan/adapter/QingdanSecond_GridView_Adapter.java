@@ -23,7 +23,7 @@ import java.util.List;
 public class QingdanSecond_GridView_Adapter extends BaseAdapter {
     private List<Text> data;
     private Context context;
-
+//测试
     public QingdanSecond_GridView_Adapter(List<Text> data,Context context) {
         this.data = data;
         this.context=context;
