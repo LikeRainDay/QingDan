@@ -26,7 +26,6 @@ import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Activity.CountryActivity;
 import com.example.houshuai.qingdan.UI.Activity.MainActivity;
 import com.example.houshuai.qingdan.UI.Activity.Self_ZhuCeActivity;
-import com.example.houshuai.qingdan.inter.UmLoginInter;
 import com.example.houshuai.qingdan.utils.LoginUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -73,7 +72,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     @BindView(R.id.imageView9)
     ImageView mRenRen;
     private App application;
-    private UmLoginInter mUmLoginInter;
 
     public Self_loginFragment() {
         isPop = true;

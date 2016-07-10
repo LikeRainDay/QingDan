@@ -3,7 +3,6 @@ package com.example.houshuai.qingdan.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.App;
@@ -125,7 +124,7 @@ public class ThridLoginUtil {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             if (data != null) {
-                Log.e("des", data.toString() + "UMAuthListener");
+                com.umeng.socialize.utils.Log.d("auth callbacl", "getting data");
                 String screen_name = data.get("screen_name");
                 String profile_image_url = data.get("profile_image_url");
                 String openid = data.get("openid");
