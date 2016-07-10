@@ -4,6 +4,7 @@ package com.example.houshuai.qingdan.inter;
 
 import com.example.houshuai.qingdan.bean.CategoryListBean;
 import com.example.houshuai.qingdan.bean.NewListBean;
+import com.example.houshuai.qingdan.bean.ZhuanchangBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -22,4 +23,7 @@ public interface QingdanInter {
 
     @GET("{index}-20-{type}-1.html?package=mizhe")
     Call<CategoryListBean> getFirstPageList(@Path("index") int index, @Path("type") String type);
+    @GET("{event_id}")
+    Call<ZhuanchangBean> getZhuanchangInfo();
+
 }
