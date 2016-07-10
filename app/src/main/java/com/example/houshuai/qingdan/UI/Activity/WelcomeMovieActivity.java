@@ -26,10 +26,9 @@ import android.widget.VideoView;
 import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Custom.FormView;
-import com.example.houshuai.qingdan.UI.Custom.PopMenu;
-import com.example.houshuai.qingdan.UI.Custom.PopMenuItem;
-import com.example.houshuai.qingdan.UI.Custom.PopMenuItemListener;
 import com.example.houshuai.qingdan.utils.LoginUtil;
+import com.example.houshuai.qingdan.utils.ThridLoginUtil;
+import com.umeng.socialize.UMShareAPI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,7 +81,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     private boolean isOK;
     private String mPhone;
     private String mPass;
-    private PopMenu mPopMenu;
+    private UMShareAPI umShareAPI;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,22 +101,10 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         }
         playVideo(videoFile);
         playAnim();
-        initPopWindow();
+
     }
 
-    private void initPopWindow() {
-        mPopMenu = new PopMenu.Builder().attachToActivity(WelcomeMovieActivity.this)
-                .addMenuItem(new PopMenuItem("QQ", getResources().getDrawable(R.mipmap.share_wechat)))
-                .addMenuItem(new PopMenuItem("新浪", getResources().getDrawable(R.mipmap.share_weibo)))
-                .addMenuItem(new PopMenuItem("人人", getResources().getDrawable(R.mipmap.share_wechat_moment)))
-                .setOnItemClickListener(new PopMenuItemListener() {
-                    @Override
-                    public void onItemClick(PopMenu popMenu, int position) {
-                        Toast.makeText(WelcomeMovieActivity.this, "你点击了第" + position + "个位置", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build();
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -186,9 +173,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mPopMenu.isShowing()) {
-                    mPopMenu.show();
-                }
+                umShareAPI = ThridLoginUtil.startAuto(WelcomeMovieActivity.this);
             }
         });
         mYanZheng.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +196,8 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         mQvhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Intent intent = new Intent(WelcomeMovieActivity.this, CountryActivity.class);
                 startActivityForResult(intent, 12);
             }
@@ -230,7 +217,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
                         //成功后跳转
                         Log.d("aaa", event + "<afterEvent>" + result + ",校验成功");
                         isOK = true;
-                        int pass = (int) (Math.random() * 10000000);
+                        int pass = (int) (Math.random() * 99999999);
                         mPass = String.valueOf(pass);
                         Toast.makeText(WelcomeMovieActivity.this, pass, Toast.LENGTH_LONG).show();
 
@@ -345,13 +332,12 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
             case SIGN_UP:
                 if (view == buttonLeft) {
 
-                    toMainActivity();
 
 
                     String nincheng = egist_edit2.getText().toString().trim();
-                    Pattern nameCompile = Pattern.compile("[\\u4E00-\\u9FA5]{2,5}(?:·[\\u4E00-\\u9FA5]{2,5})*");
+                    Pattern nameCompile = Pattern.compile("^[\\u2E80-\\u9FFF]{2,5}$");
                     Matcher nameMatcher = nameCompile.matcher(nincheng);
-                    if (nameMatcher.find() && isOK && mPhone != null) {
+                    if (nameMatcher.find() &&isOK) {
                         application.setMySharePerference(mPhone, mPhone, mPass, "", "", nincheng);
                         application.setIsLoginSharedPreferences(true, mPhone);
                         toMainActivity();
@@ -400,7 +386,14 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        umShareAPI.onActivityResult(requestCode, resultCode, data);
+    }
+
     enum InputType {
         NONE, LOGIN, SIGN_UP;
     }
+
 }

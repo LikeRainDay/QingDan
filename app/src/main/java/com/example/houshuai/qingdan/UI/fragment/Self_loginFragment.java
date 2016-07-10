@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +26,11 @@ import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Activity.CountryActivity;
 import com.example.houshuai.qingdan.UI.Activity.MainActivity;
 import com.example.houshuai.qingdan.UI.Activity.Self_ZhuCeActivity;
+import com.example.houshuai.qingdan.inter.UmLoginInter;
 import com.example.houshuai.qingdan.utils.LoginUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.view.UMFriendListener;
 
 import java.util.Map;
 
@@ -73,7 +72,8 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     ImageView mSina;
     @BindView(R.id.imageView9)
     ImageView mRenRen;
-
+    private App application;
+    private UmLoginInter mUmLoginInter;
 
     public Self_loginFragment() {
         isPop = true;
@@ -109,11 +109,11 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.inflater = inflater;
+
         parentView = (ViewGroup) getActivity().getWindow().getDecorView();
         popView = createPopView();
         parentView.addView(popView);
         linearLayout.startAnimation(createTranslationInAnimation());
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -152,6 +152,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        application = (App) getActivity().getApplication();
         SHARE_MEDIA platform = null;
         umShareAPI = UMShareAPI.get(getActivity());
         switch (view.getId()) {
@@ -176,7 +177,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.button4:
 //登录
-                App application = (App) getActivity().getApplication();
+
                 String name = mEditText_phone.getText().toString().trim();
                 String pass = mEditText_msg.getText().toString().trim();
 //                mQvHao.getText().toString().trim();
@@ -226,7 +227,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
             return;
         }
         umShareAPI.doOauthVerify(getActivity(), platform, umAuthListener);
-        umShareAPI.getFriend(getActivity(), platform, umGetfriendListener);
         isAuth = false;
     }
 
@@ -256,6 +256,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             Toast.makeText(getContext(), " 授权成功", Toast.LENGTH_SHORT).show();
+            umShareAPI.getPlatformInfo(getActivity(), platform, umGetfriendListener);
         }
 
         @Override
@@ -270,25 +271,29 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     };
 
 
-    private UMFriendListener umGetfriendListener = new UMFriendListener() {
+    private UMAuthListener umGetfriendListener = new UMAuthListener() {
         @Override
-        public void onComplete(SHARE_MEDIA platform, int action, Map<String, Object> data) {
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> data) {
             if (data != null) {
-                Toast.makeText(getContext(), data.get("json").toString(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(), data.size(), Toast.LENGTH_LONG).show();
-                Log.e("des", data.get("json").toString());
+                String screen_name = data.get("screen_name");
+                String profile_image_url = data.get("profile_image_url");
+                String openid = data.get("openid");
+                application.setIsLoginSharedPreferences(true, openid);
+                application.setMySharePerference(openid, "third", openid, profile_image_url, "", screen_name);
+                application.checkIsLogin();
+                getFragmentManager().popBackStack();
+
             }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
 
         }
 
         @Override
-        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText(getContext(), "get fail", Toast.LENGTH_SHORT).show();
-        }
+        public void onCancel(SHARE_MEDIA share_media, int i) {
 
-        @Override
-        public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText(getContext(), "get cancel", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -301,10 +306,7 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String countryNumber = bundle.getString("countryNumber");
-
                     mQvHao.setText(countryNumber);
-
-
                 }
                 break;
 
