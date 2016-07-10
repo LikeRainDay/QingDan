@@ -26,6 +26,9 @@ import android.widget.VideoView;
 import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Custom.FormView;
+import com.example.houshuai.qingdan.UI.Custom.PopMenu;
+import com.example.houshuai.qingdan.UI.Custom.PopMenuItem;
+import com.example.houshuai.qingdan.UI.Custom.PopMenuItemListener;
 import com.example.houshuai.qingdan.utils.LoginUtil;
 
 import java.io.File;
@@ -79,6 +82,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     private boolean isOK;
     private String mPhone;
     private String mPass;
+    private PopMenu mPopMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +102,21 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         }
         playVideo(videoFile);
         playAnim();
+        initPopWindow();
+    }
+
+    private void initPopWindow() {
+        mPopMenu = new PopMenu.Builder().attachToActivity(WelcomeMovieActivity.this)
+                .addMenuItem(new PopMenuItem("QQ", getResources().getDrawable(R.mipmap.share_wechat)))
+                .addMenuItem(new PopMenuItem("新浪", getResources().getDrawable(R.mipmap.share_weibo)))
+                .addMenuItem(new PopMenuItem("人人", getResources().getDrawable(R.mipmap.share_wechat_moment)))
+                .setOnItemClickListener(new PopMenuItemListener() {
+                    @Override
+                    public void onItemClick(PopMenu popMenu, int position) {
+                        Toast.makeText(WelcomeMovieActivity.this, "你点击了第" + position + "个位置", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build();
     }
 
     @Override
@@ -167,9 +186,9 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 2016/7/9 第三方
-
-                Toast.makeText(WelcomeMovieActivity.this, "第三方", Toast.LENGTH_LONG).show();
+                if (!mPopMenu.isShowing()) {
+                    mPopMenu.show();
+                }
             }
         });
         mYanZheng.setOnClickListener(new View.OnClickListener() {
