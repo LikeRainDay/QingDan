@@ -18,4 +18,8 @@
     <color name="text_color">#434343</color>
     <color name="black_half">#50000000</color>
     <color name="single_searcg_bg">#8B8682</color>
+    <color name="swiperefresh_color1">#28C75C</color>
+    <color name="swiperefresh_color2">#C72828</color>
+    <color name="swiperefresh_color3">#C3C728</color>
+    <color name="swiperefresh_color4">#9321a5</color>
 </resources>

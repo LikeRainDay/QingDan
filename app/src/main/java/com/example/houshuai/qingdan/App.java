@@ -2,9 +2,12 @@ package com.example.houshuai.qingdan;
 
 import android.app.Application;
 import android.app.Notification;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.houshuai.qingdan.greendao.DaoMaster;
+import com.example.houshuai.qingdan.greendao.DaoSession;
 import com.umeng.socialize.PlatformConfig;
 
 import java.util.ArrayList;
@@ -24,6 +27,8 @@ public class App extends Application {
     private List<String> mSelf = new ArrayList<>();
     public boolean mIsLogin;
     public String mID;
+    private static DaoMaster daoMaster;
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -106,5 +111,41 @@ public class App extends Application {
         edit.putString("self_name", self_name);
         edit.commit();
     }
+
+
+    /**
+     * 取得DaoMaster     管理数据库  特别扭X
+     *
+     * @param context
+     * @return
+     */
+    public static DaoMaster getDaoMaster(Context context) {
+        if (daoMaster == null) {
+            //创建数据库    名
+            DaoMaster.OpenHelper helper = new DaoMaster.DevOpenHelper(context, "QingDan", null);
+            //获得写数据库
+            daoMaster = new DaoMaster(helper.getWritableDatabase());
+        }
+        return daoMaster;
+    }
+
+    /**
+     * 取得DaoSession
+     *
+     * @param context
+     * @return
+     */
+    public static DaoSession getDaoSession(Context context) {
+
+        if (daoSession == null) {
+            if (daoMaster == null) {
+                daoMaster = getDaoMaster(context);
+            }
+            //创建数据库的会话
+            daoSession = daoMaster.newSession();
+        }
+        return daoSession;
+    }
+
 
 }

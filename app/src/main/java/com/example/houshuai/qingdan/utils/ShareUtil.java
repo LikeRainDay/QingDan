@@ -2,20 +2,20 @@ package com.example.houshuai.qingdan.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Custom.PopMenu;
 import com.example.houshuai.qingdan.UI.Custom.PopMenuItem;
 import com.example.houshuai.qingdan.UI.Custom.PopMenuItemListener;
+import com.example.houshuai.qingdan.inter.onSetShareDataInter;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMVideo;
-import com.umeng.socialize.media.UMusic;
 
 /**
  * 分享工具类
@@ -23,7 +23,17 @@ import com.umeng.socialize.media.UMusic;
  * Created by HouShuai on 2016/7/10.
  */
 
-public class ShareUtil {
+public class ShareUtil implements onSetShareDataInter {
+
+
+    private static Bundle mbundle;
+    private onSetShareDataInter setShareDataInter;
+
+    @Override
+    public void shareDataToShare(Bundle bundle) {
+        mbundle = bundle;
+    }
+
 
     private static Context mContext;
 
@@ -39,20 +49,11 @@ public class ShareUtil {
                 .setOnItemClickListener(new PopMenuItemListener() {
                     @Override
                     public void onItemClick(PopMenu popMenu, int position) {
-                        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.info_icon_1);
-                        //UMImage image = new UMImage(ShareActivity.this,bitmap);
-                        //UMImage image = new UMImage(ShareActivity.this,new File("/SDCARD/image_jpg.jpg"));
-                        UMusic music = new UMusic("http://music.huoxing.com/upload/20130330/1364651263157_1085.mp3");
-                        //UMusic music = new UMusic("http://y.qq.com/#type=song&mid=002I7CmS01UAIH&tpl=yqq_song_detail");
-                        music.setTitle("This is music title");
-                        music.setThumb("http://www.umeng.com/images/pic/social/chart_1.png");
-                        music.setDescription("my description");
-                        // share video
-                        UMVideo video = new UMVideo("http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html");
-                        video.setThumb("http://www.adiumxtras.com/images/thumbs/dango_menu_bar_icon_set_11_19047_6240_thumb.png");
-                        // share URL
-                        String url = "http://www.umeng.com";
-                        UMImage image = new UMImage(mContext, "http://www.umeng.com/images/pic/social/integrated_3.png");
+                        String title = mbundle.getString("title");
+                        String imageurl = mbundle.getString("imageurl");
+                        String url = mbundle.getString("url");
+                        String text = mbundle.getString("text");
+                        UMImage image = new UMImage(mContext, imageurl);
 
 
                         //开启分享
@@ -64,22 +65,19 @@ public class ShareUtil {
                             case 0:
                                 //QQ
                                 new ShareAction((Activity) mContext).setPlatform(SHARE_MEDIA.QQ).setCallback(umShareListener)
-                                        .withTitle("this is title")
-                                        .withText("hello umeng")
+                                        .withTitle(title)
+                                        .withText(text)
                                         .withMedia(image)
-                                        //.withMedia(music)
-                                        //.withTargetUrl(url)
-                                        //.withTitle("qqshare")
+                                        .withTargetUrl(url)
                                         .share();
 
                                 break;
                             case 1:
                                 //新浪
                                 new ShareAction((Activity) mContext).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
-                                        .withText("Umeng Share")
-                                        .withTitle("this is title")
+                                        .withText(title)
+                                        .withTitle(text)
                                         .withMedia(image)
-                                        //.withExtra(new UMImage(ShareActivity.this,R.drawable.ic_launcher))
                                         .withTargetUrl(url)
                                         .share();
 
@@ -87,12 +85,10 @@ public class ShareUtil {
                             case 2:
                                 //人人
                                 new ShareAction((Activity) mContext).setPlatform(SHARE_MEDIA.RENREN).setCallback(umShareListener)
-                                        .withTitle("this is title")
-                                        .withText("hello umeng")
+                                        .withTitle(title)
+                                        .withText(text)
                                         .withMedia(image)
-                                        //.withMedia(music)
-                                        //.withTargetUrl(url)
-                                        //.withTitle("qqshare")
+                                        .withTargetUrl(url)
                                         .share();
 
                                 break;

@@ -188,7 +188,7 @@ public class PopMenu {
 
         mCloseIv = new ImageView(mActivity);
         mCloseIv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        mCloseIv.setImageResource(R.drawable.tabbar_compose_background_icon_close);
+        mCloseIv.setImageResource(R.mipmap.umeng_update_close_bg_tap);
         mCloseIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
