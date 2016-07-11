@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 repositories
         {
@@ -44,18 +48,29 @@ dependencies {
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/MobCommons-2016.0624.1326.jar')
     compile files('libs/MobTools-2016.0624.1326.jar')
+    compile files('libs/dj-common-util-1.4.8-64184c0951814c39efbd31071c5683f0.jar')
+    compile files('libs/jpush-android-2.1.6.jar')
+    compile project(':xutils')
+    testCompile 'junit:junit:4.12'
+    compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+        exclude module: 'support-v4'
+    }
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.googlecode.libphonenumber:libphonenumber:7.4.4'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
+    compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile 'org.xutils:xutils:3.3.36'
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'me.relex:circleindicator:1.2.1@aar'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support:support-annotations:24.0.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
-    compile 'com.googlecode.libphonenumber:libphonenumber:7.4.4'
-    compile files('libs/dj-common-util-1.4.8-64184c0951814c39efbd31071c5683f0.jar')
-    compile files('libs/jpush-android-2.1.6.jar')
 }

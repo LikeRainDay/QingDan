@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.umeng.socialize.PlatformConfig;
 
+import org.xutils.x;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class App extends Application {
         initNotification();
         //判断是否登录
         checkIsLogin();
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG); // 开启debug会影响性能
     }
 
     public void checkIsLogin() {
