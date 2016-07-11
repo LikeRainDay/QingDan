@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\QingDan\QingDan\library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="E:\QingDan\QingDan\library\src\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\qianfeng\QingDan\library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="E:\qianfeng\QingDan\library\src\release\jniLibs"/></dataSet></merger>

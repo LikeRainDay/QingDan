@@ -23,7 +23,7 @@ public interface QingdanInter {
 
     @GET("{index}-20-{type}-1.html?package=mizhe")
     Call<CategoryListBean> getFirstPageList(@Path("index") int index, @Path("type") String type);
-    @GET("{event_id}")
-    Call<ZhuanchangBean> getZhuanchangInfo();
+    @GET("{event_id}-1-40-hot-1--0-0-.html?package=mizhe&&user_label=1")
+    Call<ZhuanchangBean> getZhuanchangInfo(@Path("event_id")String event_id);
 
 }
