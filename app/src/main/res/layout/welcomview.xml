@@ -47,6 +47,7 @@
                 android:text="+86" />
 
             <EditText
+                android:layout_marginLeft="8dp"
                 android:id="@+id/self_edit1"
                 android:layout_width="0dp"
                 android:layout_marginTop="10dp"

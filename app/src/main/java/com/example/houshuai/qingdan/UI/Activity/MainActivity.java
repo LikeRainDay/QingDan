@@ -25,7 +25,7 @@ import butterknife.BindView;
 
 
 /*主界面*/
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity  {
     private int[] picSelect = {R.drawable.qingdan_selector, R.drawable.tiaoxuan_selector, R.drawable.self_selector};
     @BindView(R.id.fth_bottom_Tile)
     FragmentTabHost mFragmentTabHost;
@@ -39,16 +39,17 @@ public class MainActivity extends BaseActivity {
     ImageView mToolBarImageView;
     private App application;
 
+
     @Override
     protected void initLayout() {
         LoginUtil.windowSettings(this);
         application = (App) getApplication();
+        application.checkIsLogin();
         setSupportActionBar(mToolbar);
         //初始化FramgnetTabHost
         initFragmentTabHost();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_ToolbarFragment, new QingDan_viewPager()).commit();
         getRegistIntent();
-
     }
 
     private void getRegistIntent() {
@@ -70,14 +71,14 @@ public class MainActivity extends BaseActivity {
             application.checkIsLogin();
             mFragmentTabHost.setCurrentTab(2);
         }
+
         if (self) {
-                application.checkIsLogin();
-                mFragmentTabHost.setCurrentTab(2);
-                mFragmentTabHost.refreshDrawableState();
-                List<String> mySharePerference = application.getMySharePerference(application.mID);
-                mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
-            }
+            application.checkIsLogin();
+            mFragmentTabHost.setCurrentTab(2);
+            List<String> mySharePerference = application.getMySharePerference(application.mID);
+            mTextView.setText("" == mySharePerference.get(4) ? "未命名" : mySharePerference.get(4));
         }
+    }
 
     private void initFragmentTabHost() {
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.fl_content);
@@ -143,5 +144,12 @@ public class MainActivity extends BaseActivity {
     protected int getActivityID() {
         return R.layout.activity_main;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
 
 }

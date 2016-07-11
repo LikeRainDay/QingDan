@@ -196,12 +196,12 @@
         android:id="@+id/imageView9"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_alignTop="@+id/imageView10"
         android:background="@drawable/self_circle"
         android:clickable="true"
-        android:src="@mipmap/umeng_socialize_renren_on" />
+        android:src="@mipmap/umeng_socialize_renren_on"
+        android:layout_alignTop="@+id/imageView10"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
 
 
 </RelativeLayout>

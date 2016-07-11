@@ -46,12 +46,20 @@ public class Self_Head extends BaseFragment {
 
     private void initView() {
         List<String> mySharePerference = application.getMySharePerference(application.mID);
-        Picasso.with(mContext)
-                .load(new File(mySharePerference.get(2)))
-                .placeholder(R.mipmap.llist_img_default_avatar)
-                .into(mImageView);
-        mTextView.setText(mySharePerference.get(4));
+        String s = mySharePerference.get(1);
 
+        if ("third".equals(s)) {
+            Picasso.with(mContext)
+                    .load(mySharePerference.get(2))
+                    .placeholder(R.mipmap.llist_img_default_avatar)
+                    .into(mImageView);
+        } else {
+            Picasso.with(mContext)
+                    .load(new File(mySharePerference.get(2)))
+                    .placeholder(R.mipmap.llist_img_default_avatar)
+                    .into(mImageView);
+        }
+        mTextView.setText(mySharePerference.get(4));
     }
 
     private void onMyClickListener() {
@@ -68,7 +76,8 @@ public class Self_Head extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.textView) {
-
+                    Intent intent = new Intent(getActivity(), Self_Settings.class);
+                    startActivity(intent);
                 }
             }
         });

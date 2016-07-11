@@ -3,6 +3,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
     //二维码
     @BindView(R.id.btn_erweima)
     Button mButtonErweima;
+
     @BindView(R.id.back)
     ImageView mBack;
     private boolean sucessful;
@@ -83,6 +85,21 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                 String pass = mPass.getText().toString().trim();
                 isSucessful(name, pass);
                 break;
+            case R.id.btn_erweima:
+                Log.i("1","1");
+                String name1 = mName.getText().toString().trim();
+                String pass1 = mPass.getText().toString().trim();
+                if (null ==name1 &&null==pass1||"".equals(name1+pass1))
+                {
+                    Toast.makeText(getApplication(),"请输入账户名和密码",Toast.LENGTH_LONG).show();
+                }else
+                {String content ="用户名是："+name1+"\n密码是"+pass1;
+                    Intent intent1 = new Intent(Self_ZhuCeXiangQingActivity.this,Self_ZxingActivity.class);
+                    intent1.putExtra("content",content);
+                    startActivity(intent1);
+                }
+                Log.i("2","2");
+                break;
             case R.id.back:
                 //点击返回
                 finish();
@@ -118,6 +135,7 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
         mHeadPic.setOnClickListener(this);
         mButton.setOnClickListener(this);
         mBack.setOnClickListener(this);
+        mButtonErweima.setOnClickListener(this);
     }
 
     @Override
