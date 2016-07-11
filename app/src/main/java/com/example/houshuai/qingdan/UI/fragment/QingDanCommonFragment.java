@@ -105,7 +105,7 @@ public class QingDanCommonFragment extends Fragment {
         //设置当前上拉加载不可用
         lv.setPullToRefreshOverScrollEnabled(true);
         //滑到底部是否自动加载数据，这句话一定要加要不然"已经到底啦"显示不出来
-        //lv.setEmptyView();
+        lv.setEmptyView(getActivity().getLayoutInflater().inflate(R.layout.qingdan_list_empty,null));
         lv.setMode(PullToRefreshBase.Mode.BOTH);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
