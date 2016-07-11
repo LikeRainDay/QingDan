@@ -1,0 +1,26 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+     
+        <Button
+            android:id="@+id/pay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="pay"
+            android:text="支付"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/h5pay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="h5Pay"
+            android:text="网页支付转native"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
