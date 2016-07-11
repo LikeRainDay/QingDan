@@ -1,7 +1,19 @@
 [
     {
+        "merged": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi\\default_ptr_flip.png",
+        "source": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi\\default_ptr_rotate.png",
+        "source": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi\\default_ptr_rotate.png"
+    },
+    {
         "merged": "E:\\qianfeng\\QingDan\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi\\indicator_arrow.png",
         "source": "E:\\qianfeng\\QingDan\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi\\indicator_arrow.png",
+        "source": "E:\\QingDan\\QingDan\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi\\indicator_arrow.png"
     },
     {
         "merged": "E:\\qianfeng\\QingDan\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi\\default_ptr_flip.png",
