@@ -51,7 +51,7 @@ import java.util.List;
  * @author duanbokan
  * 
  */
-
+//
 public class CountryActivity extends Activity
 {
 	String TAG = "CountryActivity";
