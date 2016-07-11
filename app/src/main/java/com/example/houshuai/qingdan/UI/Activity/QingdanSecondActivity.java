@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 清单中第二个页面
+ * 清单中第二个页面(专场详情)
  * Created by Dufei on 2016/7/9.
  */
 
@@ -111,10 +112,20 @@ public class QingdanSecondActivity extends BaseActivity {
         return R.layout.activity_qingdan_second;
     }
 
-    private void aboutgridView(List<ZhuanchangBean.MartshowItemsBean> list) {
+    private void aboutgridView(final List<ZhuanchangBean.MartshowItemsBean> list) {
          gridView = (GridView) findViewById(R.id.gridview_id);
          adapter= new QingdanSecond_GridView_Adapter(list, QingdanSecondActivity.this);
           gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("Tag","--------gridView--click"+i);
+                int iid=list.get(i).getIid();
+                Intent intent=new Intent();
+                intent.putExtra("iid",iid);
+                startActivity(intent);
+            }
+        });
     }
 
 }
