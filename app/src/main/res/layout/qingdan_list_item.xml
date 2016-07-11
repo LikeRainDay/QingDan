@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardMaxElevation="5dp"
+    card_view:contentPadding="5dp"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/qingdan_listitem_mainimg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_placeholder"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/qingdan_listitem_mj_iv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignLeft="@id/qingdan_listitem_mainimg"
+            android:layout_alignBottom="@id/qingdan_listitem_mainimg"
+            android:src="@drawable/jian"
+           />
+        <TextView
+            android:id="@+id/qingdan_listitem_mj_promotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/qingdan_listitem_mainimg"
+            android:layout_toRightOf="@id/qingdan_listitem_mj_iv"
+            android:layout_marginLeft="6sp"
+            android:text="满减"
+            />
+
+        <ImageView
+            android:id="@+id/qingdan_listitem_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/qingdan_listitem_mainimg"
+            android:layout_alignRight="@id/qingdan_listitem_mainimg"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/qingdan_listitem_min_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/orange"
+            android:text="1折起"/>
+
+        <TextView
+            android:id="@+id/qingdan_listitem_excerpt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="12sp"
+            android:text="标题2"/>
+    </LinearLayout>
+</LinearLayout>
+</android.support.v7.widget.CardView>
