@@ -34,7 +34,10 @@ public class App extends Application {
         initNotification();
         //判断是否登录
         checkIsLogin();
+
     }
+
+
 
     public void checkIsLogin() {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);

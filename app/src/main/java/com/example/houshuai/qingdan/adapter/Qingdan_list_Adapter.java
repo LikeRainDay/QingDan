@@ -77,7 +77,7 @@ public class Qingdan_list_Adapter extends BaseAdapter {
         }
 
 
-            vh.discountTv.setText( list.get(i).getMin_discount()+"折起");
+            vh.discountTv.setText( list.get(i).getPromotion());
             vh.titleTv.setText( list.get(i).getTitle());
             vh.manjianTv.setText( list.get(i).getMj_promotion());
             if (!"".equals( list.get(i).getLabel_img_tr()))
