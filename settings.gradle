@@ -1,1 +1,3 @@
 include ':app', ':xutils'
+include ':app'
+include ':library'

@@ -76,7 +76,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.button2:
-                Pattern compile = Pattern.compile("^((\\(d{3}\\))|(\\d{3}\\-))?13[0-9]\\d{8}|15[89]\\d{8}");
+                Pattern compile = Pattern.compile("^((\\(d{3}\\))|(\\d{3}\\-))?13[0-9]\\d{8}|15[89]\\d{8}|18[0-9]\\d{8}");
                 Matcher matcher = compile.matcher(mEditText_phone.getText().toString().trim());
                 if (matcher.find()) {
                     //获取验证码
@@ -143,7 +143,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initSMSResultHandler() {
-        SMSSDK.initSDK(this, "14aa400a62d7e", "34f69a9a008dc933302a2b982b5c207e", false);
+
         SMSSDK.registerEventHandler(new EventHandler() {
             @Override
             public void afterEvent(int event, int result, java.lang.Object data) {
@@ -173,10 +173,7 @@ public class Self_ZhuCeActivity extends BaseActivity implements View.OnClickList
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String countryNumber = bundle.getString("countryNumber");
-
                     mQvHao.setText(countryNumber);
-
-
                 }
                 break;
             default:

@@ -8,6 +8,7 @@
     <color name="self_pop_actionbar">#4e5a6e</color>
     <color name="hintColor">#7f848f</color>
     <color name="self_button">#7b157e</color>
+    <color name="orange">#FF8C00</color>
 
     <color name="blue">#0066FF</color>
     <color name="no_color">#00000000</color>
@@ -17,4 +18,27 @@
     <color name="text_color">#434343</color>
     <color name="black_half">#50000000</color>
     <color name="single_searcg_bg">#8B8682</color>
+    <color name="about">#FF030C1A</color>
+
+
+
+    <!-- 白色 -->
+    <color name="bg_White">#FFFFFF</color>
+    <!-- 黑色 -->
+    <color name="bg_Black">#000000</color>
+    <!-- 灰色 -->
+    <color name="bg_Gray">#CCCCCC</color>
+
+    <!-- 浅灰色 -->
+    <color name="bg_Gray_light">#EEEEEE</color>
+
+    <!-- 白色 -->
+    <color name="tv_White">#FFFFFF</color>
+    <!-- 黑色 -->
+    <color name="tv_Black">#000000</color>
+    <!-- 红色 -->
+    <color name="tv_Red">#CC0000</color>
+    <!-- 灰色 -->
+    <color name="tv_Gray">#CCCCCC</color>
+
 </resources>
