@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.App;
@@ -71,18 +72,19 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                 builder.setIcon(R.drawable.icon_addfriends);
                 //设置标题
                 builder.setTitle("个人信息");
+
                 //设置内容
+                view = LayoutInflater.from(this).inflate(R.layout.self_info, null);
+                builder.setView(view);
+                TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
+                TextView tv_pass = (TextView) view.findViewById(R.id.tv_pass);
                 if (application.mIsLogin) {
                     List<String> mySharePerference = application.getMySharePerference(application.mID);
                     String name = mySharePerference.get(0);
                     String pass = mySharePerference.get(1);
-                    builder.setMessage("用户名是：" + name + "/n" + "密码是:" + pass);
+                    tv_name.setText(name);
+                    tv_pass.setText(pass);
                 }
-                //设置取消按钮
-                /**
-                 * text : 按钮显示的文字
-                 * listener:  按钮对应的监听器
-                 */
                 //显示对话框
                 builder.show();
                 Toast.makeText(getApplicationContext(), "点击了个人", Toast.LENGTH_LONG).show();
