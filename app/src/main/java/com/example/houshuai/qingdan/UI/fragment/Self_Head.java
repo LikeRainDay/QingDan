@@ -16,7 +16,9 @@ import java.util.List;
 
 import butterknife.BindView;
 
+
 /**
+ *
  * Created by HouShuai on 2016/7/5.
  */
 
@@ -46,17 +48,21 @@ public class Self_Head extends BaseFragment {
 
     private void initView() {
         List<String> mySharePerference = application.getMySharePerference(application.mID);
-        String s = mySharePerference.get(1);
+        String s = mySharePerference.get(0);
 
         if ("third".equals(s)) {
             Picasso.with(mContext)
                     .load(mySharePerference.get(2))
                     .placeholder(R.mipmap.llist_img_default_avatar)
+                    .resize(50, 50)
+                    .centerCrop()
                     .into(mImageView);
         } else {
             Picasso.with(mContext)
                     .load(new File(mySharePerference.get(2)))
                     .placeholder(R.mipmap.llist_img_default_avatar)
+                    .resize(50, 50)
+                    .centerCrop()
                     .into(mImageView);
         }
         mTextView.setText(mySharePerference.get(4));
@@ -87,6 +93,4 @@ public class Self_Head extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

@@ -280,7 +280,6 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
                 application.setMySharePerference(openid, "third", openid, profile_image_url, "", screen_name);
                 application.checkIsLogin();
                 getFragmentManager().popBackStack();
-
             }
         }
 
@@ -299,6 +298,10 @@ public class Self_loginFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         umShareAPI.onActivityResult(requestCode, resultCode, data);
+
+
+
+
         switch (requestCode) {
             case 12:
                 if (resultCode == RESULT_OK) {

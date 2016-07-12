@@ -85,20 +85,11 @@
         <activity android:name=".UI.Activity.WelcomeMovieActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activity.QingdanSecondActivity" />
-        <!-- 分享编辑页 -->
-        <!-- <activity -->
-        <!-- android:name="com.umeng.socialize.view.ShareActivity" -->
-        <!-- android:configChanges="orientation|keyboard" -->
-        <!-- android:launchMode="singleTask" -->
-        <!-- android:noHistory="true" -->
-        <!-- android:theme="@style/Theme.UMDialog" -->
-        <!-- android:windowSoftInputMode="stateVisible|adjustResize" /> -->
-        <!-- Mob短信界面 -->
+
+        <!--Mob短信界面-->
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -272,6 +263,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.Activity.CountryActivity" />
+        <activity android:name=".UI.Activity.select_details_activity" />
+        <activity android:name=".UI.Activity.select_product_Activity" />
+        <activity android:name=".UI.Activity.select_buy_Activity" />
+        <activity android:name=".UI.Activity.Self_ZxingActivity" />
+        <activity android:name=".UI.Activity.SelfAbout" />
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
         <activity android:name=".shopcar.QingdanShopCar"></activity>
     </application>

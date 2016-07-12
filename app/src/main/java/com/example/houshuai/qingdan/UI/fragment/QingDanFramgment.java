@@ -57,7 +57,7 @@ public class QingDanFramgment  extends BaseFragment {
             tl.addTab(tl.newTab().setText(tabName));
         }
 
-       Find_tab_Adapter fragmentAdapter=new Find_tab_Adapter(getActivity().getSupportFragmentManager(),mFragments,mTitles);
+       Find_tab_Adapter fragmentAdapter=new Find_tab_Adapter(getChildFragmentManager(),mFragments,mTitles);
         vp.setAdapter(fragmentAdapter);
         tl.setupWithViewPager(vp);
     }
