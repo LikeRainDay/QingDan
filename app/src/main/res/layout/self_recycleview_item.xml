@@ -3,58 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView26"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="20dp"
-        android:textSize="13sp" />
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY" />
 
-    <LinearLayout
-        android:background="#CCB128C7"
-        android:id="@+id/changLinnearLayoutColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:text="sfasdf asdfsadfsadf"
-            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_below="@id/imageView26"
+            android:background="#CCB128C7"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/love"
                 android:layout_width="0dp"
-                android:layout_height="15dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:drawableLeft="@mipmap/home_card_img_heart_hl" />
 
             <TextView
                 android:id="@+id/see"
                 android:layout_width="0dp"
-                android:layout_height="15dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:drawableLeft="@mipmap/home_img_eye_nor" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="77dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/imageView26"
+            android:layout_toRightOf="@+id/imageView26"
+            android:text="20dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView8"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/imageView26"
+            android:layout_toRightOf="@+id/imageView26"
+            android:ellipsize="end"
+            android:maxEms="10"
+            android:maxLines="5"
+            android:text="sfasdf asdfsadfsadf"
+            android:textSize="10sp" />
+    </RelativeLayout>
 
 
 </android.support.v7.widget.CardView>

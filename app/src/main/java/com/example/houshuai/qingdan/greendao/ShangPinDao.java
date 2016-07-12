@@ -44,7 +44,7 @@ public class ShangPinDao extends AbstractDao<ShangPin, Long> {
     /** Creates the underlying database table. */
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SHOUCHANG' (" + //
+        db.execSQL("CREATE TABLE " + constraint + "'SHANGPIN' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'URL' TEXT NOT NULL ," + // 1: url
                 "'TITLE' TEXT," + // 2: title
@@ -57,7 +57,7 @@ public class ShangPinDao extends AbstractDao<ShangPin, Long> {
 
     /** Drops the underlying database table. */
     public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHOUCHANG'";
+        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHANGPIN'";
         db.execSQL(sql);
     }
 

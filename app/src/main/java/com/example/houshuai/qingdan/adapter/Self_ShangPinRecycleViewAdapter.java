@@ -55,14 +55,19 @@ public class Self_ShangPinRecycleViewAdapter extends RecyclerView.Adapter<Self_S
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        layoutParams.height = 500;
+        layoutParams.height = 550;
         holder.itemView.setLayoutParams(layoutParams);
         //绑定数据
         holder.content.setText(mList.get(position).getImage());
-        Picasso.with(mContext).load(mList.get(position).getImage()).into(holder.ImageView);
+        Picasso.with(mContext).load(mList.get(position).getImage())
+                .resize(150,
+                        150)
+                .placeholder(R.mipmap.lanch_icon)
+                .error(R.mipmap.lanch_icon)
+                .into(holder.ImageView);
         holder.title.setText(mList.get(position).getTitle());
-        holder.love.setText("10");
-        holder.see.setText("1000");
+        holder.love.setText(mList.get(position).getAddLove());
+        holder.see.setText(mList.get(position).getAddSee());
         //监听事件
         if (mListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
