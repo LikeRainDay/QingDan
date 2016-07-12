@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.adapter.Self_ShangPinRecycleViewAdapter;
-import com.example.houshuai.qingdan.greendao.ShangPin;
+import com.example.houshuai.qingdan.dao.ShangPin;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
 
 import java.util.ArrayList;
@@ -46,9 +46,9 @@ public class Self_ShangPinFragment extends BaseFragment {
                     public void run() {
                         //刷新接口
                         mList = ShangPinDBHelper.getInstance(getActivity()).getMessageInfoList();
-                        self_recycleViewAdapter.notifyDataSetChanged();
                     }
                 }).start();
+                        self_recycleViewAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });

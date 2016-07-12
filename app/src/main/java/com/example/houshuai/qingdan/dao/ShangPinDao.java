@@ -1,4 +1,4 @@
-package com.example.houshuai.qingdan.greendao;
+package com.example.houshuai.qingdan.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,12 +13,12 @@ import de.greenrobot.dao.internal.DaoConfig;
 /**
  * DAO for table SHOUCHANG.
 */
-public class WenZhangDao extends AbstractDao<WenZhang, Long> {
+public class ShangPinDao extends AbstractDao<ShangPin, Long> {
 
     public static final String TABLENAME = "SHOUCHANG";
 
     /**
-     * Properties of entity WenZhang.<br/>
+     * Properties of entity ShangPin.<br/>
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
@@ -33,18 +33,18 @@ public class WenZhangDao extends AbstractDao<WenZhang, Long> {
     };
 
 
-    public WenZhangDao(DaoConfig config) {
+    public ShangPinDao(DaoConfig config) {
         super(config);
     }
-    
-    public WenZhangDao(DaoConfig config, DaoSession daoSession) {
+
+    public ShangPinDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
     }
 
     /** Creates the underlying database table. */
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SHOUCHANG' (" + //
+        db.execSQL("CREATE TABLE " + constraint + "'SHANGPIN' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'URL' TEXT NOT NULL ," + // 1: url
                 "'TITLE' TEXT," + // 2: title
@@ -57,13 +57,13 @@ public class WenZhangDao extends AbstractDao<WenZhang, Long> {
 
     /** Drops the underlying database table. */
     public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHOUCHANG'";
+        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHANGPIN'";
         db.execSQL(sql);
     }
 
     /** @inheritdoc */
     @Override
-    protected void bindValues(SQLiteStatement stmt, WenZhang entity) {
+    protected void bindValues(SQLiteStatement stmt, ShangPin entity) {
         stmt.clearBindings();
  
         Long id = entity.getId();
@@ -111,8 +111,8 @@ public class WenZhangDao extends AbstractDao<WenZhang, Long> {
 
     /** @inheritdoc */
     @Override
-    public WenZhang readEntity(Cursor cursor, int offset) {
-        WenZhang entity = new WenZhang( //
+    public ShangPin readEntity(Cursor cursor, int offset) {
+        ShangPin entity = new ShangPin( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // url
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
@@ -127,7 +127,7 @@ public class WenZhangDao extends AbstractDao<WenZhang, Long> {
      
     /** @inheritdoc */
     @Override
-    public void readEntity(Cursor cursor, WenZhang entity, int offset) {
+    public void readEntity(Cursor cursor, ShangPin entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUrl(cursor.getString(offset + 1));
         entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
@@ -140,14 +140,14 @@ public class WenZhangDao extends AbstractDao<WenZhang, Long> {
     
     /** @inheritdoc */
     @Override
-    protected Long updateKeyAfterInsert(WenZhang entity, long rowId) {
+    protected Long updateKeyAfterInsert(ShangPin entity, long rowId) {
         entity.setId(rowId);
         return rowId;
     }
     
     /** @inheritdoc */
     @Override
-    public Long getKey(WenZhang entity) {
+    public Long getKey(ShangPin entity) {
         if(entity != null) {
             return entity.getId();
         } else {

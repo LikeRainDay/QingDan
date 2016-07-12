@@ -1,4 +1,4 @@
-package com.example.houshuai.qingdan.greendao;
+package com.example.houshuai.qingdan.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.houshuai.qingdan.R;
-import com.example.houshuai.qingdan.greendao.ShangPin;
+import com.example.houshuai.qingdan.dao.ShangPin;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,15 +55,15 @@ public class Self_ShangPinRecycleViewAdapter extends RecyclerView.Adapter<Self_S
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        layoutParams.height = 550;
+//        layoutParams.height = 550;
         holder.itemView.setLayoutParams(layoutParams);
         //绑定数据
         holder.content.setText(mList.get(position).getImage());
         Picasso.with(mContext).load(mList.get(position).getImage())
-                .resize(150,
-                        150)
                 .placeholder(R.mipmap.lanch_icon)
-                .error(R.mipmap.lanch_icon)
+                .error(R.drawable.loading_placeholder)
+                .resize(150, 150)
+                .centerCrop()
                 .into(holder.ImageView);
         holder.title.setText(mList.get(position).getTitle());
         holder.love.setText(mList.get(position).getAddLove());

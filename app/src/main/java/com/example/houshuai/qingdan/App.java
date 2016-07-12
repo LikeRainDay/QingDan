@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.houshuai.qingdan.greendao.DaoMaster;
-import com.example.houshuai.qingdan.greendao.DaoSession;
+import com.example.houshuai.qingdan.dao.DaoMaster;
+import com.example.houshuai.qingdan.dao.DaoSession;
 import com.umeng.socialize.PlatformConfig;
 
 import org.xutils.x;
@@ -49,7 +49,7 @@ public class App extends Application {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);
         mIsLogin = isLogin.getBoolean("isLogin", false);
         mID = isLogin.getString("ID", "false");
-        Log.e("login",mIsLogin+"---检查----"+mID);
+        Log.e("login", mIsLogin + "---检查----" + mID);
     }
 
 

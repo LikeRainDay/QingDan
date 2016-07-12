@@ -3,9 +3,9 @@ package com.example.houshuai.qingdan.utils;
 import android.content.Context;
 
 import com.example.houshuai.qingdan.App;
-import com.example.houshuai.qingdan.greendao.DaoSession;
-import com.example.houshuai.qingdan.greendao.WenZhang;
-import com.example.houshuai.qingdan.greendao.WenZhangDao;
+import com.example.houshuai.qingdan.dao.DaoSession;
+import com.example.houshuai.qingdan.dao.WenZhang;
+import com.example.houshuai.qingdan.dao.WenZhangDao;
 
 import java.util.List;
 

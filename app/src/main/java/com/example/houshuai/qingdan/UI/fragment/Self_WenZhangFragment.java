@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.adapter.Self_WenZhangRecycleViewAdapter;
-import com.example.houshuai.qingdan.greendao.WenZhang;
+import com.example.houshuai.qingdan.dao.WenZhang;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
 import com.example.houshuai.qingdan.utils.WenZhangDBHelper;
 
@@ -47,9 +47,10 @@ public class Self_WenZhangFragment extends BaseFragment {
                     public void run() {
                         //刷新接口
                         mList = WenZhangDBHelper.getInstance(getActivity()).getMessageInfoList();
-                        self_recycleViewAdapter.notifyDataSetChanged();
+//                        self_recycleViewAdapter.notifyDataSetChanged();
                     }
                 }).start();
+                self_recycleViewAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });

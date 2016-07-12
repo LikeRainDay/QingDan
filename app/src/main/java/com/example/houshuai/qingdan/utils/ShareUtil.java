@@ -43,9 +43,9 @@ public class ShareUtil implements onSetShareDataInter {
 
 
         PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(activity)
-                .addMenuItem(new PopMenuItem("QQ", activity.getResources().getDrawable(R.mipmap.share_wechat)))
+                .addMenuItem(new PopMenuItem("QQ", activity.getResources().getDrawable(R.mipmap.umeng_socialize_qq_on)))
                 .addMenuItem(new PopMenuItem("新浪", activity.getResources().getDrawable(R.mipmap.share_weibo)))
-                .addMenuItem(new PopMenuItem("人人", activity.getResources().getDrawable(R.mipmap.share_wechat_moment)))
+                .addMenuItem(new PopMenuItem("人人", activity.getResources().getDrawable(R.mipmap.umeng_socialize_renren_on)))
                 .setOnItemClickListener(new PopMenuItemListener() {
                     @Override
                     public void onItemClick(PopMenu popMenu, int position) {
@@ -54,8 +54,6 @@ public class ShareUtil implements onSetShareDataInter {
                         String url = mbundle.getString("url");
                         String text = mbundle.getString("text");
                         UMImage image = new UMImage(mContext, imageurl);
-
-
                         //开启分享
                         UMShareAPI umShareAPI = UMShareAPI.get(mContext);
                         //开启编辑页

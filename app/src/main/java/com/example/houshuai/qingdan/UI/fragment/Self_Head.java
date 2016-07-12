@@ -54,11 +54,15 @@ public class Self_Head extends BaseFragment {
             Picasso.with(mContext)
                     .load(mySharePerference.get(2))
                     .placeholder(R.mipmap.llist_img_default_avatar)
+                    .resize(50, 50)
+                    .centerCrop()
                     .into(mImageView);
         } else {
             Picasso.with(mContext)
                     .load(new File(mySharePerference.get(2)))
                     .placeholder(R.mipmap.llist_img_default_avatar)
+                    .resize(50, 50)
+                    .centerCrop()
                     .into(mImageView);
         }
         mTextView.setText(mySharePerference.get(4));
