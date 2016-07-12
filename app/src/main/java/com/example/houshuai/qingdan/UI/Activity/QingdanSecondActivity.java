@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -67,7 +68,21 @@ public class QingdanSecondActivity extends BaseActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         aboutgridView(list);
         aboutFloatingButton();
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case android.R.id.home:
+                        QingdanSecondActivity.this.finish();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
     }
+
 
     /**
      * 收藏按钮

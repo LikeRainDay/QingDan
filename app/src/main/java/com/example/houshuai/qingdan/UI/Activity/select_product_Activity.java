@@ -140,8 +140,8 @@ public class select_product_Activity extends Activity{
         //发现指示器框架
         btn_likecount_id = (Button) findViewById(R.id.btn_likecount_id);
         tv_mai_id = (TextView) findViewById(R.id.tv_mai_id);
-        dibu_id = (LinearLayout) findViewById(R.id.dibu_id);
-        tv_xiepinglun_id = (TextView) findViewById(R.id.tv_xiepinglun_id);
+        //dibu_id = (LinearLayout) findViewById(R.id.dibu_id);
+        //tv_xiepinglun_id = (TextView) findViewById(R.id.tv_xiepinglun_id);
 
         brandname_id = (TextView) findViewById(R.id.brandname_id);
         fullname_id = (TextView) findViewById(R.id.fullname_id);
@@ -174,7 +174,7 @@ public class select_product_Activity extends Activity{
 
         });
         //显示评论的listView
-        lv_pinglun_id = (ListView) findViewById(R.id.lv_pinglun_id);
+        //lv_pinglun_id = (ListView) findViewById(R.id.lv_pinglun_id);
 
     }
 
@@ -439,7 +439,7 @@ public class select_product_Activity extends Activity{
 
     //分享
     public void shareClick(View view){
-        ShareUtil.startAuto(this);
+
     }
     //评论
     public void reviewClick(View view){

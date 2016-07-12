@@ -31,8 +31,14 @@ public class QingdanShopCar extends AppCompatActivity implements IBtnCallListene
             hashMap.put("type", sp.getString("ArrayCart_type_" + i, ""));
             hashMap.put("color", sp.getString("ArrayCart_color_" + i, ""));
             hashMap.put("num", sp.getString("ArrayCart_num_" + i, ""));
+            hashMap.put("price",sp.getString("ArrayCart_price_"+i,""));
+            hashMap.put("imgUrl",sp.getString("ArrayCart_imgUrl_"+i,""));
+            hashMap.put("name",sp.getString("ArrayCart_name_"+i,""));
             QingdanShopingCarData.arrayList_cart.add(hashMap);
         }
+
+
+
 
     }
 
@@ -42,15 +48,10 @@ public class QingdanShopCar extends AppCompatActivity implements IBtnCallListene
 
         //2，开始Fragment的事务处理
         FragmentTransaction transaction = fManager.beginTransaction();
-
-
         Cart_F cart_F=new Cart_F();
-
         transaction.replace(R.id.cart_f,cart_F);
-
         //5，提交事务
         transaction.commit();
-
 
     }
 //方法未实现
