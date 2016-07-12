@@ -47,7 +47,7 @@ public class Self_ShangPinRecycleViewAdapter extends RecyclerView.Adapter<Self_S
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.self_recycleview_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.self_recycleviewshangpin_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -67,7 +67,7 @@ public class Self_ShangPinRecycleViewAdapter extends RecyclerView.Adapter<Self_S
                 .into(holder.ImageView);
         holder.title.setText(mList.get(position).getTitle());
         holder.love.setText(mList.get(position).getAddLove());
-        holder.see.setText(mList.get(position).getAddSee());
+        holder.money.setText(mList.get(position).getAddSee());
         //监听事件
         if (mListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -94,21 +94,25 @@ public class Self_ShangPinRecycleViewAdapter extends RecyclerView.Adapter<Self_S
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.imageView26)
+        @BindView(R.id.imageView27)
         ImageView ImageView;
-        @BindView(R.id.textView8)
+        @BindView(R.id.text_shangpin_title)
         TextView title;
-        @BindView(R.id.textView9)
+        @BindView(R.id.text_shangpin_title_02)
         TextView content;
-        @BindView(R.id.love)
+        @BindView(R.id.money)
+        TextView money;
+        @BindView(R.id.tv_love)
         TextView love;
-        @BindView(R.id.see)
-        TextView see;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    private void getRandomHeight() {
+
     }
 
 

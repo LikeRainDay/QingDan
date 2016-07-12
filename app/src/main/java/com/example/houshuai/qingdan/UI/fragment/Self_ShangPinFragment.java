@@ -15,6 +15,7 @@ import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.adapter.Self_ShangPinRecycleViewAdapter;
 import com.example.houshuai.qingdan.dao.ShangPin;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
+import com.example.houshuai.qingdan.utils.WenZhangDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class Self_ShangPinFragment extends BaseFragment {
                         mList = ShangPinDBHelper.getInstance(getActivity()).getMessageInfoList();
                     }
                 }).start();
-                        self_recycleViewAdapter.notifyDataSetChanged();
+                self_recycleViewAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -63,11 +64,15 @@ public class Self_ShangPinFragment extends BaseFragment {
     protected void initFragment() {
         initRecycleView();
         initRefresh();
+
     }
 
     private void initRecycleView() {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        //删除所有数据
+        WenZhangDBHelper.getInstance(getActivity()).clearMessageInfo();
+
         //初始化数据
         initData();
         self_recycleViewAdapter = new Self_ShangPinRecycleViewAdapter(getActivity(), mList);
@@ -93,14 +98,13 @@ public class Self_ShangPinFragment extends BaseFragment {
                         .setPositiveButton("残忍抛弃", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mList.remove(postion);
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ShangPinDBHelper.getInstance(getActivity()).deleteMessageInfoListBy(mList.get(postion).getUrl());
+                                        ShangPinDBHelper.getInstance(getActivity()).deleteMessageInfoList(mList.get(postion).getId());
+                                        mList.remove(postion);
                                     }
                                 }).start();
-
                                 self_recycleViewAdapter.notifyDataSetChanged();
                             }
                         })
@@ -117,6 +121,10 @@ public class Self_ShangPinFragment extends BaseFragment {
 
 
     private void initData() {
+        //删除所有数据
+        ShangPinDBHelper.getInstance(getActivity()).clearMessageInfo();
+
+
         ShangPin wenZhang = new ShangPin();
         wenZhang.setAddLove("10000");
         wenZhang.setImage("http://img3.imgtn.bdimg.com/it/u=2527393055,352242730&fm=21&gp=0.jpg");

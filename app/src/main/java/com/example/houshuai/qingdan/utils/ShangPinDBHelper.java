@@ -66,7 +66,7 @@ public class ShangPinDBHelper {
     /**
      * 指定ID删除
      */
-    public void deleteMessageInfoList(int Id) {
+    public void deleteMessageInfoList(long Id) {
         QueryBuilder<ShangPin> qb = cityInfoDao.queryBuilder();
         DeleteQuery<ShangPin> bd = qb.where(ShangPinDao.Properties.Id.eq(Id)).buildDelete();
         bd.executeDeleteWithoutDetachingEntities();

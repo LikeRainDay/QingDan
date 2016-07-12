@@ -13,7 +13,6 @@ import de.greenrobot.dao.query.DeleteQuery;
 import de.greenrobot.dao.query.QueryBuilder;
 
 /**
- *
  * Created by HouShuai on 2016/7/11.
  */
 
@@ -66,7 +65,7 @@ public class WenZhangDBHelper {
     /**
      * 指定ID删除
      */
-    public void deleteMessageInfoList(int Id) {
+    public void deleteMessageInfoList(long Id) {
         QueryBuilder<WenZhang> qb = cityInfoDao.queryBuilder();
         DeleteQuery<WenZhang> bd = qb.where(WenZhangDao.Properties.Id.eq(Id)).buildDelete();
         bd.executeDeleteWithoutDetachingEntities();
