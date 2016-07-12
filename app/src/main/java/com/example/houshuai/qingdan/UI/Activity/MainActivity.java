@@ -25,7 +25,7 @@ import butterknife.BindView;
 
 
 /*主界面*/
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity {
     private int[] picSelect = {R.drawable.qingdan_selector, R.drawable.tiaoxuan_selector, R.drawable.self_selector};
     @BindView(R.id.fth_bottom_Tile)
     FragmentTabHost mFragmentTabHost;
@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity  {
 
     @Override
     protected void initLayout() {
+
         LoginUtil.windowSettings(this);
         application = (App) getApplication();
         application.checkIsLogin();
@@ -148,7 +149,6 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 
 

@@ -2,10 +2,15 @@ package com.example.houshuai.qingdan;
 
 import android.app.Application;
 import android.app.Notification;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.houshuai.qingdan.dao.DaoMaster;
+import com.example.houshuai.qingdan.dao.DaoSession;
 import com.umeng.socialize.PlatformConfig;
+
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,8 @@ public class App extends Application {
     private List<String> mSelf = new ArrayList<>();
     public boolean mIsLogin;
     public String mID;
+    private static DaoMaster daoMaster;
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -34,10 +41,9 @@ public class App extends Application {
         initNotification();
         //判断是否登录
         checkIsLogin();
-
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG); // 开启debug会影响性能
     }
-
-
 
     public void checkIsLogin() {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);
@@ -66,7 +72,7 @@ public class App extends Application {
 
     private void initNotification() {
         BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(getApplicationContext());
-        builder.statusBarDrawable = R.mipmap.lanch_icon;
+        builder.statusBarDrawable = R.drawable.jpush_notification_icon;
         builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
                 | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
         builder.notificationDefaults = Notification.DEFAULT_SOUND
@@ -109,5 +115,41 @@ public class App extends Application {
         edit.putString("self_name", self_name);
         edit.commit();
     }
+
+
+    /**
+     * 取得DaoMaster     管理数据库  特别扭X
+     *
+     * @param context
+     * @return
+     */
+    public static DaoMaster getDaoMaster(Context context) {
+        if (daoMaster == null) {
+            //创建数据库    名
+            DaoMaster.OpenHelper helper = new DaoMaster.DevOpenHelper(context, "QingDan", null);
+            //获得写数据库
+            daoMaster = new DaoMaster(helper.getWritableDatabase());
+        }
+        return daoMaster;
+    }
+
+    /**
+     * 取得DaoSession
+     *
+     * @param context
+     * @return
+     */
+    public static DaoSession getDaoSession(Context context) {
+
+        if (daoSession == null) {
+            if (daoMaster == null) {
+                daoMaster = getDaoMaster(context);
+            }
+            //创建数据库的会话
+            daoSession = daoMaster.newSession();
+        }
+        return daoSession;
+    }
+
 
 }

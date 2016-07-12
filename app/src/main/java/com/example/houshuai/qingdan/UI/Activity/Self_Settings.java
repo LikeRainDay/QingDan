@@ -2,11 +2,8 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +20,8 @@ import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Custom.MoreWindow;
 import com.example.houshuai.qingdan.bean.DataCleanManager;
 import com.example.houshuai.qingdan.utils.LoginUtil;
+import com.example.houshuai.qingdan.utils.ShareUtil;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.List;
 
 import butterknife.BindView;
@@ -192,13 +187,7 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                 Toast.makeText(getApplicationContext(), "点击了关于", Toast.LENGTH_LONG).show();
                 break;
             case R.id.self_ShareApp:
-                if (null == mMoreWindow) {
-                    mMoreWindow = new MoreWindow(this);
-                    mMoreWindow.init();
-                }
-                Log.e("des", "我点击了");
-                Toast.makeText(getApplicationContext(), "点击了分享", Toast.LENGTH_LONG).show();
-                mMoreWindow.showMoreWindow(view, 100);
+                ShareUtil.startAuto(this);
                 break;
             case R.id.self_YiJianFanKu:
                 AlertDialog.Builder builder6 = new AlertDialog.Builder(this);
@@ -234,7 +223,6 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                 Toast.makeText(getApplicationContext(), "点击了意见反馈", Toast.LENGTH_LONG).show();
                 break;
             case R.id.self_back:
-
                 finish();
                 break;
             case R.id.self_settings_button:
