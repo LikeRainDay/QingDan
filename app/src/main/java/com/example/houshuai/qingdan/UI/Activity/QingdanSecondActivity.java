@@ -20,6 +20,7 @@ import com.example.houshuai.qingdan.bean.Constant;
 import com.example.houshuai.qingdan.bean.Text;
 import com.example.houshuai.qingdan.bean.ZhuanchangBean;
 import com.example.houshuai.qingdan.inter.QingdanInter;
+import com.example.houshuai.qingdan.shopcar.QingdanThridActivity;
 import com.example.houshuai.qingdan.utils.RetrofitUtils;
 import com.squareup.picasso.Picasso;
 
@@ -121,7 +122,9 @@ public class QingdanSecondActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i("Tag","--------gridView--click"+i);
                 int iid=list.get(i).getIid();
-                Intent intent=new Intent();
+                String name=list.get(i).getTitle();
+
+                Intent intent=new Intent(QingdanSecondActivity.this, QingdanThridActivity.class);
                 intent.putExtra("iid",iid);
                 startActivity(intent);
             }

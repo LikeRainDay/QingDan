@@ -48,7 +48,7 @@
                  <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    
+
                     android:gravity="center_vertical|left"
                     android:paddingLeft="10dp"
                     android:text="鞋柜 蝴蝶结沙滩女鞋 "
@@ -58,7 +58,7 @@
            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                 
+
                     android:gravity="center_vertical|left"
                     android:paddingLeft="10dp"
                     android:text="夹趾鞋能够让你充分了解夏日的微风，测试数据，——————简介"
@@ -84,7 +84,7 @@
                 android:text="￥100"
                 android:textColor="#CC3366"
                 android:textSize="22sp" />
-            <TextView 
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/li"/>
             
-            <TextView 
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -121,7 +121,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
-           
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

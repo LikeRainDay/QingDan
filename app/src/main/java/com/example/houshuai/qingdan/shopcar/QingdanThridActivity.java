@@ -30,8 +30,14 @@ import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.alipay.AlipayActivity;
+import com.example.houshuai.qingdan.bean.Constant;
+import com.example.houshuai.qingdan.bean.GoodsBean;
+import com.example.houshuai.qingdan.inter.QingdanInter;
+import com.example.houshuai.qingdan.utils.RetrofitUtils;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
 
 
 public class QingdanThridActivity extends FragmentActivity implements QingdanOrderPopWindow.OnItemClickListener, OnClickListener {
@@ -43,6 +49,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
     private int[] resId = { R.drawable.detail_show_1, R.drawable.detail_show_2, R.drawable.detail_show_3 };
     private ListView listView;
     private ImageView iv_baby_collection;
+    private GoodsBean goodsBean;
     /**弹出商品订单信息详情*/
     private QingdanOrderPopWindow popWindow;
     /** 用于设置背景暗淡 */
@@ -53,6 +60,9 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
     private static boolean isCollection=false;
     /**ViewPager当前显示页的下标*/
     private int position=0;
+    private int iid;
+    private QingdanInter serverInter;
+    private Call<GoodsBean> call_result;
 
 
     @Override
@@ -61,10 +71,13 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         setContentView(R.layout.activity_qingdan_thrid);
         //得到保存的收藏信息
         getSaveCollection();
+        iid=getIntent().getIntExtra("iid",0);
         initView();
         popWindow = new QingdanOrderPopWindow(this);
         popWindow.setOnItemClickListener(this);
     }
+
+
 
     @SuppressLint("NewApi")
     private void initView() {
