@@ -90,14 +90,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--分享编辑页-->
-        <!--<activity-->
-        <!--android:name="com.umeng.socialize.view.ShareActivity"-->
-        <!--android:configChanges="orientation|keyboard"-->
-        <!--android:launchMode="singleTask"-->
-        <!--android:noHistory="true"-->
-        <!--android:theme="@style/Theme.UMDialog"-->
-        <!--android:windowSoftInputMode="stateVisible|adjustResize" />-->
+
         <!--Mob短信界面-->
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -152,7 +145,7 @@
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:exported="false"
-            android:theme="@style/MyDialogStyle"></activity>
+            android:theme="@style/MyDialogStyle" />
 
         <!-- Required SDK核心功能 -->
         <activity
@@ -272,10 +265,9 @@
         <activity android:name=".UI.Activity.CountryActivity" />
         <activity android:name=".UI.Activity.select_details_activity" />
         <activity android:name=".UI.Activity.select_product_Activity" />
-        <activity android:name=".UI.Activity.select_buy_Activity"></activity>
-        <activity android:name=".UI.Activity.CountryActivity" />
+        <activity android:name=".UI.Activity.select_buy_Activity" />
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
-        <activity android:name=".UI.Activity.SelfAbout"></activity>
+        <activity android:name=".UI.Activity.SelfAbout" />
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ import java.util.List;
 
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
+import cn.smssdk.SMSSDK;
 
 /**
  * 全局
@@ -34,6 +35,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SMSSDK.initSDK(this, "14aa400a62d7e", "34f69a9a008dc933302a2b982b5c207e", false);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         initNotification();
