@@ -29,12 +29,12 @@
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/iv_refresh"
+            android:id="@+id/iv_share"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="8dp"
-            android:src="@drawable/tb_icon_actionbar_refresh_48" />
+            android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
     </LinearLayout>
 
 </RelativeLayout>

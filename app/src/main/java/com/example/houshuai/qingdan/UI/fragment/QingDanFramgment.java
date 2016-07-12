@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 清单
+ * 清单Fragment
  * Created by HouShuai on 2016/7/5.
  */
 
@@ -59,6 +59,7 @@ public class QingDanFramgment  extends BaseFragment {
 
        Find_tab_Adapter fragmentAdapter=new Find_tab_Adapter(getChildFragmentManager(),mFragments,mTitles);
         vp.setAdapter(fragmentAdapter);
+        vp.setCurrentItem(0);
         tl.setupWithViewPager(vp);
     }
 

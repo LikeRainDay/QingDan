@@ -95,6 +95,7 @@
         <!--Mob短信界面-->
         <activity android:name=".UI.Activity.QingdanSecondActivity"/>
         <activity android:name=".shopcar.QingdanThridActivity"/>
+        <activity android:name=".alipay.AlipayActivity"/>
         <!-- 分享编辑页 -->
         <!--<activity-->
         <!--android:name="com.umeng.socialize.view.ShareActivity"-->
