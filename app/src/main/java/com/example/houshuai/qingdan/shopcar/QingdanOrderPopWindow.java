@@ -20,12 +20,16 @@ import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 
 import com.example.houshuai.qingdan.R;
+import com.squareup.picasso.Picasso;
+
+import static com.example.houshuai.qingdan.R.id.qingdan_pop_price;
+import static com.example.houshuai.qingdan.R.id.view;
 
 
 @SuppressLint("CommitPrefEdits")
 public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener {
-    private TextView pop_choice_16g,pop_choice_32g,pop_choice_16m,pop_choice_32m,pop_choice_black,pop_choice_white,pop_add,pop_reduce,pop_num,pop_ok;
-    private ImageView pop_del;
+    private TextView tvPrice,pop_choice_16g,pop_choice_32g,pop_choice_16m,pop_choice_32m,pop_choice_black,pop_choice_white,pop_add,pop_reduce,pop_num,pop_ok;
+    private ImageView pop_del,iv;
 
     private PopupWindow popupWindow;
     private OnItemClickListener listener;
@@ -37,7 +41,7 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
     private String str_type="";
 
 
-    public QingdanOrderPopWindow(Context context) {
+    public QingdanOrderPopWindow(Context context,String imgUrl,String price) {
         this.context=context;
         View view=LayoutInflater.from(context).inflate(R.layout.qingdan_adapter_popwindow, null);
         pop_choice_16g=(TextView) view.findViewById(R.id.pop_choice_16g);
@@ -51,7 +55,13 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
         pop_num=(TextView) view.findViewById(R.id.pop_num);
         pop_ok=(TextView) view.findViewById(R.id.pop_ok);
         pop_del=(ImageView) view.findViewById(R.id.pop_del);
-
+        iv= (ImageView) view.findViewById(R.id.qingdan_pop_img);
+        tvPrice= (TextView) view.findViewById(R.id.qingdan_pop_price);
+        if (!"".equals(imgUrl))
+        {
+            Picasso.with(context).load(imgUrl).placeholder(R.drawable.loading_placeholder).into(iv);
+        }
+        tvPrice.setText("￥"+price);
         pop_choice_16g.setOnClickListener(this);
         pop_choice_32g.setOnClickListener(this);
         pop_choice_16m.setOnClickListener(this);
@@ -62,7 +72,6 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
         pop_reduce.setOnClickListener(this);
         pop_ok.setOnClickListener(this);
         pop_del.setOnClickListener(this);
-
 
 
         popupWindow=new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -110,7 +119,6 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.pop_choice_16g:
-
                 pop_choice_16g.setBackgroundResource(R.drawable.yuanjiao_choice);
                 pop_choice_32g.setBackgroundResource(R.drawable.yuanjiao);
                 pop_choice_16m.setBackgroundResource(R.drawable.yuanjiao);
@@ -176,28 +184,25 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
                 }
                 break;
             case R.id.pop_del:
-                listener.onClickOKPop();
                 dissmiss();
 
                 break;
             case R.id.pop_ok:
-                listener.onClickOKPop();
+
                 if (str_color.equals("")) {
                     Toast.makeText(context, "亲，你还没有选择颜色哟~", Toast.LENGTH_SHORT).show();
                 }else if (str_type.equals("")) {
                     Toast.makeText(context, "亲，你还没有选择类型哟~",Toast.LENGTH_SHORT).show();
                 }else {
                     HashMap<String, Object> allHashMap=new HashMap<String,Object>();
-
                     allHashMap.put("color",str_color);
                     allHashMap.put("type",str_type);
                     allHashMap.put("num",pop_num.getText().toString());
                     allHashMap.put("id",QingdanShopingCarData.arrayList_cart_id+=1);
-
                     QingdanShopingCarData.arrayList_cart.add(allHashMap);
                     setSaveData();
                     dissmiss();
-
+                    listener.onClickOKPop();
                 }
                 break;
 

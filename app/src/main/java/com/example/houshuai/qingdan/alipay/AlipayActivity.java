@@ -9,13 +9,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.shopcar.QingdanShopingCarData;
+import com.squareup.picasso.Picasso;
 
 
 import java.io.UnsupportedEncodingException;
@@ -40,7 +44,10 @@ public class AlipayActivity extends FragmentActivity {
     public static final String RSA_PUBLIC = "";//公钥保存在服务器�??
 
     private static final int SDK_PAY_FLAG = 1;
-    private TextView bt_back;
+    private ImageView iv;
+    private TextView bt_back,tvPrice,tvNum,tvTotal,tvTotal2,tvName,tvCity;
+    private String name,city,price,num,imgUrl;
+    private double totalPrice;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -69,7 +76,6 @@ public class AlipayActivity extends FragmentActivity {
                         } else {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             Toast.makeText(AlipayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                     break;
@@ -79,11 +85,24 @@ public class AlipayActivity extends FragmentActivity {
             }
         };
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buynow);
+        iv= (ImageView) findViewById(R.id.qingdan_pay_img);
+        tvNum= (TextView) findViewById(R.id.qingdan_pay_num);
+        tvName= (TextView) findViewById(R.id.qingdan_pay_name);
+        tvPrice= (TextView) findViewById(R.id.qingdan_pay_price);
+        tvTotal= (TextView) findViewById(R.id.qingdan_pay_total);
+        tvTotal2= (TextView) findViewById(R.id.qingdan_pay_total2);
+        tvCity= (TextView) findViewById(R.id.qingdan_pay_city);
+        Intent intent=getIntent();
+        name=intent.getStringExtra("goodName");
+        Log.i("TAG","------------onCreat()::"+name);
+        city=intent.getStringExtra("shipCity");
+        price=(intent.getIntExtra("price",0)/100)+"";
+        imgUrl=intent.getStringExtra("imgUrl");
+        num= (String)QingdanShopingCarData.arrayList_cart.get(QingdanShopingCarData.arrayList_cart.size()-1).get("num");
         initView();
     }
 
@@ -95,6 +114,19 @@ public class AlipayActivity extends FragmentActivity {
                 finish();
             }
         });
+        if (!"".equals(imgUrl))
+        {
+            Picasso.with(this).load(imgUrl).placeholder(R.drawable.loading_placeholder).into(iv);
+        }
+        Log.i("TAG","------PAY:::"+name);
+        tvName.setText(name);
+        tvCity.setText("由"+city+"发货");
+        tvPrice.setText(price);
+        tvNum.setText("X"+num);
+        totalPrice=Integer.parseInt(num)*Double.parseDouble(price);
+        tvTotal.setText("￥"+totalPrice);
+        tvTotal2.setText("￥"+totalPrice);
+
     }
 
     /**
@@ -114,7 +146,7 @@ public class AlipayActivity extends FragmentActivity {
                     }).show();
             return;
         }
-        String orderInfo = getOrderInfo("清单商品", "商品的信�??", "0.02");
+        String orderInfo = getOrderInfo(name, "发货地"+city, totalPrice+"");
 
         /**
          * 特别注意，这里的签名逻辑�??要放在服务端，切勿将私钥泄露在代码中�??

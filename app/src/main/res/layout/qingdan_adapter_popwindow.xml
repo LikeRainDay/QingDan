@@ -12,7 +12,7 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:id="@+id/iv_adapter_grid_pic"
+            android:id="@+id/qingdan_pop_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -25,6 +25,7 @@
         android:orientation="vertical"
                                        >
          <TextView
+            android:id="@+id/qingdan_pop_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -46,7 +47,6 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        
         android:src="@drawable/lj" />
 
     </LinearLayout>
@@ -125,7 +125,6 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/tv_Black"
                     android:text="绿" />
-
                 <TextView
                     android:id="@+id/pop_choice_32m"
                     android:layout_width="wrap_content"
