@@ -22,4 +22,27 @@
     <color name="swiperefresh_color2">#C72828</color>
     <color name="swiperefresh_color3">#C3C728</color>
     <color name="swiperefresh_color4">#9321a5</color>
+    <color name="about">#FF030C1A</color>
+
+
+
+    <!-- 白色 -->
+    <color name="bg_White">#FFFFFF</color>
+    <!-- 黑色 -->
+    <color name="bg_Black">#000000</color>
+    <!-- 灰色 -->
+    <color name="bg_Gray">#CCCCCC</color>
+
+    <!-- 浅灰色 -->
+    <color name="bg_Gray_light">#EEEEEE</color>
+
+    <!-- 白色 -->
+    <color name="tv_White">#FFFFFF</color>
+    <!-- 黑色 -->
+    <color name="tv_Black">#000000</color>
+    <!-- 红色 -->
+    <color name="tv_Red">#CC0000</color>
+    <!-- 灰色 -->
+    <color name="tv_Gray">#CCCCCC</color>
+
 </resources>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_Gray"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -14,6 +15,7 @@
             android:id="@+id/self_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:src="@mipmap/angle_left_white" />
 
         <TextView
@@ -44,7 +46,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView13"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:clickable="true"
+
         android:orientation="horizontal">
 
         <TextView
@@ -53,6 +56,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="个人资料"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -82,7 +86,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/self_GeRen"
         android:layout_marginTop="14dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -91,6 +95,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="修改密码"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -132,7 +137,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView17"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -141,6 +146,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="消息通知"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -170,7 +176,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/self_TongZhi"
         android:layout_marginTop="14dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -179,6 +185,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="清理缓存"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <TextView
@@ -224,7 +231,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView19"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -233,6 +240,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="关于清单"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -262,7 +270,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/imageView20"
         android:layout_marginTop="14dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -271,6 +279,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="分享应用"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -300,7 +309,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/imageView22"
         android:layout_marginTop="14dp"
-        android:background="@color/white"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <TextView
@@ -309,6 +318,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="意见反馈"
+            android:textColor="@color/bg_White"
             android:textSize="17sp" />
 
         <ImageView
@@ -345,8 +355,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView23"
         android:background="@null"
+        android:gravity="center_horizontal"
         android:text="退出登录"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        android:textStyle="italic" />
 
     <ImageView
         android:id="@+id/imageView24"

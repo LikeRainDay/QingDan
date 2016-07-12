@@ -30,6 +30,9 @@
     <string name="edit_password">密码</string>
     <string name="button_Third">第三方</string>
     <string name="duanxinyanzheng">短信验证</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_welcome">昵称</string>
     <string name="msg_welcome">验证码</string>
 </resources>

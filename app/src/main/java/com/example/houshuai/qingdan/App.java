@@ -10,12 +10,13 @@ import com.example.houshuai.qingdan.greendao.DaoMaster;
 import com.example.houshuai.qingdan.greendao.DaoSession;
 import com.umeng.socialize.PlatformConfig;
 
+import org.xutils.x;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
-import cn.smssdk.SMSSDK;
 
 /**
  * 全局
@@ -33,19 +34,20 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SMSSDK.initSDK(this, "14aa400a62d7e", "34f69a9a008dc933302a2b982b5c207e", false);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         initNotification();
         //判断是否登录
         checkIsLogin();
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG); // 开启debug会影响性能
     }
 
     public void checkIsLogin() {
         SharedPreferences isLogin = getSharedPreferences("IsLogin", MODE_PRIVATE);
         mIsLogin = isLogin.getBoolean("isLogin", false);
         mID = isLogin.getString("ID", "false");
-        Log.e("login", mIsLogin + "---检查----" + mID);
+        Log.e("login",mIsLogin+"---检查----"+mID);
     }
 
 
@@ -68,7 +70,7 @@ public class App extends Application {
 
     private void initNotification() {
         BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(getApplicationContext());
-        builder.statusBarDrawable = R.mipmap.lanch_icon;
+        builder.statusBarDrawable = R.drawable.jpush_notification_icon;
         builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
                 | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
         builder.notificationDefaults = Notification.DEFAULT_SOUND

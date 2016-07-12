@@ -46,7 +46,7 @@ public class Self_Head extends BaseFragment {
 
     private void initView() {
         List<String> mySharePerference = application.getMySharePerference(application.mID);
-        String s = mySharePerference.get(1);
+        String s = mySharePerference.get(0);
 
         if ("third".equals(s)) {
             Picasso.with(mContext)
@@ -87,6 +87,4 @@ public class Self_Head extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

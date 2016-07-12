@@ -3,7 +3,6 @@
     package="com.example.houshuai.qingdan"
     android:versionCode="1"
     android:versionName="1.0">
-
     <!-- ###################声明SDK使用的相关权限###################### -->
     <!-- 检测网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,6 +20,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -32,6 +32,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+
 
     <permission
         android:name="com.example.houshuai.qingdan.permission.JPUSH_MESSAGE"
@@ -58,8 +59,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <!-- <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" /> -->
+    <!--    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />-->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -72,6 +72,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Activity.WelcomeMovieActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".UI.Activity.Self_Settings">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -79,17 +86,11 @@
         </activity>
         <activity android:name=".UI.Activity.MainActivity">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".UI.Activity.WelcomeMovieActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activity.QingdanSecondActivity"/>
-        <!-- 分享编辑页 -->
+        <!--分享编辑页-->
         <!--<activity-->
         <!--android:name="com.umeng.socialize.view.ShareActivity"-->
         <!--android:configChanges="orientation|keyboard"-->
@@ -97,7 +98,7 @@
         <!--android:noHistory="true"-->
         <!--android:theme="@style/Theme.UMDialog"-->
         <!--android:windowSoftInputMode="stateVisible|adjustResize" />-->
-        <!-- Mob短信界面 -->
+        <!--Mob短信界面-->
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -122,6 +123,7 @@
         <activity
             android:name="com.renn.rennsdk.oauth.OAuthActivity"
             android:configChanges="orientation|navigation|keyboardHidden" />
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
@@ -131,13 +133,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".UI.Activity.Self_ZhuCeXiangQingActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 选择图片的页面 -->
+        <!--选择图片的页面-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize" />
@@ -146,11 +147,12 @@
             android:name="UMENG_APPKEY"
             android:value="577cbd5367e58e1162000433" />
 
+
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:exported="false"
-            android:theme="@style/MyDialogStyle" />
+            android:theme="@style/MyDialogStyle"></activity>
 
         <!-- Required SDK核心功能 -->
         <activity
@@ -268,7 +270,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.Activity.CountryActivity" />
-        <activity android:name=".UI.Activity.Self_ZxingActivity"></activity>
+        <activity android:name=".UI.Activity.select_details_activity" />
+        <activity android:name=".UI.Activity.select_product_Activity" />
+        <activity android:name=".UI.Activity.select_buy_Activity"></activity>
+        <activity android:name=".UI.Activity.CountryActivity" />
+        <activity android:name=".UI.Activity.Self_ZxingActivity" />
+        <activity android:name=".UI.Activity.SelfAbout"></activity>
     </application>
 
 </manifest>
