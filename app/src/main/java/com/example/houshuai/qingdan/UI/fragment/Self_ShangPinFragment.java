@@ -1,6 +1,7 @@
 package com.example.houshuai.qingdan.UI.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -8,10 +9,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.UI.Activity.QingdanSecondActivity;
 import com.example.houshuai.qingdan.adapter.Self_ShangPinRecycleViewAdapter;
 import com.example.houshuai.qingdan.dao.ShangPin;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
@@ -86,7 +87,18 @@ public class Self_ShangPinFragment extends BaseFragment {
         self_recycleViewAdapter.setOnClickListener(new Self_ShangPinRecycleViewAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int postion) {
-                Toast.makeText(getActivity(), "我点击了" + postion, Toast.LENGTH_LONG).show();
+                String shangPin = mList.get(postion).getUrl();
+                if ("http" == shangPin.substring(0, 4)) {
+//                    Intent intent = new Intent(getActivity(), .class);
+//                    intent.putExtra("buylink", shangPin);
+//                    startActivity(intent);
+                    // TODO: 2016/7/12
+                } else {
+                    Intent intent = new Intent(getActivity(), QingdanSecondActivity.class);
+                    intent.putExtra("event_id", shangPin);
+                    startActivity(intent);
+                }
+
 
             }
 

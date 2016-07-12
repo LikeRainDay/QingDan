@@ -87,15 +87,14 @@
         <activity android:name=".UI.Activity.MainActivity">
             <intent-filter>
 
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!--Mob短信界面-->
-        <activity android:name=".UI.Activity.QingdanSecondActivity"/>
-        <activity android:name=".shopcar.QingdanThridActivity"/>
-        <activity android:name=".alipay.AlipayActivity"/>
+        <activity android:name=".UI.Activity.QingdanSecondActivity" />
+        <activity android:name=".shopcar.QingdanThridActivity" />
+        <activity android:name=".alipay.AlipayActivity" />
         <!-- 分享编辑页 -->
         <!--<activity-->
         <!--android:name="com.umeng.socialize.view.ShareActivity"-->
@@ -138,7 +137,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-       <activity android:name=".shopcar.QingdanThridActivity"/>
+        <activity android:name=".shopcar.QingdanThridActivity" />
 
         <activity android:name=".alipay.AlipayActivity" />
         <activity android:name=".alipay.AlipayH5PayActivity" />
@@ -284,7 +283,7 @@
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
         <activity android:name=".UI.Activity.SelfAbout" />
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
-        <activity android:name=".shopcar.QingdanShopCar"></activity>
+        <activity android:name=".shopcar.QingdanShopCar" />
     </application>
 
 </manifest>

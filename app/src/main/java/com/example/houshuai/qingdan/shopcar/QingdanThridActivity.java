@@ -1,17 +1,14 @@
 package com.example.houshuai.qingdan.shopcar;
 
-import android.support.v4.app.FragmentActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,6 +80,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         ((ImageView) findViewById(R.id.iv_share)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.put_in)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.buy_now)).setOnClickListener(this);
+        ((ImageView) findViewById(R.id.iv_shoping_cat)).setOnClickListener(this);
         findViewById(R.id.xuanze_id).setOnClickListener(this);
 
         iv_baby_collection=(ImageView) findViewById(R.id.iv_baby_collection);
@@ -165,11 +163,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 intent.setClass(QingdanThridActivity.this, QingdanShopCar.class);
                 startActivity(intent);
                 break;
-            case R.id.xuanze_01_id:
-                Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
-//			isClickBuy = false;
-//			setBackgroundBlack(all_choice_layout, 0);
-//			popWindow.showAsDropDown(view);
+
             case R.id.xuanze_id:
                 //Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
             	isClickBuy = false;
@@ -177,8 +171,6 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
 			    popWindow.showAsDropDown(view);
         }
     }
-
-
 
 
     /**
