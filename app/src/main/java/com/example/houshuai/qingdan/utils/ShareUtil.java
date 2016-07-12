@@ -37,10 +37,10 @@ public class ShareUtil implements onSetShareDataInter {
 
     private static Context mContext;
 
-    public static void startAuto(final Activity activity) {
+    public static void startAuto(final Activity activity, Bundle bundle) {
         //社会化登录
         mContext = activity;
-
+        mbundle = bundle;
 
         PopMenu mPopMenu = new PopMenu.Builder().attachToActivity(activity)
                 .addMenuItem(new PopMenuItem("QQ", activity.getResources().getDrawable(R.mipmap.umeng_socialize_qq_on)))
@@ -49,7 +49,8 @@ public class ShareUtil implements onSetShareDataInter {
                 .setOnItemClickListener(new PopMenuItemListener() {
                     @Override
                     public void onItemClick(PopMenu popMenu, int position) {
-                        String title = mbundle.getString("title");
+
+                        String title = mbundle.getString("fulName");
                         String imageurl = mbundle.getString("imageurl");
                         String url = mbundle.getString("url");
                         String text = mbundle.getString("text");

@@ -1,46 +1,43 @@
 package com.example.houshuai.qingdan.shopcar;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.alipay.AlipayActivity;
+import com.example.houshuai.qingdan.bean.Constant;
+import com.example.houshuai.qingdan.bean.GoodsBean;
+import com.example.houshuai.qingdan.dao.ShangPin;
+import com.example.houshuai.qingdan.inter.QingdanInter;
+import com.example.houshuai.qingdan.utils.RetrofitUtils;
+import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class QingdanThridActivity extends FragmentActivity implements QingdanOrderPopWindow.OnItemClickListener, OnClickListener {
 
     NfcAdapter nfcAdapter;
-
-    private QingdanThridTileViewPager viewPager;
-    private ArrayList<View> allListView;
-    private int[] resId = { R.drawable.detail_show_1, R.drawable.detail_show_2, R.drawable.detail_show_3 };
+    private ImageView mainImg;
     private ListView listView;
     private ImageView iv_baby_collection;
     /**弹出商品订单信息详情*/
@@ -53,18 +50,24 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
     private static boolean isCollection=false;
     /**ViewPager当前显示页的下标*/
     private int position=0;
+    private int iid;
+    private QingdanInter serverInter;
+    private Call<GoodsBean> call_result;
+    private GoodsBean goodsBean;
+    private TextView tvGoodName,tvGoodDesc,tvGoodPrice,tvGoodDiscount,tvMianjian,tvTips;
 
+    //购物车页面
+    private Cart_F cart_F;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qingdan_thrid);
-        //得到保存的收藏信息
-        getSaveCollection();
+        iid=getIntent().getIntExtra("iid",0);
         initView();
-        popWindow = new QingdanOrderPopWindow(this);
-        popWindow.setOnItemClickListener(this);
     }
+
+
 
     @SuppressLint("NewApi")
     private void initView() {
@@ -73,10 +76,13 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         if (nfcAdapter == null) {
             //Toast.makeText(this, "该设备不支持NFC", Toast.LENGTH_SHORT).show();
         }
-
         ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(this);
+        ((ImageView) findViewById(R.id.iv_share)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.put_in)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.buy_now)).setOnClickListener(this);
+        ((ImageView) findViewById(R.id.iv_shoping_cat)).setOnClickListener(this);
+        findViewById(R.id.xuanze_id).setOnClickListener(this);
+
         iv_baby_collection=(ImageView) findViewById(R.id.iv_baby_collection);
         iv_baby_collection.setOnClickListener(this);
         all_choice_layout = (LinearLayout) findViewById(R.id.all_choice_layout);
@@ -95,12 +101,19 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 //startActivity(intent);
             }
         });
-        initViewPager();
 
         if (isCollection) {
             //如果已经收藏，则显示收藏后的效果
             iv_baby_collection.setImageResource(R.drawable.second_2_collection);
         }
+        mainImg= (ImageView) findViewById(R.id.qingdan_good_mainimg);
+        tvGoodName= (TextView) findViewById(R.id.qingdan_good_name);
+        tvGoodDesc= (TextView) findViewById(R.id.qingdan_good_desc);
+        tvGoodPrice= (TextView) findViewById(R.id.qingdan_good_price);
+        tvGoodDiscount= (TextView) findViewById(R.id.qingdan_good_diasount);
+        tvMianjian= (TextView) findViewById(R.id.qingdan_good_manjan);
+        tvTips= (TextView) findViewById(R.id.qingdang_good_tips);
+        getGoodsInfo();
     }
 
     @Override
@@ -108,20 +121,30 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         switch (view.getId()) {
             case R.id.iv_back:
                 //返回
-                finish();
+                this.finish();
+                break;
+            case R.id.iv_share:
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("goodShareInfo",goodsBean.getShare_info());
+                //TODO
+
                 break;
             case R.id.iv_baby_collection:
                 //收藏
-                if (isCollection) {
-                    //提示是否取消收藏
-                    cancelCollection();
-                }else {
-                    isCollection=true;
-                    setSaveCollection();
-                    //如果已经收藏，则显示收藏后的效果
-                    iv_baby_collection.setImageResource(R.drawable.second_2_collection);
-                    Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
+                if (goodsBean!=null)
+                {
+                    if (isCollection) {//提示是否取消收藏
+                        cancelCollection();
+                    }else {
+                        isCollection=true;
+
+                        setSaveCollection();
+                        //如果已经收藏，则显示收藏后的效果
+                        iv_baby_collection.setImageResource(R.drawable.second_2_collection);
+                        Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
             case R.id.put_in:
                 //添加购物车
@@ -135,92 +158,59 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 setBackgroundBlack(all_choice_layout, 0);
                 popWindow.showAsDropDown(view);
                 break;
-            case R.id.xuanze_01_id:
-                Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
-//			isClickBuy = false;
-//			setBackgroundBlack(all_choice_layout, 0);
-//			popWindow.showAsDropDown(view);
+            case R.id.iv_shoping_cat:
+                Intent intent = new Intent();
+                intent.setClass(QingdanThridActivity.this, QingdanShopCar.class);
+                startActivity(intent);
+                break;
+
             case R.id.xuanze_id:
-                Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
-//			isClickBuy = false;
-//			setBackgroundBlack(all_choice_layout, 0);
-//			popWindow.showAsDropDown(view);
+                //Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
+            	isClickBuy = false;
+  		        setBackgroundBlack(all_choice_layout, 0);
+			    popWindow.showAsDropDown(view);
         }
     }
 
 
+    /**
+     * 获取商品信息
+     * @return
+     */
+    public void getGoodsInfo() {
 
-    private void initViewPager() {
-
-        if (allListView != null) {
-            allListView.clear();
-            allListView = null;
-        }
-        allListView = new ArrayList<View>();
-
-        for (int i = 0; i < resId.length; i++) {
-            View view = LayoutInflater.from(this).inflate(R.layout.pic_item, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.pic_item);
-            imageView.setImageResource(resId[i]);
-            imageView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    //挑战到查看大图界面
-                    Toast.makeText(QingdanThridActivity.this, "查看大图界面", Toast.LENGTH_SHORT).show();
-//					Intent intent = new Intent(MainActivity.this, ShowBigPictrue.class);
-//					intent.putExtra("position", position);
-//					startActivity(intent);
+        serverInter=RetrofitUtils.initRetrofit(Constant.BASE_URL_GOODBEAN);
+        call_result=serverInter.getGoodsInfo(iid);
+        call_result.enqueue(new Callback<GoodsBean>() {
+            @Override
+            public void onResponse(Call<GoodsBean> call, Response<GoodsBean> response) {
+                if(response.isSuccess()&&response.body()!=null)
+                {
+                    goodsBean=response.body();
+                    Log.i("TAG","--------GoodsBeans："+goodsBean.getTitle());
+                    tvGoodDiscount.setText((goodsBean.getDiscount()/10)+"折起");
+                    tvGoodName.setText(goodsBean.getTitle());
+                    tvGoodDesc.setText(goodsBean.getDesc());
+                    tvGoodPrice.setText("￥"+(goodsBean.getPrice()/100)+"");
+                    StringBuffer tips=new StringBuffer();
+                    for (int i=0;i<goodsBean.getItem_tips().size();i++)
+                    {
+                        tips.append("  "+goodsBean.getItem_tips().get(i));
+                    }
+                    tvTips.setText(tips);
+                    if(!"".equals(goodsBean.getMain_img()))
+                    {
+                        Picasso.with(QingdanThridActivity.this).load(goodsBean.getMain_img()).placeholder(R.drawable.loading_placeholder).into(mainImg);
+                    }
+                    popWindow = new QingdanOrderPopWindow(QingdanThridActivity.this,goodsBean.getMain_img(),(goodsBean.getPrice()/100)+"");
+                    popWindow.setOnItemClickListener(QingdanThridActivity.this);
                 }
-            });
-            allListView.add(view);
-        }
-
-        viewPager = (QingdanThridTileViewPager) findViewById(R.id.iv_baby);
-        ViewPagerAdapter adapter = new ViewPagerAdapter();
-        viewPager.setOnPageChangeListener(new OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int arg0) {
-                position=arg0;
             }
-
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-
+            public void onFailure(Call<GoodsBean> call, Throwable t) {
+             Toast.makeText(QingdanThridActivity.this,"网络异常，加载失败！",Toast.LENGTH_LONG).show();
             }
         });
-        viewPager.setAdapter(adapter);
-
-    }
-
-    private class ViewPagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return allListView.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == (View) arg1;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view = allListView.get(position);
-            container.addView(view);
-            return view;
-        }
 
     }
 
@@ -233,6 +223,10 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
             //如果之前是点击的立即购买，那么就跳转到立即购物界面
             //Toast.makeText(MainActivity.this, "跳转到购物页面", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(QingdanThridActivity.this, AlipayActivity.class);
+            intent.putExtra("goodName",goodsBean.getTitle());
+            intent.putExtra("shipCity",goodsBean.getShip_city());
+            intent.putExtra("price",goodsBean.getPrice());
+            intent.putExtra("imgUrl",goodsBean.getMain_img());
             startActivity(intent);
         }else {
             Toast.makeText(this, "添加到购物车成功", Toast.LENGTH_SHORT).show();
@@ -253,17 +247,16 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
 
     /**保存是否添加收藏*/
     private void setSaveCollection(){
-        SharedPreferences sp=getSharedPreferences("SAVECOLLECTION", Context.MODE_PRIVATE);
-        Editor editor=sp.edit();
-        editor.putBoolean("isCollection", isCollection);
-        editor.commit();
+        ShangPin shangPin=new ShangPin();
+        shangPin.setTitle(goodsBean.getTitle());
+        shangPin.setImage(goodsBean.getMain_img());
+        shangPin.setAddLove((goodsBean.getPrice()/100)+"");
+        shangPin.setAddSee(goodsBean.getFocus_num()+"");
+        shangPin.setContent(goodsBean.getDesc());
+        shangPin.setUrl(goodsBean.getIid()+"");
+        ShangPinDBHelper.getInstance(this).addToMessageInfoTable(shangPin);
     }
-    /**得到保存的是否添加收藏标记*/
-    private void getSaveCollection(){
-        SharedPreferences sp=getSharedPreferences("SAVECOLLECTION", Context.MODE_PRIVATE);
-        isCollection=sp.getBoolean("isCollection", false);
 
-    }
     /**取消收藏*/
     private  void cancelCollection(){
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
@@ -273,8 +266,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
             public void onClick(DialogInterface arg0, int arg1) {
                 isCollection=false;
                 //如果取消收藏，则显示取消收藏后的效果
-                iv_baby_collection.setImageResource(R.drawable.second_2);
-                setSaveCollection();
+                ShangPinDBHelper.getInstance(QingdanThridActivity.this).deleteMessageInfoListBy(goodsBean.getIid()+"");
             }
         });
         dialog.setNegativeButton("取消", null);

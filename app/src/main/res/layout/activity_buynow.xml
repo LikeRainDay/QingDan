@@ -74,7 +74,8 @@
                        android:layout_marginTop="3dp"
                        android:layout_marginLeft="5dp"
                        />
-                    <TextView 
+                    <TextView
+                        android:id="@+id/qingdan_pay_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="由浙江金龙发货"
@@ -91,7 +92,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:id="@+id/iv_adapter_list_pic"
+                    android:id="@+id/qingdan_pay_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
@@ -105,7 +106,7 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/tv_name"
+                        android:id="@+id/qingdan_pay_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -124,7 +125,7 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/tv_price"
+                        android:id="@+id/qingdan_pay_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -132,7 +133,7 @@
                         android:textColor="@color/tv_Black" />
 
                     <TextView
-                        android:id="@+id/tv_num"
+                        android:id="@+id/qingdan_pay_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -232,7 +233,7 @@
                 android:paddingTop="25dp" >
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/qingdan_pay_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -244,9 +245,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/textView1"
+                    android:layout_alignBottom="@+id/qingdan_pay_total"
                     android:layout_marginRight="18dp"
-                    android:layout_toLeftOf="@+id/textView1"
+                    android:layout_toLeftOf="@+id/qingdan_pay_total"
                     android:text="共1件商品"
                     android:textColor="@color/tv_Black" />
             </RelativeLayout>
@@ -328,6 +329,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/qingdan_pay_total2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_buy_ok"

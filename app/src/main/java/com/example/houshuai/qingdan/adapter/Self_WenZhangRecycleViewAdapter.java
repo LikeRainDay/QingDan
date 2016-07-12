@@ -47,7 +47,7 @@ public class Self_WenZhangRecycleViewAdapter extends RecyclerView.Adapter<Self_W
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.self_recycleview_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.self_recycleviewwenzhang_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
