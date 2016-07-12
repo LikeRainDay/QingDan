@@ -53,7 +53,8 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
     private static boolean isCollection=false;
     /**ViewPager当前显示页的下标*/
     private int position=0;
-
+    //购物车页面
+    private Cart_F cart_F;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.put_in)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.buy_now)).setOnClickListener(this);
+        ((ImageView) findViewById(R.id.iv_shoping_cat)).setOnClickListener(this);
         iv_baby_collection=(ImageView) findViewById(R.id.iv_baby_collection);
         iv_baby_collection.setOnClickListener(this);
         all_choice_layout = (LinearLayout) findViewById(R.id.all_choice_layout);
@@ -90,9 +92,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
                 //进入恋上猫女衣坊的网店
-                //Uri uri = Uri.parse("http://yecaoly.taobao.com");
-                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                //startActivity(intent);
+
             }
         });
         initViewPager();
@@ -135,6 +135,11 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 setBackgroundBlack(all_choice_layout, 0);
                 popWindow.showAsDropDown(view);
                 break;
+            case R.id.iv_shoping_cat:
+                Intent intent = new Intent();
+                intent.setClass(QingdanThridActivity.this, QingdanShopCar.class);
+                startActivity(intent);
+                break;
             case R.id.xuanze_01_id:
                 Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
 //			isClickBuy = false;
@@ -147,6 +152,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
 //			popWindow.showAsDropDown(view);
         }
     }
+
 
 
 

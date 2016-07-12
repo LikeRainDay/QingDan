@@ -103,6 +103,7 @@ public class AlipayActivity extends FragmentActivity {
      */
 
     public void pay(View v) {
+
         if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE) || TextUtils.isEmpty(SELLER)) {
             new AlertDialog.Builder(this).setTitle("警告").setMessage("�??要配置PARTNER | RSA_PRIVATE| SELLER")
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -153,6 +154,10 @@ public class AlipayActivity extends FragmentActivity {
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
+
+
+
+
 
     /**
      * get the sdk version. 获取SDK版本�??
