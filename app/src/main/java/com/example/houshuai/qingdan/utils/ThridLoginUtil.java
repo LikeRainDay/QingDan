@@ -131,7 +131,7 @@ public class ThridLoginUtil {
                 App application = (App) ((Activity) mContext).getApplication();
                 application.setIsLoginSharedPreferences(true, openid);
                 application.setMySharePerference(openid, "third", openid, profile_image_url, "", screen_name);
-
+                //application.setMySharePerference(openid, "third", profile_image_url, profile_image_url ,"", screen_name);
                 Intent intent = new Intent(mContext, WelcomeActivity.class);
                 mContext.startActivity(intent);
                 ((Activity) mContext).finish();

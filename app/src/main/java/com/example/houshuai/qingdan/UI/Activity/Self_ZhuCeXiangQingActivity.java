@@ -86,19 +86,18 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
                 isSucessful(name, pass);
                 break;
             case R.id.btn_erweima:
-                Log.i("1","1");
+                Log.i("1", "1");
                 String name1 = mName.getText().toString().trim();
                 String pass1 = mPass.getText().toString().trim();
-                if (null ==name1 &&null==pass1||"".equals(name1+pass1))
-                {
-                    Toast.makeText(getApplication(),"请输入账户名和密码",Toast.LENGTH_LONG).show();
-                }else
-                {String content ="用户名是："+name1+"\n密码是"+pass1;
-                    Intent intent1 = new Intent(Self_ZhuCeXiangQingActivity.this,Self_ZxingActivity.class);
-                    intent1.putExtra("content",content);
+                if ((null == name1 || null == pass1) || "".equals(name1) || "".equals(pass1)) {
+                    Toast.makeText(getApplication(), "用户名和密码不为空", Toast.LENGTH_LONG).show();
+                } else {
+                    String content = "用户名是：" + name1 + "\n密码是" + pass1;
+                    Intent intent1 = new Intent(Self_ZhuCeXiangQingActivity.this, Self_ZxingActivity.class);
+                    intent1.putExtra("content", content);
                     startActivity(intent1);
                 }
-                Log.i("2","2");
+                Log.i("2", "2");
                 break;
             case R.id.back:
                 //点击返回
@@ -130,7 +129,6 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
         }
     }
 
-
     private void initWeigt() {
         mHeadPic.setOnClickListener(this);
         mButton.setOnClickListener(this);
@@ -154,5 +152,4 @@ public class Self_ZhuCeXiangQingActivity extends BaseActivity implements View.On
             }
         }
     }
-
 }
