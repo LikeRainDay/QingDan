@@ -113,6 +113,7 @@ public class App extends Application {
         edit.putString("BackPic", BackPic);
         //用户名
         edit.putString("self_name", self_name);
+
         edit.commit();
     }
 

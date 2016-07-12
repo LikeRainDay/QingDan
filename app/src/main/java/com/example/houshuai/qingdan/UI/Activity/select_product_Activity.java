@@ -1,11 +1,15 @@
 package com.example.houshuai.qingdan.UI.Activity;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.os.Environment;
 import android.support.v4.view.PagerAdapter;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -13,11 +17,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,11 +33,20 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.houshuai.qingdan.App;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.bean.typebean;
+import com.example.houshuai.qingdan.dao.ShangPin;
+import com.example.houshuai.qingdan.utils.GetIsLogin;
+import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
+import com.example.houshuai.qingdan.utils.ShareUtil;
+import com.umeng.socialize.utils.Log;
 
+import org.xutils.DbManager;
+import org.xutils.common.util.LogUtil;
 import org.xutils.x;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,8 +58,6 @@ public class select_product_Activity extends Activity{
     private AutoScrollViewPager auto_view_pager;
     private Intent intent;
     private WebView wv_id;
-    private FloatingActionButton btn;
-    boolean  bss=false;
     private List<String> imageUrls;
     private List<ImageView> images;
     private TextView brandname_id;
@@ -51,6 +65,14 @@ public class select_product_Activity extends Activity{
     private Button btn_likecount_id;
     private ListView lv_buylikes_id;
     private typebean.DataBean.ThingsBean thingsBean;
+    private TextView tv_xiepinglun_id;
+    private TextView tv_mai_id;
+    private PopupWindow popWindowsss;
+    private LinearLayout dibu_id;
+    private ListView lv_pinglun_id;
+    private EditText et_id;
+    private boolean a=true;
+    private String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,31 +80,58 @@ public class select_product_Activity extends Activity{
         setContentView(R.layout.select_product_layout);
         DisplayMetrics dm = getResources().getDisplayMetrics();
 
-        initView();
-        final int screenWidth = dm.widthPixels;
-        final int screenHeight = dm.heightPixels - 50;
 
+        initView();
         //获取传过来的对象
         intent = getIntent();
 
         thingsBean = (typebean.DataBean.ThingsBean) intent.getSerializableExtra("thingsbean");
+
         //得到图片地址的集合
         imageUrls = thingsBean.getImageUrls();
         //关于图片轮播控件的操作
-            aboutviewpager();
+        aboutviewpager();
         brandname_id.setText(thingsBean.getBrand().getName());
         fullname_id.setText(thingsBean.getName());
+        //给这个喜欢设置了喜欢的个数
         btn_likecount_id.setText("喜欢("+ thingsBean.getLikeCount()+")");
+
+
+        aboutWebview();
+        //关于数据库,数据库不写了
+       // aboutDb();
+    }
+    private void aboutDb() {
+        //创建数据库,等到做完了，然后将数据的建立移到ａｐｐ类中
+        DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
+                // 数据库的名字
+                .setDbName("shangping")
+                // 保存到指定路径
+                 .setDbDir(new
+                         File(Environment.getExternalStorageDirectory().getAbsolutePath()))
+                // 数据库的版本号
+                .setDbVersion(1)
+                // 数据库版本更新监听
+                .setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+                    @Override
+                    public void onUpgrade(DbManager arg0, int arg1, int arg2) {
+                        LogUtil.e("数据库版本更新了！");
+                    }
+                });
+        DbManager manager = x.getDb(daoConfig);
+
+        //创建对象，用来生成表
+    }
+
+    private void aboutWebview() {
         //对webView进行操作
         WebSettings settings = wv_id.getSettings();
         settings.setJavaScriptEnabled(true);
         WebViewClient client = new WebViewClient();// 将浏览器嵌入到WebView控件中
         wv_id.setWebViewClient(client);
-
         wv_id.loadUrl(thingsBean.getLinks().getHtml());//加载
-        //发现浮动按钮
-      
     }
+
 
     private void initView() {
         wv_id = (WebView)findViewById(R.id.wv_id);
@@ -90,10 +139,14 @@ public class select_product_Activity extends Activity{
         auto_view_pager = (AutoScrollViewPager)findViewById(R.id.view_pager);
         //发现指示器框架
         btn_likecount_id = (Button) findViewById(R.id.btn_likecount_id);
-        TextView tv_mai_id= (TextView) findViewById(R.id.tv_mai_id);
+        tv_mai_id = (TextView) findViewById(R.id.tv_mai_id);
+        dibu_id = (LinearLayout) findViewById(R.id.dibu_id);
+        tv_xiepinglun_id = (TextView) findViewById(R.id.tv_xiepinglun_id);
 
         brandname_id = (TextView) findViewById(R.id.brandname_id);
         fullname_id = (TextView) findViewById(R.id.fullname_id);
+
+
         //点击购买按钮，弹出对应的popuwindow
         tv_mai_id.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +163,76 @@ public class select_product_Activity extends Activity{
                 onBackPressed();
             }
         });
+        //当评论按钮被点击的时候，从底部弹出一个popuwindow
+        tv_xiepinglun_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+                showPopup(tv_xiepinglun_id);
+
+            }
+
+        });
+        //显示评论的listView
+        lv_pinglun_id = (ListView) findViewById(R.id.lv_pinglun_id);
+
     }
+
+    //弹出popuwindow
+    private void showPopup(TextView tv_xiepinglun_id) {
+        //弹出popuwindow
+        dibu_id.setVisibility(View.GONE);
+
+        LayoutInflater layoutInflater = (LayoutInflater)select_product_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.pinglun_item,null);
+        et_id = (EditText) view.findViewById(R.id.et_id);
+        et_id.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        et_id.setFocusable(true);
+        et_id.setFocusableInTouchMode(true);
+        et_id.setSingleLine(false);
+        //水平滚动设置为False
+        et_id.setHorizontallyScrolling(false);
+        // 创建一个PopuWidow对象
+        popWindowsss = new PopupWindow(view, LinearLayout.LayoutParams.FILL_PARENT,
+                250,true);
+
+        //弹出时的动画
+        popWindowsss.setAnimationStyle(R.style.popWindow_anim_style);
+        // 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
+        popWindowsss.setFocusable(true);
+        // 设置允许在外点击消失
+        popWindowsss.setOutsideTouchable(false);
+        // 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
+        popWindowsss.setBackgroundDrawable(new BitmapDrawable());
+        //软键盘不会挡着popupwindow
+        popWindowsss.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        //设置菜单显示的位置
+        popWindowsss.showAtLocation(tv_mai_id, Gravity.BOTTOM, 0, 0);
+        //监听菜单的关闭事件
+        popWindowsss.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                dibu_id.setVisibility(View.VISIBLE);
+            }
+        });
+        //监听触屏事件
+        popWindowsss.setTouchInterceptor(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                return false;
+            }
+        });
+        //调出键盘
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) et_id.getContext().getSystemService(Service.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
+            }
+        }).start();
+
+    }
+
     //关于图片轮播控件的操作
     private void aboutviewpager() {
         //准备数据源
@@ -317,11 +439,77 @@ public class select_product_Activity extends Activity{
 
     //分享
     public void shareClick(View view){
-
+        ShareUtil.startAuto(this);
     }
     //评论
     public void reviewClick(View view){
+        showPopup(tv_xiepinglun_id);
+    }
+    //发表
+    public void fabiao(View view){
+        //思路：
+        //判断用户是否登录，如果已经登录，获取该用户的头像和昵称
+        if( new GetIsLogin(select_product_Activity.this).IsLogin()){
+            App application = (App) getApplication();
 
+            List<String> mySharePerference = (application).getMySharePerference(application.mID);
+            //获到用户名
+            String name=mySharePerference.get(4);
+            //获得密码
+            String touxiang=mySharePerference.get(2);
+            //获取用户在editView上面输入的内容,然后判断内容是否为空，如果为空，则提示用户
+            String s=et_id.getText().toString().trim();
+            if(s!=null){
+                //获取当前的时间
+                long time=System.currentTimeMillis();
+                //将用户的所有的数据存入数据库中
+
+                //然后从数据库中取出数据，显示到listView上面
+                //准备适配器
+                //设置适配器
+                //绑定适配器
+                //设置监听器
+            }else{
+                Toast.makeText(this,"评论不能为空！！！请输入后再评论",Toast.LENGTH_LONG).show();
+            }
+
+        }else{
+            //如果用户没有登录，则提示用户登录或者直接跳转到登录界面
+            Toast.makeText(this,"请先登录，",Toast.LENGTH_LONG).show();
+
+        }
+
+
+
+
+    }
+    //喜欢
+    public void likeCilck(View view){
+        //根据当前的点击状态修改里面的值
+        text = (String) btn_likecount_id.getText();
+        int i=Integer.parseInt(text.substring(3, text.length() - 1));
+        if(a==true){
+            btn_likecount_id.setText("喜欢("+(i+1)+")");
+            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.heart_purple,0,0);
+            //获取数据库，修改里面的值
+            ShangPin shangPin=new ShangPin();
+
+            shangPin.setAddLove(thingsBean.getPrice());//价钱
+            shangPin.setAddSee(i+1+"");//喜欢的人数
+            shangPin.setContent(thingsBean.getBrand().getName());//品牌名字
+            shangPin.setImage(thingsBean.getImageUrls().get(0));//图片的地址
+            shangPin.setTitle(thingsBean.getName());//产品的名字
+            shangPin.setUrl(thingsBean.getLinks().getShare());//产品描述地址
+            ShangPinDBHelper.getInstance(this).addToMessageInfoTable(shangPin);
+
+            a=false;
+            Log.i("ss","运行了呃呃呃额额");
+        }else if(a==false){
+            Log.i("ss","运行了");
+            btn_likecount_id.setText("喜欢("+(i-1)+")");
+            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.heart_o_alt,0,0);
+            a=true;
+        }
     }
 }
 

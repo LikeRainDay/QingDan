@@ -17,9 +17,9 @@
 	<color name="navajowhite">#FFDEAD</color><!--纳瓦白 -->
 	<color name="peachpuff">#FFDAB9</color><!--桃色 -->
 	<color name="gold">#FFD700</color><!--金色 -->
+	<color name="orange">#FFD700</color><!--金色 -->
 	<color name="pink">#FFC0CB</color><!--粉红色 -->
 	<color name="lightpink">#FFB6C1</color><!--亮粉红色-->
-	<color name="orange">#FFA500</color><!--橙色 -->
 	<color name="lightsalmon">#FFA07A</color><!--亮肉色 -->
 	<color name="darkorange">#FF8C00</color><!--暗桔黄色 -->
 	<color name="coral">#FF7F50</color><!--珊瑚色 -->
@@ -77,7 +77,7 @@
 	<color name="paleturquoise">#AFEEEE</color><!--苍宝石绿 -->
 	<color name="greenyellow">#ADFF2F</color><!--黄绿色 -->
 	<color name="lightblue">#ADD8E6</color><!--亮蓝色 -->
-	<color name="darkgray">#A9A9A9</color><!--暗灰色 -->
+	<color name="darkgray">#dbdbdb</color><!--暗灰色 -->
 	<color name="darkgrey">#A9A9A9</color><!--暗灰色 -->
 	<color name="brown">#A52A2A</color><!--褐色 -->
 	<color name="sienna">#A0522D</color><!--赭色 -->
