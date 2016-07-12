@@ -59,6 +59,8 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
     private GoodsBean goodsBean;
     private TextView tvGoodName,tvGoodDesc,tvGoodPrice,tvGoodDiscount,tvMianjian,tvTips;
 
+    //购物车页面
+    private Cart_F cart_F;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +160,16 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 setBackgroundBlack(all_choice_layout, 0);
                 popWindow.showAsDropDown(view);
                 break;
+            case R.id.iv_shoping_cat:
+                Intent intent = new Intent();
+                intent.setClass(QingdanThridActivity.this, QingdanShopCar.class);
+                startActivity(intent);
+                break;
+            case R.id.xuanze_01_id:
+                Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
+//			isClickBuy = false;
+//			setBackgroundBlack(all_choice_layout, 0);
+//			popWindow.showAsDropDown(view);
             case R.id.xuanze_id:
                 //Toast.makeText(QingdanThridActivity.this, "你点击了", Toast.LENGTH_SHORT).show();
             	isClickBuy = false;
@@ -227,11 +239,10 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
         }else {
             Toast.makeText(this, "添加到购物车成功", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /** 控制背景变暗 0变暗 1变亮 */
-    public static void setBackgroundBlack(View view, int what) {
+    public void setBackgroundBlack(View view, int what) {
         switch (what) {
             case 0:
                 view.setVisibility(View.VISIBLE);
