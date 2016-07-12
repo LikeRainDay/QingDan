@@ -105,7 +105,6 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -289,7 +288,6 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
         int delta2 = Self_FormView_Welcome.getTop() + Self_FormView_Welcome.getHeight();
         switch (inputType) {
             case NONE:
-                toMainActivity();
 
                 if (view == buttonLeft) {
                     formView.animate().translationY(0).alpha(1).setDuration(500).start();
@@ -334,7 +332,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
                     String nincheng = egist_edit2.getText().toString().trim();
                     Pattern nameCompile = Pattern.compile("^[\\u2E80-\\u9FFF]{2,5}$");
                     Matcher nameMatcher = nameCompile.matcher(nincheng);
-                    if (nameMatcher.find() &&isOK) {
+                    if (nameMatcher.find() && isOK) {
                         application.setMySharePerference(mPhone, mPhone, mPass, "", "", nincheng);
                         application.setIsLoginSharedPreferences(true, mPhone);
                         toMainActivity();

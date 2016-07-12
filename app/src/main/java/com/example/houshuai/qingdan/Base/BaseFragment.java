@@ -19,20 +19,12 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
     public Context mContext;
     private Unbinder bind;
-    private View view;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
-                parent.removeView(view);
-            }
-            return view;
-        }
-        view = inflater.inflate(getFragmentID(), container, false);
+        View view = inflater.inflate(getFragmentID(), container, false);
         bind = ButterKnife.bind(this, view);
         return view;
     }
