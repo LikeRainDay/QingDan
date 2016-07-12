@@ -14,7 +14,7 @@
         app:tabSelectedTextColor="#000000"
         app:tabTextColor="#ADADAD"
         app:tabIndicatorColor="#000000"
-        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorHeight="2dp"
         />
     <!--viewpager的布局-->
     <android.support.v4.view.ViewPager

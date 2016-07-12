@@ -58,8 +58,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <!-- <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" /> -->
+    <!--    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />-->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -92,9 +91,9 @@
         </activity>
 
         <!--Mob短信界面-->
-        <activity android:name=".UI.Activity.QingdanSecondActivity" />
-        <activity android:name=".shopcar.QingdanThridActivity" />
-        <activity android:name=".alipay.AlipayActivity" />
+        <activity android:name=".UI.Activity.QingdanSecondActivity"/>
+        <activity android:name=".shopcar.QingdanThridActivity"/>
+        <activity android:name=".alipay.AlipayActivity"/>
         <!-- 分享编辑页 -->
         <!--<activity-->
         <!--android:name="com.umeng.socialize.view.ShareActivity"-->
@@ -128,6 +127,7 @@
         <activity
             android:name="com.renn.rennsdk.oauth.OAuthActivity"
             android:configChanges="orientation|navigation|keyboardHidden" />
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
@@ -137,7 +137,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".shopcar.QingdanThridActivity" />
+       <activity android:name=".shopcar.QingdanThridActivity"/>
 
         <activity android:name=".alipay.AlipayActivity" />
         <activity android:name=".alipay.AlipayH5PayActivity" />
@@ -146,7 +146,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 选择图片的页面 -->
+        <!--选择图片的页面-->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize" />
@@ -154,6 +154,7 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="577cbd5367e58e1162000433" />
+
 
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
@@ -283,7 +284,7 @@
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
         <activity android:name=".UI.Activity.SelfAbout" />
         <activity android:name=".UI.Activity.Self_ZxingActivity" />
-        <activity android:name=".shopcar.QingdanShopCar" />
+        <activity android:name=".shopcar.QingdanShopCar"></activity>
     </application>
 
 </manifest>

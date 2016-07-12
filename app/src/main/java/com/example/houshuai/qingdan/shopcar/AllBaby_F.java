@@ -155,11 +155,11 @@ public class AllBaby_F extends Fragment implements IBtnCallListener, Adapter_Lis
         if (isChoice) {
             if (QingdanShopingCarData.arrayList_cart.size()!=0) {
                 //49表示写死
-                QingdanShopingCarData.Allprice_cart += Float.valueOf(QingdanShopingCarData.arrayList_cart.get(position).get("num").toString())*49;
+                QingdanShopingCarData.Allprice_cart += Float.valueOf(QingdanShopingCarData.arrayList_cart.get(position).get("num").toString())*(Integer.parseInt(QingdanShopingCarData.arrayList_cart.get(position).get("price").toString())/100);
             }
         } else {
             if (QingdanShopingCarData.arrayList_cart.size()!=0) {
-                QingdanShopingCarData.Allprice_cart -= Float.valueOf(QingdanShopingCarData.arrayList_cart.get(position).get("num").toString())*49;
+                QingdanShopingCarData.Allprice_cart -= Float.valueOf(QingdanShopingCarData.arrayList_cart.get(position).get("num").toString())*(Integer.parseInt(QingdanShopingCarData.arrayList_cart.get(position).get("price").toString())/100);
             }
         }
         // 记录列表处于选中状态的数量
@@ -170,6 +170,7 @@ public class AllBaby_F extends Fragment implements IBtnCallListener, Adapter_Lis
                 // 列表处于选中状态的数量+1
                 num_choice += 1;
                 is_choice[i]=true;
+                tv_cart_buy_Ordel.setText("结算（"+num_choice+")");
             }
         }
         // 判断列表中的CheckBox是否全部选择

@@ -14,9 +14,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.houshuai.qingdan.R;
+import com.example.houshuai.qingdan.bean.Text;
+import com.squareup.picasso.Picasso;
 
 public class Adapter_ListView_cart extends BaseAdapter {
     private Context context;
@@ -58,14 +61,20 @@ public class Adapter_ListView_cart extends BaseAdapter {
             holderView.tv_num = (TextView) currentView.findViewById(R.id.tv_num);
             holderView.tv_type_color = (TextView) currentView.findViewById(R.id.tv_type_color);
             holderView.cb_choice = (CheckBox) currentView.findViewById(R.id.cb_choice);
+            holderView.tv_name= (TextView) currentView.findViewById(R.id.tv_name);
+            holderView.iv= (ImageView) currentView.findViewById(R.id.iv_adapter_list_pic);
             currentView.setTag(holderView);
         } else {
             holderView = (HolderView) currentView.getTag();
         }
         if (arrayList.size() != 0) {
-            holderView.tv_num.setText("x" + arrayList.get(position).get("num"));
+            holderView.tv_num.setText("X" + arrayList.get(position).get("num"));
             holderView.tv_type_color.setText("类型:" + arrayList.get(position).get("type").toString() + "    颜色:" + arrayList.get(position).get("color").toString());
-
+            holderView.tv_name.setText(arrayList.get(position).get("name").toString());
+            if(!"".equals(arrayList.get(position).get("imgUrl").toString()))
+            {
+                Picasso.with(context).load(arrayList.get(position).get("imgUrl").toString()).placeholder(R.drawable.loading_placeholder).into(holderView.iv);
+            }
             holderView.cb_choice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton arg0, boolean choice) {
@@ -82,6 +91,8 @@ public class Adapter_ListView_cart extends BaseAdapter {
 
         private TextView tv_type_color;
         private TextView tv_num;
+        private TextView tv_name;
+        private ImageView iv;
         private CheckBox cb_choice;
 
     }

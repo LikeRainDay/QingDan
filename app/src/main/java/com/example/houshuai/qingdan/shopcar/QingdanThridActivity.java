@@ -27,6 +27,7 @@ import com.example.houshuai.qingdan.dao.ShangPin;
 import com.example.houshuai.qingdan.inter.QingdanInter;
 import com.example.houshuai.qingdan.utils.RetrofitUtils;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
+import com.example.houshuai.qingdan.utils.ShareUtil;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -124,10 +125,13 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 this.finish();
                 break;
             case R.id.iv_share:
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("goodShareInfo",goodsBean.getShare_info());
-                //TODO
 
+                Bundle bundle=new Bundle();
+                bundle.putString("title",goodsBean.getShare_info().getShare_title());
+                bundle.putString("imgurl",goodsBean.getMain_img());
+                bundle.putString("url",goodsBean.getShare_info().getShare_link());
+                bundle.putString("text",goodsBean.getShare_info().getShare_desc());
+                ShareUtil.startAuto(QingdanThridActivity.this,bundle);
                 break;
             case R.id.iv_baby_collection:
                 //收藏
@@ -135,6 +139,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                 {
                     if (isCollection) {//提示是否取消收藏
                         cancelCollection();
+                        iv_baby_collection.setImageResource(R.drawable.second_2);
                     }else {
                         isCollection=true;
 
@@ -161,6 +166,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
             case R.id.iv_shoping_cat:
                 Intent intent = new Intent();
                 intent.setClass(QingdanThridActivity.this, QingdanShopCar.class);
+                Toast.makeText(QingdanThridActivity.this,"daiwanshan........",Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 break;
 
@@ -202,7 +208,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
                     {
                         Picasso.with(QingdanThridActivity.this).load(goodsBean.getMain_img()).placeholder(R.drawable.loading_placeholder).into(mainImg);
                     }
-                    popWindow = new QingdanOrderPopWindow(QingdanThridActivity.this,goodsBean.getMain_img(),(goodsBean.getPrice()/100)+"");
+                    popWindow = new QingdanOrderPopWindow(QingdanThridActivity.this,goodsBean.getTitle(),goodsBean.getMain_img(),(goodsBean.getPrice()/100)+"");
                     popWindow.setOnItemClickListener(QingdanThridActivity.this);
                 }
             }
@@ -229,6 +235,7 @@ public class QingdanThridActivity extends FragmentActivity implements QingdanOrd
             intent.putExtra("imgUrl",goodsBean.getMain_img());
             startActivity(intent);
         }else {
+
             Toast.makeText(this, "添加到购物车成功", Toast.LENGTH_SHORT).show();
         }
     }

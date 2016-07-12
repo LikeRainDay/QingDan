@@ -39,9 +39,10 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
     private String str_color="";
     /**保存选择的类型的数据*/
     private String str_type="";
+    private String name,price,imgUrl;
 
 
-    public QingdanOrderPopWindow(Context context,String imgUrl,String price) {
+    public QingdanOrderPopWindow(Context context,String name,String imgUrl,String price) {
         this.context=context;
         View view=LayoutInflater.from(context).inflate(R.layout.qingdan_adapter_popwindow, null);
         pop_choice_16g=(TextView) view.findViewById(R.id.pop_choice_16g);
@@ -72,7 +73,9 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
         pop_reduce.setOnClickListener(this);
         pop_ok.setOnClickListener(this);
         pop_del.setOnClickListener(this);
-
+        this.name=name;
+        this.imgUrl=imgUrl;
+        this.price=price;
 
         popupWindow=new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         //设置popwindow的动画效果
@@ -197,6 +200,9 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
                     HashMap<String, Object> allHashMap=new HashMap<String,Object>();
                     allHashMap.put("color",str_color);
                     allHashMap.put("type",str_type);
+                    allHashMap.put("name",name);
+                    allHashMap.put("price",price);
+                    allHashMap.put("imgUrl",imgUrl);
                     allHashMap.put("num",pop_num.getText().toString());
                     allHashMap.put("id",QingdanShopingCarData.arrayList_cart_id+=1);
                     QingdanShopingCarData.arrayList_cart.add(allHashMap);
@@ -219,9 +225,19 @@ public class QingdanOrderPopWindow implements OnDismissListener, OnClickListener
             editor.remove("ArrayCart_type_"+i);
             editor.remove("ArrayCart_color_"+i);
             editor.remove("ArrayCart_num_"+i);
-            editor.putString("ArrayCart_type_"+i, QingdanShopingCarData.arrayList_cart.get(i).get("type").toString());
-            editor.putString("ArrayCart_color_"+i, QingdanShopingCarData.arrayList_cart.get(i).get("color").toString());
-            editor.putString("ArrayCart_num_"+i, QingdanShopingCarData.arrayList_cart.get(i).get("num").toString());
+            editor.remove("ArrayCart_name_"+i);
+            editor.remove("ArrayCart_imgUrl_"+i);
+            editor.remove("ArrayCart_price_"+i);
+
+            editor.putString("ArrayCart_name_"+i,name)
+                    .putString("ArrayCart_price_"+i,price)
+                    .putString("ArrayCart_imgUrl_"+i,imgUrl)
+            .putString("ArrayCart_type_"+i,str_color)
+            .putString("ArrayCart_color_"+i,str_color)
+            .putString("ArrayCart_num_"+i,pop_num.getText().toString());
+            editor.commit();
+
+
 
         }
 
