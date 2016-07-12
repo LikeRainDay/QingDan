@@ -12,9 +12,8 @@ public class GetIsLogin {
     private Activity mActivity;
     private final App application;
 
-    public GetIsLogin(Activity mActivity) {
+    private GetIsLogin(Activity mActivity) {
         this.mActivity = mActivity;
-
         application = (App) mActivity.getApplication();
     }
 
@@ -23,6 +22,4 @@ public class GetIsLogin {
         boolean mIsLogin = application.mIsLogin;
         return mIsLogin;
     }
-
-
 }
