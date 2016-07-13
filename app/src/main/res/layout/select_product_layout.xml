@@ -45,6 +45,7 @@
                 android:id="@+id/brandname_id"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:paddingLeft="12dp"
                 android:layout_below="@+id/view_pager"
                 android:gravity="center_vertical"
                 android:text="没什么"
@@ -55,6 +56,7 @@
                 android:layout_height="30dp"
                 android:layout_below="@+id/brandname_id"
                 android:text="没什么"
+                android:paddingLeft="12dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -65,19 +67,66 @@
                 android:layout_below="@+id/fullname_id"
                 >
             </WebView>
+            <LinearLayout
+                android:id="@+id/pinglunqu_id"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/wv_id">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="评论区"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_xiepinglun_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="写评论"
+                    android:drawableLeft="@mipmap/img_write_comment"
+                    android:textColor="@color/blueviolet"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                     />
+            </LinearLayout>
+                <ListView
+                    android:id="@+id/lv_pinglun_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pinglunqu_id">
+                </ListView>
+                <ImageView
+                    android:id="@android:id/empty"
+                    android:layout_below="@+id/pinglunqu_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/empty"
+                    android:gravity="center"
+                    />
+
         </RelativeLayout>
     </ScrollView>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
+        android:id="@+id/dibu_id"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:orientation="horizontal"
         >
-        <RadioGroup
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -95,6 +144,7 @@
                 android:text="喜欢(28)"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="likeCilck"
                 android:drawableTop="@mipmap/heart_grey_sm"/>
             <RadioButton
                 android:id="@+id/btn_review_id"
@@ -118,7 +168,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:drawableTop="@mipmap/share"/>
-        </RadioGroup>
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_mai_id"
             android:layout_width="0dp"

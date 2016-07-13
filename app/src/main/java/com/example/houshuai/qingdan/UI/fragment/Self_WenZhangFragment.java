@@ -84,9 +84,9 @@ public class Self_WenZhangFragment extends BaseFragment {
             @Override
             public void ItemClickListener(View view, int postion) {
                 String shangPin = mList.get(postion).getUrl();
-                    Intent intent = new Intent(getActivity(), QingdanSecondActivity.class);
-                    intent.putExtra("event_id", shangPin);
-                    startActivity(intent);
+                Intent intent = new Intent(getActivity(), QingdanSecondActivity.class);
+                intent.putExtra("event_id", shangPin);
+                startActivity(intent);
             }
 
             @Override
@@ -98,8 +98,6 @@ public class Self_WenZhangFragment extends BaseFragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 try {
-
-//                                    Log.e("Log", "最初" + mList.toString());
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -122,13 +120,12 @@ public class Self_WenZhangFragment extends BaseFragment {
             }
         });
 
-
     }
 
     private void initData() {
-        //删除所有数据
-        WenZhangDBHelper.getInstance(getActivity()).clearMessageInfo();
-
+//        删除所有数据
+//        WenZhangDBHelper.getInstance(getActivity()).clearMessageInfo();
+//
         WenZhang wenZhang = new WenZhang();
         wenZhang.setAddLove("9999");
         wenZhang.setImage("http://img1.imgtn.bdimg.com/it/u=3444612337,3844090186&fm=21&gp=0.jpg");
@@ -141,19 +138,18 @@ public class Self_WenZhangFragment extends BaseFragment {
         wenZhan2g.setTitle("你好");
         wenZhan2g.setAddSee("199");
         wenZhan2g.setUrl("http://img4.imgtn.bdimg.com/it/u=1425972139,1057908849&fm=21&gp=0.jpg");
-        WenZhang wenZhan3g = new WenZhang();
-        wenZhan3g.setAddLove("1999");
-        wenZhan3g.setImage("http://img4.imgtn.bdimg.com/it/u=1425972139,1057908849&fm=21&gp=0.jpg");
-        wenZhan3g.setTitle("你好");
-        wenZhan3g.setAddSee("199");
-        wenZhan3g.setUrl("http://img4.imgtn.bdimg.com/it/u=1425972139,1057908849&fm=21&gp=0.jpg");
+////        WenZhang wenZhan3g = new WenZhang();
+//        wenZhan3g.setAddLove("1999");
+//        wenZhan3g.setImage("http://img4.imgtn.bdimg.com/it/u=1425972139,1057908849&fm=21&gp=0.jpg");
+//        wenZhan3g.setTitle("你好");
+//        wenZhan3g.setAddSee("199");
+////        wenZhan3g.setUrl("http://img4.imgtn.bdimg.com/it/u=1425972139,1057908849&fm=21&gp=0.jpg");
         WenZhangDBHelper.getInstance(getActivity())
                 .addToMessageInfoTable(wenZhang);
         WenZhangDBHelper.getInstance(getActivity())
                 .addToMessageInfoTable(wenZhan2g);
-        WenZhangDBHelper.getInstance(getActivity())
-                .addToMessageInfoTable(wenZhan3g);
-
+//        WenZhangDBHelper.getInstance(getActivity())
+//                .addToMessageInfoTable(wenZhan3g);
         mList = WenZhangDBHelper.getInstance(getActivity()).getMessageInfoList();
 
 

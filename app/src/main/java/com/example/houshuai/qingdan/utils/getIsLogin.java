@@ -12,7 +12,7 @@ public class GetIsLogin {
     private Activity mActivity;
     private final App application;
 
-    private GetIsLogin(Activity mActivity) {
+    public GetIsLogin(Activity mActivity) {
         this.mActivity = mActivity;
         application = (App) mActivity.getApplication();
     }

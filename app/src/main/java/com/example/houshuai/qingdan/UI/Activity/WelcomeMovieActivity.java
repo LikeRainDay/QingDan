@@ -332,7 +332,7 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
                     String nincheng = egist_edit2.getText().toString().trim();
                     Pattern nameCompile = Pattern.compile("^[\\u2E80-\\u9FFF]{2,5}$");
                     Matcher nameMatcher = nameCompile.matcher(nincheng);
-                    if (nameMatcher.find() && isOK) {
+                    if (nameMatcher.find() ) {
                         application.setMySharePerference(mPhone, mPhone, mPass, "", "", nincheng);
                         application.setIsLoginSharedPreferences(true, mPhone);
                         toMainActivity();
@@ -385,6 +385,11 @@ public class WelcomeMovieActivity extends AppCompatActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         umShareAPI.onActivityResult(requestCode, resultCode, data);
+
+        
+
+
+
     }
 
     enum InputType {

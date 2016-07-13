@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.houshuai.qingdan.Base.BaseFragment;
 import com.example.houshuai.qingdan.R;
 import com.example.houshuai.qingdan.UI.Activity.QingdanSecondActivity;
+import com.example.houshuai.qingdan.UI.Activity.select_buy_Activity;
 import com.example.houshuai.qingdan.adapter.Self_ShangPinRecycleViewAdapter;
 import com.example.houshuai.qingdan.dao.ShangPin;
 import com.example.houshuai.qingdan.utils.ShangPinDBHelper;
@@ -47,6 +48,7 @@ public class Self_ShangPinFragment extends BaseFragment {
                     @Override
                     public void run() {
                         //刷新接口
+//                        mList.clear();
                         mList = ShangPinDBHelper.getInstance(getActivity()).getMessageInfoList();
                     }
                 }).start();
@@ -88,10 +90,10 @@ public class Self_ShangPinFragment extends BaseFragment {
             @Override
             public void ItemClickListener(View view, int postion) {
                 String shangPin = mList.get(postion).getUrl();
-                if ("http" == shangPin.substring(0, 4)) {
-//                    Intent intent = new Intent(getActivity(), .class);
-//                    intent.putExtra("buylink", shangPin);
-//                    startActivity(intent);
+                if ("http" == shangPin.substring(0, 3)) {
+                    Intent intent = new Intent(getActivity(), select_buy_Activity.class);
+                    intent.putExtra("buylink", shangPin);
+                    startActivity(intent);
                     // TODO: 2016/7/12
                 } else {
                     Intent intent = new Intent(getActivity(), QingdanSecondActivity.class);
@@ -134,7 +136,7 @@ public class Self_ShangPinFragment extends BaseFragment {
 
     private void initData() {
         //删除所有数据
-        ShangPinDBHelper.getInstance(getActivity()).clearMessageInfo();
+//        ShangPinDBHelper.getInstance(getActivity()).clearMessageInfo();
 
 
         ShangPin wenZhang = new ShangPin();

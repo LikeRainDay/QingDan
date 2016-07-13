@@ -2,6 +2,7 @@ package com.example.houshuai.qingdan.UI.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -187,6 +188,13 @@ public class Self_Settings extends BaseActivity implements View.OnClickListener 
                 Toast.makeText(getApplicationContext(), "点击了关于", Toast.LENGTH_LONG).show();
                 break;
             case R.id.self_ShareApp:
+                Bundle bundle = new Bundle();
+                bundle.putString("title", "清单");
+                bundle.putString("imageurl", "http://www.eqingdan.com/asset/img/wechat-qrcode.jpg");
+                bundle.putString("url", "https://www.baidu.com/link?url=a3d43Z1cVplXDpKr4fxO6P6ut8i-o7GGpN-7keUA-stya5gDF79FMdvQ3PH7hjHR&wd=&eqid=a8f366930010a37b0000000357859000");
+                bundle.putString("text", "品质生活清单祝你");
+                ShareUtil.startAuto(this, bundle);
+
 
                 break;
             case R.id.self_YiJianFanKu:

@@ -54,7 +54,7 @@ import java.util.Map;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
-public class select_product_Activity extends Activity{
+public class select_product_Activity extends Activity {
     private AutoScrollViewPager auto_view_pager;
     private Intent intent;
     private WebView wv_id;
@@ -71,7 +71,7 @@ public class select_product_Activity extends Activity{
     private LinearLayout dibu_id;
     private ListView lv_pinglun_id;
     private EditText et_id;
-    private boolean a=true;
+    private boolean a = true;
     private String text;
 
     @Override
@@ -94,21 +94,21 @@ public class select_product_Activity extends Activity{
         brandname_id.setText(thingsBean.getBrand().getName());
         fullname_id.setText(thingsBean.getName());
         //给这个喜欢设置了喜欢的个数
-        btn_likecount_id.setText("喜欢("+ thingsBean.getLikeCount()+")");
-
+        btn_likecount_id.setText("喜欢(" + thingsBean.getLikeCount() + ")");
 
         aboutWebview();
         //关于数据库,数据库不写了
-       // aboutDb();
+        // aboutDb();
     }
+
     private void aboutDb() {
         //创建数据库,等到做完了，然后将数据的建立移到ａｐｐ类中
         DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
                 // 数据库的名字
                 .setDbName("shangping")
                 // 保存到指定路径
-                 .setDbDir(new
-                         File(Environment.getExternalStorageDirectory().getAbsolutePath()))
+                .setDbDir(new
+                        File(Environment.getExternalStorageDirectory().getAbsolutePath()))
                 // 数据库的版本号
                 .setDbVersion(1)
                 // 数据库版本更新监听
@@ -134,14 +134,14 @@ public class select_product_Activity extends Activity{
 
 
     private void initView() {
-        wv_id = (WebView)findViewById(R.id.wv_id);
+        wv_id = (WebView) findViewById(R.id.wv_id);
         //发现轮播控件
-        auto_view_pager = (AutoScrollViewPager)findViewById(R.id.view_pager);
+        auto_view_pager = (AutoScrollViewPager) findViewById(R.id.view_pager);
         //发现指示器框架
         btn_likecount_id = (Button) findViewById(R.id.btn_likecount_id);
         tv_mai_id = (TextView) findViewById(R.id.tv_mai_id);
-        //dibu_id = (LinearLayout) findViewById(R.id.dibu_id);
-        //tv_xiepinglun_id = (TextView) findViewById(R.id.tv_xiepinglun_id);
+        dibu_id = (LinearLayout) findViewById(R.id.dibu_id);
+        tv_xiepinglun_id = (TextView) findViewById(R.id.tv_xiepinglun_id);
 
         brandname_id = (TextView) findViewById(R.id.brandname_id);
         fullname_id = (TextView) findViewById(R.id.fullname_id);
@@ -156,7 +156,7 @@ public class select_product_Activity extends Activity{
 
             }
         });
-        ImageView iv_backs_id= (ImageView) findViewById(R.id.iv_backs_id);
+        ImageView iv_backs_id = (ImageView) findViewById(R.id.iv_backs_id);
         iv_backs_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +174,7 @@ public class select_product_Activity extends Activity{
 
         });
         //显示评论的listView
-        //lv_pinglun_id = (ListView) findViewById(R.id.lv_pinglun_id);
+        lv_pinglun_id = (ListView) findViewById(R.id.lv_pinglun_id);
 
     }
 
@@ -183,8 +183,8 @@ public class select_product_Activity extends Activity{
         //弹出popuwindow
         dibu_id.setVisibility(View.GONE);
 
-        LayoutInflater layoutInflater = (LayoutInflater)select_product_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.pinglun_item,null);
+        LayoutInflater layoutInflater = (LayoutInflater) select_product_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.pinglun_item, null);
         et_id = (EditText) view.findViewById(R.id.et_id);
         et_id.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         et_id.setFocusable(true);
@@ -194,7 +194,7 @@ public class select_product_Activity extends Activity{
         et_id.setHorizontallyScrolling(false);
         // 创建一个PopuWidow对象
         popWindowsss = new PopupWindow(view, LinearLayout.LayoutParams.FILL_PARENT,
-                250,true);
+                250, true);
 
         //弹出时的动画
         popWindowsss.setAnimationStyle(R.style.popWindow_anim_style);
@@ -237,35 +237,34 @@ public class select_product_Activity extends Activity{
     private void aboutviewpager() {
         //准备数据源
         images = new LinkedList<>();
-        if(imageUrls.size()==1){
-            for(int i=0;i<10;i++){
-                ImageView imageView=new ImageView(select_product_Activity.this);
+        if (imageUrls.size() == 1) {
+            for (int i = 0; i < 10; i++) {
+                ImageView imageView = new ImageView(select_product_Activity.this);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                x.image().bind(imageView,imageUrls.get(0));
+                x.image().bind(imageView, imageUrls.get(0));
                 images.add(imageView);
             }
-        }
-        else if(imageUrls.size()==2){
-            for(String s:imageUrls){
-                for(int i=0;i<imageUrls.size();i++){
-                    ImageView imageView=new ImageView(select_product_Activity.this);
+        } else if (imageUrls.size() == 2) {
+            for (String s : imageUrls) {
+                for (int i = 0; i < imageUrls.size(); i++) {
+                    ImageView imageView = new ImageView(select_product_Activity.this);
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    x.image().bind(imageView,imageUrls.get(i));
+                    x.image().bind(imageView, imageUrls.get(i));
                     images.add(imageView);
                 }
             }
-        }else{
-            for(int i=0;i<imageUrls.size();i++){
-                ImageView imageView=new ImageView(select_product_Activity.this);
+        } else {
+            for (int i = 0; i < imageUrls.size(); i++) {
+                ImageView imageView = new ImageView(select_product_Activity.this);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                x.image().bind(imageView,imageUrls.get(i));
+                x.image().bind(imageView, imageUrls.get(i));
                 images.add(imageView);
             }
         }
 
-        Toast.makeText(this, images.size()+"",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, images.size() + "", Toast.LENGTH_LONG).show();
         //准备适配器
-        MyAdapter adapter=new MyAdapter(images);
+        MyAdapter adapter = new MyAdapter(images);
         //绑定适配器
         auto_view_pager.setAdapter(adapter);
 
@@ -284,19 +283,19 @@ public class select_product_Activity extends Activity{
         auto_view_pager.setScrollDurationFactor(3);
         //设置当滑动到最后一个或者第一个时，如何切换下一张
         /**
-        * SLIDE_BORDER_MODE_NONE：不能再滑动
+         * SLIDE_BORDER_MODE_NONE：不能再滑动
          * SLIDE_BORDER_MODE_TO_PARENT：移动父视图的Pager
          * SLIDE_BORDER_MODE_CYCLE：循环
          * 默认为SLIDE_BORDER_MODE_NONE
          */
-           auto_view_pager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
+        auto_view_pager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
         //当滑动到最后一张或第一张时是否开启动画，默认为true
-           auto_view_pager.setBorderAnimation(true);
-                //当触摸的时候，停止轮播
+        auto_view_pager.setBorderAnimation(true);
+        //当触摸的时候，停止轮播
 
-                //设置监听器，当图片变化的时候，对应的小圆点的状态发生状态
+        //设置监听器，当图片变化的时候，对应的小圆点的状态发生状态
         auto_view_pager.setStopScrollWhenTouch(true);
-                //关于小圆点的操作
+        //关于小圆点的操作
         //TODO
 
 
@@ -308,30 +307,30 @@ public class select_product_Activity extends Activity{
         // 一个自定义的布局，作为显示的内容
         View contentView = LayoutInflater.from(this).inflate(
                 R.layout.popuwindow_buy_item, null);
-       LinearLayout pp_ll_id= (LinearLayout) contentView.findViewById(R.id.pp_ll_id);
+        LinearLayout pp_ll_id = (LinearLayout) contentView.findViewById(R.id.pp_ll_id);
         lv_buylikes_id = (ListView) contentView.findViewById(R.id.lv_buylikes_id);
         //给这个ListView准备数据源
         final List<typebean.DataBean.ThingsBean.BuylinksBean> buylinks = thingsBean.getBuylinks();
-        final List<Map<String,String>> list=new LinkedList<>();
-        for(typebean.DataBean.ThingsBean.BuylinksBean buylinksB:buylinks){
-            Map<String,String> map=new HashMap<>();
-            map.put("address",buylinksB.getPlatform());
-            map.put("price",buylinksB.getPrice());
+        final List<Map<String, String>> list = new LinkedList<>();
+        for (typebean.DataBean.ThingsBean.BuylinksBean buylinksB : buylinks) {
+            Map<String, String> map = new HashMap<>();
+            map.put("address", buylinksB.getPlatform());
+            map.put("price", buylinksB.getPrice());
             list.add(map);
         }
         //准备适配器
-        SimpleAdapter simpleAdapter=new SimpleAdapter(select_product_Activity.this,list,
-                R.layout.lv_buylinks_item,new String[]{"address","price"},new int[]{R.id.tv_buyaddress_id,R.id.tv_buyprice_id});
+        SimpleAdapter simpleAdapter = new SimpleAdapter(select_product_Activity.this, list,
+                R.layout.lv_buylinks_item, new String[]{"address", "price"}, new int[]{R.id.tv_buyaddress_id, R.id.tv_buyprice_id});
         //绑定适配器
         lv_buylikes_id.setAdapter(simpleAdapter);
         //设置监听器，点击跳转到购买的网站
         lv_buylikes_id.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                for(typebean.DataBean.ThingsBean.BuylinksBean buyl:buylinks){
-                    if(buyl.getPlatform().equals(list.get(i).get("address"))){
-                        Intent intent=new Intent(select_product_Activity.this,select_buy_Activity.class);
-                        intent.putExtra("buylink",buyl.getLink());
+                for (typebean.DataBean.ThingsBean.BuylinksBean buyl : buylinks) {
+                    if (buyl.getPlatform().equals(list.get(i).get("address"))) {
+                        Intent intent = new Intent(select_product_Activity.this, select_buy_Activity.class);
+                        intent.putExtra("buylink", buyl.getLink());
                         startActivity(intent);
                         return;
                     }
@@ -341,12 +340,12 @@ public class select_product_Activity extends Activity{
 
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 
-        int popupHeight= contentView.getMeasuredHeight();
+        int popupHeight = contentView.getMeasuredHeight();
         int popupWidth = contentView.getMeasuredWidth();
 
         //new一个popwindow
         PopupWindow popupWindow = new PopupWindow(contentView,
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);//popopwindow可以被点击
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
@@ -367,11 +366,11 @@ public class select_product_Activity extends Activity{
         int[] location = new int[2];
         pp_ll_id.getLocationOnScreen(location);
 
-        popupWindow.showAtLocation(pp_ll_id, Gravity.BOTTOM, 0 ,popupHeight+66);
+        popupWindow.showAtLocation(pp_ll_id, Gravity.BOTTOM, 0, popupHeight + 66);
 
         //popupWindow.showAsDropDown(view);
 
- }
+    }
 
     //webview的返回上一个html
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -379,20 +378,23 @@ public class select_product_Activity extends Activity{
             wv_id.goBack(); // goBack()表示返回WebView的上一页面
             return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
+
     //浮动按钮的点击事件
-    public void fabcheaked(View view ){
+    public void fabcheaked(View view) {
         //点击桌面上的可以移动的按钮,弹出一个popwindow,然后执行分享等相关的操作
         showPopupWindow(view);
-        Toast.makeText(getApplicationContext(),view.getRight()+"",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), view.getRight() + "", Toast.LENGTH_LONG).show();
     }
+
     //自定义适配器
     class MyAdapter extends PagerAdapter {
         //数据源
         private List<ImageView> images;
+
         public MyAdapter(List<ImageView> images) {
-            this.images=images;
+            this.images = images;
         }
 
         @Override
@@ -409,18 +411,19 @@ public class select_product_Activity extends Activity{
         public Object instantiateItem(ViewGroup container, int position) {
             //将数据源中取出的数据挂载到ViewPager上面
 
-             container.removeView(images.get(position % images.size()));
-             container.addView(images.get(position % images.size()));
-             return images.get(position % images.size());
+            container.removeView(images.get(position % images.size()));
+            container.addView(images.get(position % images.size()));
+            return images.get(position % images.size());
 
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
 
-            container.removeView((View)object);
+            container.removeView((View) object);
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -438,30 +441,37 @@ public class select_product_Activity extends Activity{
     }
 
     //分享
-    public void shareClick(View view){
-
+    public void shareClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("title", thingsBean.getName());
+        bundle.putString("imageurl", thingsBean.getImageUrls().get(0));
+        bundle.putString("url", thingsBean.getLinks().getShare());
+        bundle.putString("text", thingsBean.getFullName());
+        ShareUtil.startAuto(this, bundle);
     }
+
     //评论
-    public void reviewClick(View view){
+    public void reviewClick(View view) {
         showPopup(tv_xiepinglun_id);
     }
+
     //发表
-    public void fabiao(View view){
+    public void fabiao(View view) {
         //思路：
         //判断用户是否登录，如果已经登录，获取该用户的头像和昵称
-        if( new GetIsLogin(select_product_Activity.this).IsLogin()){
+        if (new GetIsLogin(select_product_Activity.this).IsLogin()) {
             App application = (App) getApplication();
 
             List<String> mySharePerference = (application).getMySharePerference(application.mID);
             //获到用户名
-            String name=mySharePerference.get(4);
+            String name = mySharePerference.get(4);
             //获得密码
-            String touxiang=mySharePerference.get(2);
+            String touxiang = mySharePerference.get(2);
             //获取用户在editView上面输入的内容,然后判断内容是否为空，如果为空，则提示用户
-            String s=et_id.getText().toString().trim();
-            if(s!=null){
+            String s = et_id.getText().toString().trim();
+            if (s != null) {
                 //获取当前的时间
-                long time=System.currentTimeMillis();
+                long time = System.currentTimeMillis();
                 //将用户的所有的数据存入数据库中
 
                 //然后从数据库中取出数据，显示到listView上面
@@ -469,46 +479,43 @@ public class select_product_Activity extends Activity{
                 //设置适配器
                 //绑定适配器
                 //设置监听器
-            }else{
-                Toast.makeText(this,"评论不能为空！！！请输入后再评论",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "评论不能为空！！！请输入后再评论", Toast.LENGTH_LONG).show();
             }
 
-        }else{
+        } else {
             //如果用户没有登录，则提示用户登录或者直接跳转到登录界面
-            Toast.makeText(this,"请先登录，",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "请先登录，", Toast.LENGTH_LONG).show();
 
         }
 
 
-
-
     }
+
     //喜欢
-    public void likeCilck(View view){
+    public void likeCilck(View view) {
         //根据当前的点击状态修改里面的值
         text = (String) btn_likecount_id.getText();
-        int i=Integer.parseInt(text.substring(3, text.length() - 1));
-        if(a==true){
-            btn_likecount_id.setText("喜欢("+(i+1)+")");
-            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.heart_purple,0,0);
+        int i = Integer.parseInt(text.substring(3, text.length() - 1));
+        if (a == true) {
+            btn_likecount_id.setText("喜欢(" + (i + 1) + ")");
+            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.heart_purple, 0, 0);
             //获取数据库，修改里面的值
-            ShangPin shangPin=new ShangPin();
-
+            ShangPin shangPin = new ShangPin();
             shangPin.setAddLove(thingsBean.getPrice());//价钱
-            shangPin.setAddSee(i+1+"");//喜欢的人数
+            shangPin.setAddSee(i + 1 + "");//喜欢的人数
             shangPin.setContent(thingsBean.getBrand().getName());//品牌名字
             shangPin.setImage(thingsBean.getImageUrls().get(0));//图片的地址
             shangPin.setTitle(thingsBean.getName());//产品的名字
             shangPin.setUrl(thingsBean.getLinks().getShare());//产品描述地址
             ShangPinDBHelper.getInstance(this).addToMessageInfoTable(shangPin);
-
-            a=false;
-            Log.i("ss","运行了呃呃呃额额");
-        }else if(a==false){
-            Log.i("ss","运行了");
-            btn_likecount_id.setText("喜欢("+(i-1)+")");
-            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.heart_o_alt,0,0);
-            a=true;
+            a = false;
+            Log.i("ss", "运行了呃呃呃额额");
+        } else if (a == false) {
+            Log.i("ss", "运行了");
+            btn_likecount_id.setText("喜欢(" + (i - 1) + ")");
+            btn_likecount_id.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.heart_o_alt, 0, 0);
+            a = true;
         }
     }
 }
